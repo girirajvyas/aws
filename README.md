@@ -215,7 +215,29 @@ Option 2:
   - triggered when video uploaded  
   - scales automatically  
 
-# 5. Connect from Code
+# 5. Manage Billing
+To avoid billing shocks while using AWS, you can do below setup as a precautionalry measure.
+
+In case you access the billing module from IAM user, you might get below permissions error  
+```cmd
+You Need Permissions
+You don't have permission to access billing information for this account. Contact your AWS administrator if you need help. If you are an AWS administrator, you can provide permissions for your users or groups by making sure that (1) this account allows IAM and federated users to access billing information and (2) you have the required IAM permissions.
+```
+
+You have to update the access via root account
+ - Account name -> My Account -> IAM User and Role Access to Billing Information -> Edit -> Activate IAM Access -> Update
+ - Go to IAM user account and refresh to see it refkects now
+
+Now to setup a budgetgo
+ - Go to Budgets -> Create a Budget -> you have below options
+   - Cost Budget: Monitor your costs against a specified amount and receive alerts when your user defined thresholds are met
+   - Usage Budget: Monitor your usage of one or more specified usage types or usage type groups and receive alrets when your user-defined thresholds are met
+   - Reservation Budget: Track the RI Utilization or RI Coverage associated with your reservations. Thses budgets supports Amazon EC2, RDS, Redshift, ElasticCache and ElasticSearch reservation models
+   - Savings plan budget: Track the utilization and coverage associated with your Savings plans
+ - Lets create `Cost Budget`, provide name, recurring type monthly, threshold amount at which alert will be triggered. and create
+ 
+ 
+# 6. Connect from Code
 
 ## Maven Dependency
  - Amazon SDK makes it possible to interact with various Amazon services from our applications. 
@@ -235,6 +257,7 @@ Option 2:
 
 
  
+
 
 # Resources
 
