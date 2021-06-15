@@ -56,11 +56,13 @@ Example implementation is available at:
   - [UserRepository.java](https://github.com/derjust/spring-data-dynamodb-examples/blob/master/src/main/java/com/github/derjust/spring_data_dynamodb_examples/simple/UserRepository.java)
  
  Maven dependency: https://mvnrepository.com/artifact/com.github.derjust/spring-data-dynamodb
-<dependency>
-    <groupId>com.github.derjust</groupId>
-    <artifactId>spring-data-dynamodb</artifactId>
-    <version>5.1.0</version>
-</dependency>
+ ```xml
+   <dependency>
+      <groupId>com.github.derjust</groupId>
+      <artifactId>spring-data-dynamodb</artifactId>
+      <version>5.1.0</version>
+   </dependency>
+  ```
 
 create dynamoDB configuration  
 @EnableDynamoDBRepositories will be imported from the dependency added above  
@@ -189,6 +191,7 @@ Using 5.1.0 version of said dependency will have below issue:
 
 Ref:
  - https://github.com/derjust/spring-data-dynamodb
+ - https://dzone.com/articles/getting-started-with-dynamodb-and-spring
  
 
 # Resources
