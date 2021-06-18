@@ -132,27 +132,27 @@ Problems solved
  - `Add user to group:` In case you donot have groups already, "get started with group"
  - Copy permissions from existing user
  - Add existing policies directly
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.1.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.1.png)
 
 get started with group  
  - Group Name: admins
  - Create policy/ add policies
  - For starter add AdministratorAccess policy to make the users in group as admins
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.2_create_group.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.2_create_group.png)
 
 **Step 3: Add tags (Optional)**  
  - for eg: Department as key and value as Enineering
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_3_tags.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_3_tags.png)
 
 **Step 4: Review**  
  - Review whatever you have selected till now
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.1_review.PNG)
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.2_review.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.1_review.png)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.2_review.png)
 
 **Step 5: Success, you have created an user.**  
  - There is a one time option to download the csv that contains every information including how to login and passwords, etc
  - A link will also be generated that can be shared with the user directly.
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_5_Created.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_5_Created.png)
 
 **Detailed steps:**  
  - Step by step screenshots are available [here](https://github.com/girirajvyas/101-series/tree/master/resources/images/aws/IAM/add_user)
