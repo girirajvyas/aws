@@ -3,7 +3,12 @@ Summary and resources for certifications
 
 # 1. Overview
 
-This repository contains the path and resources for learning and passing AWS certifications. This place is just to consolidate the learnings I had from various learning resources and act as a reference for me or any one who wants to pursue this track  
+This repository contains the path and resources for learning and passing AWS certifications. This place is just to consolidate the learnings I had from various learning resources and act as a reference for me or any one who wants to pursue this track.
+
+If you see below, you will have common data that will be common across the three certifications and for specific certifications you can see below:
+ - [Cloud Practitioner]()
+ - [Solutions Architect]()
+ - [Developer - Associate (DVA -C01)]() 
 
 # 2. Certifications
 
@@ -33,14 +38,14 @@ We have different levels of Certifications in AWS, depending on the level you ar
    - Take Exam readiness training
    - Take a pracrice exam
  - Pictorial version is avaialble at: https://aws.amazon.com/certification/
- - ![Certifications link]()
+ - ![Certifications link](https://github.com/girirajvyas/aws/blob/main/resources/images/Certifications.png)
 
 ## 2.2 Where to start
 
 This is the question that comes to mind when we plan to take any certification. Ideally if you see the image above, AWS has certain guidelines of how many years of experience one must have to appear that certification. These are just guidelines and your timeline can be different from the one recommended by AWS
 
 **Ideal flow is:**  
- Certifid Cloud Practitioner -> Certified solutions Architect - Associate -> Certified Developer - Associate
+ `Certifid Cloud Practitioner` **->** `Certified solutions Architect - Associate` **->** `Certified Developer - Associate`
 
 The flow depicted above is the normal one and not strictly followed you can do them in any order and can do any one directly. This is generally what people do  
 
@@ -93,11 +98,46 @@ https://en.wikipedia.org/wiki/Amazon_Web_Services
 ## 4.1 History
 
 [AWS](https://en.wikipedia.org/wiki/Amazon_Web_Services):
+ - 2002: Internally launched
+ - 2003: 
+ - 2004: Launched publicly with SQS
+ - 2006: re-launched with SQS, S3 and EC2
+ - 2007: Launched in Europe
+ - Major customers: Netflix, Nasa, Airbnb, Dropbox
 
-## 4.2 Infrastructure
+## 4.2 Major competitors:
+ - Microsoft Azure cloud
+ - Google cloud platform (GCP)
+ - Followed by Alibaba, IBM, Salesforce, Tencent and Oracle
+
+## 4.3 Where to use
+ - Building Enterprise IT applications
+ - Backup and Storage
+ - Big Data Analytics
+ - Many services for IOT and ML in case you are doing something in tat field
+ - Hosting your website, application 
+
+## 4.3 Infrastructure
 
 The best resource to understand infrastructure is https://www.infrastructure.aws/.  
 Here you can click on different sections to understand in detail about them. A brief summary is as below:
+
+Why cloud infrastructure matters?   
+ - https://aws.amazon.com/about-aws/global-infrastructure
+
+Regions and Availability zones  
+ - On high level We have Regions:
+   - Cluster of data centers
+   - Many Avaialbility zones (normally 3, minimum 2, maximum 6)
+   - Most of the services are Region scoped. This means that you have to define the region while using that service and it will be available in that region only
+ - Each region has Availability zones
+   - Each availability zone is one or more discrete data centers with redundant power, Networking and connectivity
+   - They are saperated from each other so as to have isolation from disasters
+   - connected with high bandwidth, ultra-low latency network
+   - Example:
+ - Each availability zone has data centers 
+ - Finally we have Edge locations/Point of presence
+ - You can read about this in detail at: https://aws.amazon.com/about-aws/global-infrastructure/regions_az/
 
 **AWS global datacentres:**  
  - It is important to know how many `regions` and `availability zones` does aws provide
@@ -106,30 +146,37 @@ Here you can click on different sections to understand in detail about them. A b
  - While deploying we can decide which region to deploy our service
  - Each region will have typically 2 or more data centers for high availability of services and hence called `availability zones`
  - `Edge locations are the place where the data is cached to the nearest location` from where it is accessed
- - 175+ services
+ - 200+ services as of June-2021
 
 **Quick Summary:**  
  - `Region:` Independent geographic area, typically has 2 or more availability zones
  - `Availability zones:` Multiple isolated locations/data centers within a region
  - `Edge Locations:` place where the data is cached to the nearest location
 
-## 4.3 AWS account, users and services scope
+## 4.3 Different Service offerings and its scope
+Do not get overwhelmed by the numbers below, it is just to consolidate the mostly used services and once you are familiar with those you will be comfortable to read this again and relate with it.  
 
 **AWS account (Global)**
  - IAM{Identity and Access Management} users. (User management)
  - Billing
- - Route53
+ - Route53 (DNS Service)
+ - WAF
+ - CloudFront (COntent Delivery Network)
 
 **Region level services**
  - S3 Bucket
  - Dynamo DB (NoSQL db)
+ - Rekognition (SaaS)
+ - BeanStalk (PaaS)
+ - EC2 (IaaS)
+ - Lambda (FaaS)
 
 **Availability zones services**
- - EC2 it is vm
+ - EC2 it is vm (IAAS)
  - RDS relational databases
  - EBS Elastic block storage
 
-## 4.4 Different services overview
+**Miscellaneous**  
  - ElasticCache - Redis and memcached  
  - ELB - Elastic load balancer  
  - VPC - Virtual private cloud  
@@ -168,7 +215,7 @@ Here you can click on different sections to understand in detail about them. A b
  - CodePipeline: (covers all above 3 service)  
  - CodeStar: Project managing/issue tracking/   
 
-**AWS Networking services**  
+**AWS Networking services**   
 **Developer**  
  - VPC basics
     - CIDR
@@ -205,7 +252,7 @@ Here you can click on different sections to understand in detail about them. A b
     - Network Performance
     - Network Security (Layer 3, Layer 7)
 
-**Video converter from 1 s3 to another**  
+**Example: Video converter from 1 s3 to another**  
 option 1:  
  - EC2 instance watches s3 for a new video  
  - downloads - converts it - puts in another s3  
@@ -235,29 +282,10 @@ Now to setup a budgetgo
    - Reservation Budget: Track the RI Utilization or RI Coverage associated with your reservations. Thses budgets supports Amazon EC2, RDS, Redshift, ElasticCache and ElasticSearch reservation models
    - Savings plan budget: Track the utilization and coverage associated with your Savings plans
  - Lets create `Cost Budget`, provide name, recurring type monthly, threshold amount at which alert will be triggered. and create
- 
- 
-# 6. Connect from Code
-
-## Maven Dependency
- - Amazon SDK makes it possible to interact with various Amazon services from our applications. 
- - In the pom.xml file add the Amazon SDK dependency.
- - You can get the latest version from: https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
- - ```xml
-     <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
-      <dependency>
-          <groupId>com.amazonaws</groupId>
-          <artifactId>aws-java-sdk</artifactId>
-          <version>1.12.5</version>
-      </dependency>
-   ```
-
-## Credentials - Access key and Secret Key
 
 
-
- 
-
+# 7. Connect from Code
+If you see their is spring boot project created with basic connectivity setup done and basic example of S3 and DynamoDB. you can check that **[here](https://github.com/girirajvyas/aws/tree/main/aws-springboot)**
 
 # Resources
 

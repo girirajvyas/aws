@@ -87,12 +87,15 @@ Problems solved
 ## 3.1 Basics
 
 **Components:**  
- - It is a global Services
+ - It is a *global Service*
  - Root account is created by default when you create your account
- - It is recommended to not use or share this and should only be used for user creation
- - Users: These are the people within the organization and can be grouped based on departments, roles, etc
- - Groups: These contains only the users created above and no other groups
- - Note: It is not mandatory for Users to be assigned to a group. It can be the case that a user does not belong to any group or it can belong to multiple groups as well
+ - It is recommended to **not use or share this root user and should only be used for user creation**
+ - `Users:` These are the people within the organization and can be grouped based on departments, roles, etc
+ - `Groups:` These contains only the users created above and no other groups
+ - `Note:` 
+   - It is not mandatory for Users to be assigned to a group. 
+   - It can be the case that a user does not belong to any group 
+   - or it can belong to multiple groups as well
 
 **Permissions:**  
  - Users or Groups can be assigned JSON documents called `policies`
@@ -108,36 +111,48 @@ Problems solved
 ## 3.3 Add User  
  - Go to Access Management -> Users -> Add Users
 
-**Step 1: user details and access type**  
- - User Name: johndoe
+**Step 1: user details and access type** 
+**Set User Details**  
+ - User Name: johndoe/raj
+ - You can have multiple users added at the same time
+
+**Select AWS access Type**  
  - Access type 
-   - Programmatic Access: check
+   - Programmatic Access: check in case you want to allow this user to connect via code
    - AWS Managemenet Console access: check
+     - Selecting this section will require you to provide below details
+   - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_1.1.PNG)
  - Console password
    - Autogenerate Pasword: unchecked
    - Custom Password: checked
  - Require Password Reset Checkbox: unchecked
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_1.1.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_1.2.PNG)
  
 **Step 2: Set Permissions**  
- - Add user to group: In case you donot have groups already, "get started with group"
+ - `Add user to group:` In case you donot have groups already, "get started with group"
  - Copy permissions from existing user
  - Add existing policies directly
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.1.PNG)
 
 get started with group  
  - Group Name: admins
  - Create policy/ add policies
  - For starter add AdministratorAccess policy to make the users in group as admins
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.2_create_group.PNG)
 
 **Step 3: Add tags (Optional)**  
  - for eg: Department as key and value as Enineering
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_3_tags.PNG)
 
 **Step 4: Review**  
  - Review whatever you have selected till now
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.1_review.PNG)
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.2_review.PNG)
 
 **Step 5: Success, you have created an user.**  
  - There is a one time option to download the csv that contains every information including how to login and passwords, etc
  - A link will also be generated that can be shared with the user directly.
+ - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_5_Created.PNG)
 
 **Detailed steps:**  
  - Step by step screenshots are available [here](https://github.com/girirajvyas/101-series/tree/master/resources/images/aws/IAM/add_user)

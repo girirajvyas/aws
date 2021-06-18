@@ -1,14 +1,28 @@
 # aws-spring boot
 
 # 1. Overview
-Steps for setup
+Steps for setup and connect different services from spring boot application. For now endpoints are exposed to test and verify the same.
 
 # 2. Setup
+
+When you are connecting from code, the first thing you will need is to authenticate yourself and for that you have to generate the credentials. Once you have them then you have to add the dependency of `aws-java-sdk` in your pom.xml in case of maven projects so that you can call the AWS api.
+
+## 2.1 Credentials - Access key and Secret Key
+ - Do not use your root account to create security credentials
+ - Login via IAM user -> IAM -> Access management -> Users -> select your name -> Security credentials tab
+ - Access keys -> Create access keys (Single time download and next time you have to create a new one in case you forgot or missed)
+
+## 2.2 Create Spring booot project 
+We have taken example of spring boot here. 
  - Create spring boot app via:
    - spring boot initializer in web browser
    - directly via STS
- - Add AWS JDK
- ```xml
+
+## 2.3 Maven Dependency
+ - Amazon SDK makes it possible to interact with various Amazon services from our applications. 
+ - In the pom.xml file add the Amazon SDK dependency.
+ - You can get the latest version from: https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
+ - ```xml
      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
       <dependency>
           <groupId>com.amazonaws</groupId>
@@ -16,26 +30,42 @@ Steps for setup
           <version>1.12.5</version>
       </dependency>
    ```
+
+## 2.4 Common step: Credentials config
  - For anything you need to do with AWS, you are supposed to provide the aws credentials. Hence, Create config file that creates bean of amazon credentials that we will use with all the other configurations
  ```java
-  @Configuration
-  public class AwsConfig {
+  import org.springframework.beans.factory.annotation.Value;
+  import org.springframework.context.annotation.Bean;
+  import org.springframework.context.annotation.Configuration;
+  import com.amazonaws.auth.AWSCredentials;
+  import com.amazonaws.auth.AWSCredentialsProvider;
+  import com.amazonaws.auth.AWSStaticCredentialsProvider;
+  import com.amazonaws.auth.BasicAWSCredentials;
 
-  @Value("${amazon.aws.accesskey}")
-  private String amazonAwsAccessKey;
+  @Configuration
+  public class AwsCredentialsConfig {
   
-  @Value("${amazon.aws.secretkey}")
-  private String amazonAwsSecretKey;
-  
-  @Bean
-  public AWSCredentials amazonAWSCredentials() {
-      return new BasicAWSCredentials(amazonAwsAccessKey, amazonAwsSecretKey);
+   @Value("${amazon.aws.accesskey}")
+   private String amazonAwsAccessKey;
+   
+   @Value("${amazon.aws.secretkey}")
+   private String amazonAwsSecretKey;
+   
+   
+   private AWSCredentials amazonAWSCredentials() {
+       return new BasicAWSCredentials(amazonAwsAccessKey, amazonAwsSecretKey);
+   }
+   
+   @Bean
+   public AWSCredentialsProvider awsStaticCredentialsProvider() {
+     return new AWSStaticCredentialsProvider(amazonAWSCredentials());
+   }
   }
- }
  ```
- 
- ## S3
- 
+
+## 2.5 S3
+Lets try to connect S2 from the code.
+
  ```java
  @Bean
   public AmazonS3 amazonS3() {
@@ -47,7 +77,7 @@ Steps for setup
   }
  ```
  
- ## DynamoDB
+## 2.6 DynamoDB
 For dynamodb if you see their is not official dependency that can be used,  
 but we have a community version of spring data that helps with the task.
 
@@ -191,6 +221,8 @@ Using 5.1.0 version of said dependency will have below issue:
 
 Ref:
  - https://github.com/derjust/spring-data-dynamodb
+ - https://javatodev.com/spring-boot-dynamo-db-crud-tutorial/
+ - https://www.baeldung.com/spring-data-dynamodb - Integration test
  - https://dzone.com/articles/getting-started-with-dynamodb-and-spring
  
 
