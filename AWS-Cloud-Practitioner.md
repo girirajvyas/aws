@@ -5,23 +5,6 @@
  
  Source: https://aws.amazon.com/what-is-aws/
 
-# Table of content
-
- - [1. Cloud Computing](#1-cloud-computing)
-   - [1.1 Traditional Setup](#11-traditional-setup)
-   - [1.2 Cloud setup](#12-cloud-setup)
- - [2. Introduction to AWS Services](#2-introduction-to-aws-services)
-   - [2.1 Infrastructure]()
-   - [2.2 AWS account, users and services scope]()
- - [3. Identity and Access Management (IAM)](#3-identity-and-access-management-iam)
-    - [3.1 Basics](#31-basics)
-    - [3.2 How to land to IAM (Common step across this section)](#32-how-to-land-to-iam-common-step-across-this-section)
-    - [3.3 Add User](#33-add-user)
-    - [3.4 Policies](#34-policies)
-    - [3.4]()
-    - [3.5 Multi Factor Authentication - MFA]()
-    - []() 
-
 # 1. Cloud Computing:
 
 ## 1.1 Traditional Setup:
@@ -82,9 +65,9 @@ Problems solved
  - Rapid elasticity and scalability
  - Measured service
 
-# 3. Identity and Access Management (IAM)
+# 2. Identity and Access Management (IAM)
 
-## 3.1 Basics
+## 2.1 Basics
 
 **Components:**  
  - It is a *global Service*
@@ -102,13 +85,13 @@ Problems solved
  - Policies define what users/groups are allowed or in short the permissions of the users
  - [Least privilege access](http://docs.aws.amazon.com/wellarchitected/latest/security-pillar/permissions-management.html): It is recommended to follow this principle that states dont give user more permissions that he needs 
 
-## 3.2 How to land to IAM (Common step across this section)
+## 2.2 How to land to IAM (Common step across this section)
  - Go to: https://aws.amazon.com -> login with root user
  - You can use the Global search -> Search IAM -> Select
  - Or go to Services -> Security, Identity and compliance -> IAM
  - You will be landed to Dashboard of IAM
  
-## 3.3 Add User  
+## 2.3 Add User  
  - Go to Access Management -> Users -> Add Users
 
 **Step 1: user details and access type** 
@@ -121,62 +104,76 @@ Problems solved
    - Programmatic Access: check in case you want to allow this user to connect via code
    - AWS Managemenet Console access: check
      - Selecting this section will require you to provide below details
-   - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_1.1.PNG)
+   - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_1.1.PNG)
  - Console password
    - Autogenerate Pasword: unchecked
    - Custom Password: checked
  - Require Password Reset Checkbox: unchecked
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_1.2.PNG)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_1.2.PNG)
  
 **Step 2: Set Permissions**  
  - `Add user to group:` In case you donot have groups already, "get started with group"
  - Copy permissions from existing user
  - Add existing policies directly
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.1.png)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_2.1.png)
 
 get started with group  
  - Group Name: admins
  - Create policy/ add policies
  - For starter add AdministratorAccess policy to make the users in group as admins
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_2.2_create_group.png)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_2.2_create_group.png)
 
 **Step 3: Add tags (Optional)**  
  - for eg: Department as key and value as Enineering
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_3_tags.png)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_3_tags.png)
 
 **Step 4: Review**  
  - Review whatever you have selected till now
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.1_review.png)
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_4.2_review.png)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_4.1_review.png)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_4.2_review.png)
 
 **Step 5: Success, you have created an user.**  
  - There is a one time option to download the csv that contains every information including how to login and passwords, etc
  - A link will also be generated that can be shared with the user directly.
- - ![Add user](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/add_user/add_user_step_5_Created.png)
+ - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_5_Created.png)
 
 **Detailed steps:**  
  - Step by step screenshots are available [here](https://github.com/girirajvyas/101-series/tree/master/resources/images/aws/IAM/add_user)
 
-`Tip:` 
-In IAM dashboard, set Sign-in URL for IAM users in the account, you will have a default value by default or you can edit and see if you have an alias available
+`Tip:` In `IAM dashboard`, set Sign-in URL for IAM users in the account, you will have a default value by default or you can edit and see if you have an alias available
 
 **How to differentiate a root user or IAM user?**
  - `root user:` you will directly have name 
  - `IAM user:` username @ account name
 
-## 3.4 Policies
+## 2.4 Policies
 
- - if you remove the user from the group admins having AdministratorAccess policy, user will not be able to create/read groups and users
+**Overview**  
+ - If you remove the user from the group admins having AdministratorAccess policy, user will not be able to create/read groups and users
  - if you add a readonly policy, your user will only be able to read
+
+**Basic structure of policy**  
+ - On high level it has:
+   - Version: Policy language version
+   - Id: Identifier of policy
+   - Statement: Array of statemenets (atleast 1 required)
+ - Array of statements include:
+   - Sid: identifier for statment
+   - Effect: whether it allows or Denies access
+   - Principal: account:user:role this policy is applied to
+   - Action: list of actions this policy allows or denies
+   - Resource: List of resources where this action will be applied
+
+
  - Go to Access Management -> Policies  
  - Here you can see all the policies and can create custom ones as well
  - you can see the policy summary and json tab of policy, where policy summary is human readable and json has the same thing in json format
  - For creating policy: you can do it via visual editor or directly write the json as well
 
-## 3.5 Multi Factor Authentication - MFA
+## 2.5 Multi Factor Authentication - MFA
 
 **Password policy Basics**  
- - String password means higher security for your account
+ - Strong password means higher security for your account
  - In AWS, you can setup a password policy:
    - set a min password length
    - Require specific character types:
@@ -221,23 +218,23 @@ In IAM dashboard, set Sign-in URL for IAM users in the account, you will have a 
    - Success
  - Next time you login via your root account you have to provide MFA token along with your password
 
-## 3.6 Ways to access AWS
+## 2.6 Ways to access AWS
 
  - `AWS Management Console:`(Protected by password + MFA)
  - `AWS Command line Interface (CLI):` protected by access keys
  - `AWS Software Development Kit (SDK) for code:` protected by access keys
- - Access keys used above are generated through AWS console
- - Users Manage their own access keys
- - **Access keys are secret like you have passwords, it is recommended not to share them**
+   - Access keys used above are generated through AWS console
+   - Users Manage their own access keys
+   - **Access keys are secret like you have passwords, it is recommended not to share them**
 
-Acess keys:  
+**Acess keys:**   
  - `Access Key Id` which is used like a username but it is not the same
  - `Secret Access Key` which is used like a password but it is not the same.
 
-### 3.6.1 AWS console
- - All the hands on we dod till now is on console
+### 2.6.1 AWS console
+ - All the hands on we did till now is on console
 
-### 3.6.2 AWS cli on Windows
+### 2.6.2 AWS cli on Windows
 
 **Installation:**  
  - Google -> Download aws cli on windows -> [Link](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html)
@@ -260,11 +257,11 @@ Acess keys:
  - permissions updated via console will reflect in console as well.
  - in case you do not have permissions, there will be a blank response
 
-## 3.7 IAM Roles for services
+## 2.7 IAM Roles for services
 
 **Basics**  
  - Some AWS services will need to perform actions on your behalf
- - To achieve that, we will assign permissions to AWS serviceswith IAM Roles.
+ - To achieve that, we will assign permissions to AWS services with IAM Roles.
  - Common roles:
    - EC2 Instance roles
    - Lambda Function roles
@@ -290,7 +287,7 @@ IAM roles are a secure way to grant permissions to entities that you trust. Exam
  - We can skip this and do `Next:Review`
  - Provide Role name -> Create Role
 
-## 3.8 IAM Security Tools
+## 2.8 IAM Security Tools
 
 **Basics**  
  - IAM Credentials Report(account-level)
@@ -310,7 +307,7 @@ Access Advisor
  - Gives you detailed summary of the services used and in turn helps in effectively managing the access
  - Ref: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
 
-## 3.9 IAM Guidelines and Best Practices
+## 2.9 IAM Guidelines and Best Practices
 
  - Don't use the root account except for AWS account setup
  - One Physical user = One AWS user
@@ -330,7 +327,7 @@ Access Advisor
  - Enable [IAM Access Analyzer](https://console.aws.amazon.com/access-analyzer/home): Enable IAM Access Analyzer to analyze public, cross-account, and cross-organization access.
  - Learn more about all **[security best practices](https://console.aws.amazon.com/access-analyzer/home)**.
 
-## 3.10 Shared Responsibility Model for IAM
+## 2.10 Shared Responsibility Model for IAM
 
 | AWS                                           | You                           |
 | -------------                                 |:-------------:                      |
@@ -340,17 +337,17 @@ Access Advisor
 |                                               | Use IAM tools to apply appropriate permissions|
 |                                               | Analyze access patterns and review permissions|
 
-## 3.11 IAM Summary
+## 2.11 IAM Summary
 
  - Users: mapped to physical user, has a password for AWS Console
  - Groups: contains users only
- - Policies: JSOn documents that outlines permissions for users or groups
+ - Policies: JSON documents that outlines permissions for users or groups
  - Roles: for EC2 instances or AWS services
  - Security: MFA + password policy
  - Access keys: Access AWS using the CLI/SDK
  - Audit: IAM Credential Reports and IAM Access Advisor
 
-## 3.12 QUIZ
+## 2.12 QUIZ
 
 What is a proper Definition of IAM roles:
  - An IAM entity that defines a set of permissions for making AWS service requests, that will be used by AWS services
@@ -501,7 +498,7 @@ Launch EC2 instance running Linux
 **SSH on Windows 10**  
 
  - open powershell/cmd -> ssh -> if options comes up, you can continue or else have to use putty
- - [Screenshot](https://github.com/girirajvyas/101-series/blob/master/resources/images/aws/IAM/ssh/check_ssh_windows10.PNG)
+ - [Screenshot](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/ssh/check_ssh_windows10.PNG)
  - Command to run: ssh -i <path to pem file downloaded> ec2-user@<ip addres of EC2 instance>
  - eg: ssh -i D:\Data\aws\firstEC2instance.pem ec2-user@3.135.188.103
  - ec2-user is the default user that is logged in to the ec2 instances

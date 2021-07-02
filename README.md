@@ -6,9 +6,9 @@ Summary and resources for certifications
 This repository contains the path and resources for learning and passing AWS certifications. This place is just to consolidate the learnings I had from various learning resources and act as a reference for me or any one who wants to pursue this track.
 
 If you see below, you will have common data that will be common across the three certifications and for specific certifications you can see below:
- - [Cloud Practitioner]()
- - [Solutions Architect]()
- - [Developer - Associate (DVA -C01)]() 
+ - [Cloud Practitioner](https://github.com/girirajvyas/aws/blob/main/AWS-Cloud-Practitioner.md)
+ - [Solutions Architect](https://github.com/girirajvyas/aws/blob/main/AWS-Solution-Architect-Associate.md)
+ - [Developer - Associate (DVA -C01)](https://github.com/girirajvyas/aws/blob/main/AWS-Developer-Associate.md) 
 
 # 2. Certifications
 
@@ -38,7 +38,7 @@ We have different levels of Certifications in AWS, depending on the level you ar
    - Take Exam readiness training
    - Take a pracrice exam
  - Pictorial version is avaialble at: https://aws.amazon.com/certification/
- - ![Certifications link](https://github.com/girirajvyas/aws/blob/main/resources/images/Certifications.png)
+ - ![Certifications link](https://github.com/girirajvyas/aws/blob/main/resources/images/available_certifications.png)
 
 ## 2.2 Where to start
 
@@ -105,6 +105,9 @@ https://en.wikipedia.org/wiki/Amazon_Web_Services
  - 2007: Launched in Europe
  - Major customers: Netflix, Nasa, Airbnb, Dropbox
 
+*In detail when a service was annopunced and released in detail:*
+ - https://www.awsgeek.com/AWS-History/
+ 
 ## 4.2 Major competitors:
  - Microsoft Azure cloud
  - Google cloud platform (GCP)
@@ -289,6 +292,8 @@ If you see their is spring boot project created with basic connectivity setup do
 
 # Resources
 
+ - [Official AWS Docs](https://docs.aws.amazon.com/index.html)
+ - [AWSGeek - Nice pictorial summary for different topics](https://www.awsgeek.com/)
  - [Introduction to AWS Services](https://www.youtube.com/watch?v=Z3SYDTMP3ME)
  - [Introduction to AWS Networking](https://www.youtube.com/watch?v=XZbvQWkpJTI)
  - [Open guides AWS](https://github.com/open-guides/og-aws)
