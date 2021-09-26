@@ -15,7 +15,7 @@ When you are connecting from code, the first thing you will need is to authentic
 ## 2.2 Create Spring booot project 
 We have taken example of spring boot here. 
  - Create spring boot app via:
-   - spring boot initializer in web browser
+   - [Spring initializer](https://start.spring.io/)
    - directly via STS
 
 ## 2.3 Maven Dependency
@@ -63,7 +63,7 @@ We have taken example of spring boot here.
   }
  ```
 
-## 2.5 S3
+# 3. S3
 Lets try to connect S2 from the code.
 
  ```java
@@ -77,7 +77,7 @@ Lets try to connect S2 from the code.
   }
  ```
  
-## 2.6 DynamoDB
+# 4. DynamoDB
 For dynamodb if you see their is not official dependency that can be used,  
 but we have a community version of spring data that helps with the task.
 
@@ -209,7 +209,7 @@ public class User {
 }
 ```
 
-Issues:
+## 4.2 Issues
 Using 5.1.0 version of said dependency will have below issue:
  - https://github.com/derjust/spring-data-dynamodb/issues/233
  - ```console
@@ -219,12 +219,35 @@ Using 5.1.0 version of said dependency will have below issue:
    ```
  - Marking dynamoDbMapperConfig @Primary made it work
 
-Ref:
+## 4.3 References
  - https://github.com/derjust/spring-data-dynamodb
  - https://javatodev.com/spring-boot-dynamo-db-crud-tutorial/
  - https://www.baeldung.com/spring-data-dynamodb - Integration test
  - https://dzone.com/articles/getting-started-with-dynamodb-and-spring
+
+# 5. Deploy your Spring boot app on EC2
+
+https://medium.com/@kgaurav23/deploying-hosting-spring-boot-applications-on-aws-ec2-7babc15a1ab6
+https://www.javacodegeeks.com/2019/10/deploy-spring-boot-application-aws-ec2-instance.html
+https://www.javacodegeeks.com/2019/09/how-to-launch-an-ec2-instance-in-aws.html
+https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+
+## 5.1 App creation
+ - Considering you are following along from start. You already have a spring boot app working.
+ - If not, you can create one via:
+   - [Spring initializer](https://start.spring.io/)
+   - directly via STS
+ - Create dummy endpoint that we can access to verify its working
+
+## EC2 Instance creation
+
+ - Login to console
+ - [EC2 Dashboard]()
+ - Select EC2 
+ - 
  
+
+
 
 # Resources
 

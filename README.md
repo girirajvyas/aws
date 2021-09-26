@@ -16,10 +16,10 @@ If you see below, you will have common data that will be common across the three
 We have different levels of Certifications in AWS, depending on the level you are you can choose it accordingly
 
  - *Foundation Level AWS Certifications*
-   - **Cloud Practitioner** - Learn cloud fundamentals and best practices
+   - **[Cloud Practitioner](https://aws.amazon.com/certification/certified-cloud-practitioner)** - Learn cloud fundamentals and best practices
  - *Associate Level AWS Certifications*
-   - **Solutions Architect** - Associate: Learn to design highly available systems
-   - **[Developer - Associate (DVA -C01)](https://aws.amazon.com/certification/certified-developer-associate/)** - Learn to develop applications for the cloud
+   - **[Solutions Architect (SAA-C02) ](https://aws.amazon.com/certification/certified-solutions-architect-associate)** - Associate: Learn to design highly available systems
+   - **[Developer - Associate (DVA-C01)](https://aws.amazon.com/certification/certified-developer-associate/)** - Learn to develop applications for the cloud
    - **SysOps Administrator** - Associate: Learn to automate applications, networks, and systems
  - *Professional Level AWS Certifications*
    - **Solutions Architect - Professional:** Build complex solutions with data services, governance, and security
@@ -95,23 +95,43 @@ https://en.wikipedia.org/wiki/Amazon_Web_Services
 
 # 4. Basics
 
-## 4.1 History
+## 4.1 Why Move to cloud
+ - Unlimited Storage space (Almost)
+ - Flexible spend instead of setting upfront
+ - Downtime mitigation available
+ - Disaster recovery options out of the box
+ - Reduced Software maintenance
+ - Centralized security management
+ - Automated provisioning of servers
+ - Scalability
+ - Decentralized environments
+ - Getting close to users (Point of presence, cloudfront)
+ - Speed
+ - Capital Expenditure(CapEx) reduction
+
+**Good reads:** 
+ - https://en.wikipedia.org/wiki/Cloud_computing
+ - 
+
+## 4.2 History
 
 [AWS](https://en.wikipedia.org/wiki/Amazon_Web_Services):
  - 2002: Internally launched
- - 2003: 
  - 2004: Launched publicly with SQS
  - 2006: re-launched with SQS, S3 and EC2
- - 2007: Launched in Europe
+ - 2007: Launched in Europe + simpleDB  
  - Major customers: Netflix, Nasa, Airbnb, Dropbox
 
-*In detail when a service was annopunced and released in detail:*
- - https://www.awsgeek.com/AWS-History/
- 
+**Good Reads:**
+ - [AWS announcements](https://aws.amazon.com/new/)
+
 ## 4.2 Major competitors:
  - Microsoft Azure cloud
  - Google cloud platform (GCP)
- - Followed by Alibaba, IBM, Salesforce, Tencent and Oracle
+ - Followed by Alibaba, IBM Bluemix, Salesforce, Tencent, VmWare and Oracle
+
+**Good read:**
+ - https://en.wikipedia.org/wiki/Category:Cloud_computing_providers
 
 ## 4.3 Where to use
  - Building Enterprise IT applications
@@ -120,20 +140,20 @@ https://en.wikipedia.org/wiki/Amazon_Web_Services
  - Many services for IOT and ML in case you are doing something in tat field
  - Hosting your website, application 
 
-## 4.3 Infrastructure
+## 4.4 Infrastructure
 
 The best resource to understand infrastructure is https://www.infrastructure.aws/.  
 Here you can click on different sections to understand in detail about them. A brief summary is as below:
 
-Why cloud infrastructure matters?   
+**Why cloud infrastructure matters?**   
  - https://aws.amazon.com/about-aws/global-infrastructure
 
-Regions and Availability zones  
+### 4.4.1 Regions and Availability zones  
  - On high level We have Regions:
    - Cluster of data centers
    - Many Avaialbility zones (normally 3, minimum 2, maximum 6)
    - Most of the services are Region scoped. This means that you have to define the region while using that service and it will be available in that region only
- - Each region has Availability zones
+ - Each Region has 2 or more Availability zones
    - Each availability zone is one or more discrete data centers with redundant power, Networking and connectivity
    - They are saperated from each other so as to have isolation from disasters
    - connected with high bandwidth, ultra-low latency network
@@ -142,7 +162,7 @@ Regions and Availability zones
  - Finally we have Edge locations/Point of presence
  - You can read about this in detail at: https://aws.amazon.com/about-aws/global-infrastructure/regions_az/
 
-**AWS global datacentres:**  
+### 4.4.2 AWS global datacentres: 
  - It is important to know how many `regions` and `availability zones` does aws provide
  - You can always get the latest data at: https://aws.amazon.com/about-aws/global-infrastructure/
  - For Instance, India has 1 region and USA has 7 
@@ -151,14 +171,19 @@ Regions and Availability zones
  - `Edge locations are the place where the data is cached to the nearest location` from where it is accessed
  - 200+ services as of June-2021
 
-**Quick Summary:**  
+### 4.4.3 Quick Summary:
  - `Region:` Independent geographic area, typically has 2 or more availability zones
  - `Availability zones:` Multiple isolated locations/data centers within a region
- - `Edge Locations:` place where the data is cached to the nearest location
+ - `Edge Locations:` place where the data is cached to the nearest location, you cannot directly use but can be used via services like cloudFront
 
 ## 4.3 Different Service offerings and its scope
 Do not get overwhelmed by the numbers below, it is just to consolidate the mostly used services and once you are familiar with those you will be comfortable to read this again and relate with it.  
 
+*In detail when a service was announced and released in detail:*
+ - https://www.awsgeek.com/AWS-History/
+
+### 4.3.1 AWS services by their scope
+ 
 **AWS account (Global)**
  - IAM{Identity and Access Management} users. (User management)
  - Billing
@@ -179,36 +204,50 @@ Do not get overwhelmed by the numbers below, it is just to consolidate the mostl
  - RDS relational databases
  - EBS Elastic block storage
 
-**Miscellaneous**  
- - ElasticCache - Redis and memcached  
- - ELB - Elastic load balancer  
- - VPC - Virtual private cloud  
- - Route53 - DNS service  
- - S3 - Simple storage service (External storage)  
- - Rekognition - Content filter  
- - Lambda - Serverless service  
- - Kinesis - Click stream analysis  
- - EMR - aggregation, processig spark/hadoop cluster  
- - GLUE - ETL  
- - Redshift - data warehouse can store petabytes  
- - Quicksight - Bi analysis  
- - Athena - SQL tool for BI  
- - Cloudfront - Content delivery network (cache). It does this with the help of edgelocation  
- - SNS - Simple notification service - for mobile push notifications/SMS  
- - SES - Simple email service - for sending mails/ bulk emails  
- - SQS - Simle queue service - messaging queues or chatting app  
- - Cloudwatch - Monitor all the services, set alarms  
+### 4.3.1 AWS services by Functionality
+
+**Compute services**  
+ - Elastic cloud compute (EC2) : Virtual servers in cloud
+ - EC2 container service (ECS) : Run and Manage Docker Containers
+ - Elastic Container service for Kubernetes (EKS) : Deploy, manage and scale containerized applications using K8s
+ - Fargate : Run containers without having to manage servers and clusters
+ - Lightsail : Launch and manage Virtual private servers
+ - Elastic Beanstalk : Run and Manage webapps
+ - Lambda : Run code in response to Events or Run code without thinking about servers
+ - Batch : Batch Jobs at scale
+ 
+**Storage Services**  
+ - Simple Storage Service (S3) : Storage in cloud
+ - Elastic File System (EFS) : Managed file storage for EC2
+ - Glacier : Archive storage
+ - Storage Gateway : Hybrid storage integration
+
+**Database Services**  
+ - Relational Database Services (RDS) : Managed relational database for Amazon Aurora, MySQL, PostgreSQL, SQL server, Oracle and MariaDB
+ - DynamoDB : Managed NoSQL database (Equivalent of mongoDB)
+ - ElastiCache : In-Memory caching system
+ - RedShift : DataWarehousing
+ - Elastic Map Reduce (EMR) : Managed hadoop that can be combined with hbase or hive
+ 
+**Networking and content delivery**  
+ - Virtual Private Cloud (VPC) : Isolated/saggregated private networks
+ - CloudFront : Content Delivery Network
+ - Direct Connect : Private Network connection to AWS
+ - Route 53 : Domain Name system
+
+**Security, Identity and colplaince**  
+ - Identity and Access Management (IAM) : Manage user access and API access keys in AWS  
+ - Key management service (KMS) : Managed creation and control of encryption keys   
+ - Certificate Manager: Provision, Manage and deploy SSL/TLS certificates
+ - Directory Service:  Host and manage active directory
+ - WAF and shield - Web application firewalls (Prevents ddos, sql injection, cross site scripting, etc)  
+ - Inspector : Analyze application security (PCI DSS compliance, HIPPA compliance, scans for any known vulnerabilities)
+ - Artifact :  No cost, self-service portal for on demand access to aws compliance report
+ - AWS Config : Assess, Audit and Evaluate the configurations of yor aws resources
 
 **Expose API**  
  - API Gateway - Rest API  
  - Cognito - web and mobile user management  
-
-**Security**  
- - IAM - manage all accesses in AWS  
- - KMS - Key management service  
- - ACM - Digital certificates for https ssl connection Amazon certification management  
- - WAF - Web application firewalls (Prevents ddos, sql injection, cross site scripting, etc)  
- - Inspector - PCI DSS compliance, HIPPA compliance: scans for any known vulnerabilities  
 
 **Development and Devops services**  
  - CloudFormation: code your infrastructure/Infrastructure as a code (json/yaml)  
@@ -265,9 +304,32 @@ Option 2:
   - triggered when video uploaded  
   - scales automatically  
 
+**Miscellaneous**  
+ - ElasticCache - Redis and memcached  
+ - ELB - Elastic load balancer  
+ - VPC - Virtual private cloud  
+ - Route53 - DNS service  
+ - S3 - Simple storage service (External storage)  
+ - Rekognition - Content filter  
+ - Lambda - Serverless service  
+ - Kinesis - Click stream analysis  
+ - EMR - aggregation, processig spark/hadoop cluster  
+ - GLUE - ETL  
+ - Redshift - data warehouse can store petabytes  
+ - Quicksight - Bi analysis  
+ - Athena - SQL tool for BI  
+ - Cloudfront - Content delivery network (cache). It does this with the help of edgelocation  
+ - SNS - Simple notification service - for mobile push notifications/SMS  
+ - SES - Simple email service - for sending mails/ bulk emails  
+ - SQS - Simle queue service - messaging queues or chatting app  
+ - Cloudwatch - Monitor all the services, set alarms  
+
 # 5. Manage Billing
+
+## 5.1 Why
 To avoid billing shocks while using AWS, you can do below setup as a precautionalry measure.
 
+## 5.2 Pre-requisite
 In case you access the billing module from IAM user, you might get below permissions error  
 ```cmd
 You Need Permissions
@@ -276,19 +338,43 @@ You don't have permission to access billing information for this account. Contac
 
 You have to update the access via root account
  - Account name -> My Account -> IAM User and Role Access to Billing Information -> Edit -> Activate IAM Access -> Update
- - Go to IAM user account and refresh to see it refkects now
+ - Go to IAM user account and refresh to see it reflects now
 
-Now to setup a budgetgo
+## 5.3 Read bills
+ - Go to Bills section -> you can see your bill month wise
+ - You can expand any section which has amount specified and see the details of the same
+ - For free tier services you can also check the details of your usage
+
+## 5.4 Setup a budget
  - Go to Budgets -> Create a Budget -> you have below options
-   - Cost Budget: Monitor your costs against a specified amount and receive alerts when your user defined thresholds are met
-   - Usage Budget: Monitor your usage of one or more specified usage types or usage type groups and receive alrets when your user-defined thresholds are met
-   - Reservation Budget: Track the RI Utilization or RI Coverage associated with your reservations. Thses budgets supports Amazon EC2, RDS, Redshift, ElasticCache and ElasticSearch reservation models
-   - Savings plan budget: Track the utilization and coverage associated with your Savings plans
- - Lets create `Cost Budget`, provide name, recurring type monthly, threshold amount at which alert will be triggered. and create
+ - Step 1: Select Budget
+   - Types:
+     - Cost Budget: Monitor your costs against a specified amount and receive alerts when your user defined thresholds are met
+     - Usage Budget: Monitor your usage of one or more specified usage types or usage type groups and receive alrets when your user-defined thresholds are met
+     - Reservation Budget: Track the RI Utilization or RI Coverage associated with your reservations. Thses budgets supports Amazon EC2, RDS, Redshift, ElasticCache and ElasticSearch reservation models
+     - Savings plan budget: Track the utilization and coverage associated with your Savings plans
+ - Step 2: Set your budget 
+   - Lets create `Cost Budget`
+     - Provide name: anything
+     - Period: monthly
+     - Budget effective date: Recurring type
+     - Specify your monthly budget
+       - Fixed
+       - Budgeted amount: 1$
+ - Step 3: Configure Thresholds
+   - based on actual cost and forecasted cost
+   - provide alert threshold
+   - Setup your notifications via providing email
+ - Step 4: Confirm Budget
 
 
 # 7. Connect from Code
-If you see their is spring boot project created with basic connectivity setup done and basic example of S3 and DynamoDB. you can check that **[here](https://github.com/girirajvyas/aws/tree/main/aws-springboot)**
+You can find a Spring boot project with below examples in this repository
+ - Basic connectivity setup
+ - Example of S3
+ - Example of DynamoDB. 
+
+You can check the code **[here](https://github.com/girirajvyas/aws/tree/main/aws-springboot)**
 
 # Resources
 
@@ -299,4 +385,7 @@ If you see their is spring boot project created with basic connectivity setup do
  - [Open guides AWS](https://github.com/open-guides/og-aws)
  - [Resources with most stars on github are listed here](https://github.com/donnemartin/awesome-aws)
  - [Ultimate AWS Certified Cloud Practitioner - 2021](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/)
+ - Notes: https://tutorialsdojo.com/aws-study-path-notes/
+ - Repo: https://bitbucket.org/awsdevguru/awsdevassoc/src/master/
+ - aws certified solutions architect jon bonso
 

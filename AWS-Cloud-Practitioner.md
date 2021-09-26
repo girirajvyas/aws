@@ -90,6 +90,7 @@ Problems solved
  - You can use the Global search -> Search IAM -> Select
  - Or go to Services -> Security, Identity and compliance -> IAM
  - You will be landed to Dashboard of IAM
+ - ![Landing Page](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/IAM_landing_page.PNG)
  
 ## 2.3 Add User  
  - Go to Access Management -> Users -> Add Users
@@ -138,7 +139,7 @@ get started with group
  - ![Add user](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/add_user/add_user_step_5_Created.png)
 
 **Detailed steps:**  
- - Step by step screenshots are available [here](https://github.com/girirajvyas/101-series/tree/master/resources/images/aws/IAM/add_user)
+ - Step by step screenshots are also available [here](https://github.com/girirajvyas/101-series/tree/master/resources/images/aws/IAM/add_user)
 
 `Tip:` In `IAM dashboard`, set Sign-in URL for IAM users in the account, you will have a default value by default or you can edit and see if you have an alias available
 
@@ -240,7 +241,7 @@ get started with group
  - Google -> Download aws cli on windows -> [Link](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html)
  - Install the downloaded msi file. for me it was 28 MB.
  - After finishing installation, go to cmd -> type aws --version -> you will get the result as below
- - [Successful installation]()
+ - ![Successful installation](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/aws_cli/aws_cli_installed_successfully.PNG)
  - In case you want to upgrade, you have to download the latest version of msi and install again
 
 **Hands On:**  
@@ -252,10 +253,18 @@ get started with group
    - access key secret: one you created just above
    - Default region name: the region close to you
    - Default output format: nothing, just press enter
- - verify if aws is configured correctly by: `aws iam list-users`
- - [output]()
- - permissions updated via console will reflect in console as well.
- - in case you do not have permissions, there will be a blank response
+   - ![configure](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/aws_cli/aws_cli_initial_setup.PNG)
+ - Verify if aws is configured correctly by: `aws iam list-users`
+ - ![output](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/aws_cli/aws_cli_list_users.PNG)
+ - Permissions updated via console will reflect in console as well.
+ - In case you do not have permissions, there will be a blank response
+
+**Reference documentation:** https://docs.aws.amazon.com/cli/latest/reference/
+ - You get the same info via `aws help or aws ec2 help`
+
+### 2.6.3 AWS Cloudshell (Alternative to AWS cli on Windows)
+
+
 
 ## 2.7 IAM Roles for services
 
@@ -267,7 +276,7 @@ get started with group
    - Lambda Function roles
    - Roles for CloudFormation
 
-**Form AWS console**  
+**From AWS console: What are IAM Roles?**  
 IAM roles are a secure way to grant permissions to entities that you trust. Examples of entities include the following:  
  - IAM user in another account
  - Application code running on an EC2 instance that needs to perform actions on AWS resources
@@ -366,7 +375,7 @@ What are IAM Policies?
 
 # 4. EC2 - Elastic Compute Cloud
 
-## 4.1 EC2 
+## 4.1 EC2 Basics
 
 **Basics**  
  - EC2 is one of te most popular AWS offering
@@ -387,10 +396,22 @@ What are IAM Policies?
    - hardware **(EC2 instance store)**
  - Network card: **speed of the card, public IP address**
  - Firewall rules: **security group**
- - **Bootstrap script (configure at first launch)**: EC2 User Data
+ - Bootstrap script (configure at first launch): **EC2 User Data**
 
 **EC2 instance types**
  - Different depending on the cpu ram storage and network performance
+ - [High level image]
+
+**EC2 User data**
+ - It is possible to bootstrap our instances using and `EC2 user data` script
+ - Bootstrapping means launching commands when a machine starts
+ - That Script is only run once at the instance first start
+ - EC2 user data is used to automate boot tasks such as:
+   - Installing updates|
+   - Installing softwares
+   - Downloading common files from internet
+   - Any other use cases as well
+ - "EC2 user data script" runs with root user
 
 **Hands on**
 
@@ -401,14 +422,14 @@ Launch EC2 instance running Linux
    - EC2 dashboard -> instances -> Launch Instance 
    - Step 1: Choose Amazon Machine Image (AMI)
    - These AMI is template image for all your work
-   - you have 4 options to chooese from:
+   - you have 4 options to choose from:
      - Quick start
      - My AMIs
-     - awS marketPlace 
+     - AWS Marketplace 
      - Community AMIs
    - Lets continue with quickstart and free tier option -> Amazon Linux 2 AMI (HVM), SSD Volume Type AMI
    - Step 2: Choose an instance type
-     - there are multiple choice avaialble here as well and can be filtered based on instance families and generation, we will select t2.micro (Free tier eligible)
+     - there are multiple choice available here as well and can be filtered based on instance families and generation, we will select t2.micro (Free tier eligible)
    - Step 3: Configure Instance details
      - Number of instances: 1
      - Network: same as default
@@ -443,7 +464,7 @@ Launch EC2 instance running Linux
       - Stop: Stop the instance, starting again will have new ip address assigned to the instance
       - Terminate: it will delete everything of this instance
 
-## 4.2 introduction to Security Groups
+## 4.2 Introduction to Security Groups
 
 **Basics**  
  - Security Groups are the fundamental of network security in AWS
@@ -612,17 +633,17 @@ Launch EC2 instance running Linux
 
 ## 4.6 EC2 Summary
  
- - EC2 Instance:
+ - *EC2 Instance:*
    - AMI(OS)
    - Instance size (CPU + RAM)
    - Storage
    - Security groups
    - EC2 User data
- - Security groups: Firewall attached to the EC2 instance
- - EC2 User data: Script launched at the first start of an instance
- - SSH: start a terminal into our EC2 instances (port 22)
- - EC2 Instance Role: link to IAM roles
- - Purchasing Options:
+ - *Security groups:* Firewall attached to the EC2 instance
+ - *EC2 User data:* Script launched at the first start of an instance
+ - *SSH:* start a terminal into our EC2 instances (port 22)
+ - *EC2 Instance Role:* link to IAM roles
+ - *Purchasing Options:*
    - On-demand
    - Reserved (Standard, Convertible, Scheduled)
    - Spot
@@ -645,7 +666,7 @@ Which EC2 purchasing option should you use for an application you plan on runnin
 ## 5.1 Whats an EBS Volume
 
 **Basics**  
- - An EBS (Elastoc Block Store) Volume is a network drive you can attach to your instances while they run
+ - An EBS (Elastic Block Store) Volume is a network drive you can attach to your instances while they run
  - It allows your instances to persist data, even after their termination
  - They can **only be mounnted to one instance at a time (at the Certified cloud Practitioner level)**
  - They are **bound to a specific availability zone** and cannot be attached to another zone
