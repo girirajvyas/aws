@@ -4,7 +4,6 @@
 Steps for setup and connect different services from spring boot application. For now endpoints are exposed to test and verify the same.
 
 # 2. Setup
-
 When you are connecting from code, the first thing you will need is to authenticate yourself and for that you have to generate the credentials. Once you have them then you have to add the dependency of `aws-java-sdk` in your pom.xml in case of maven projects so that you can call the AWS api.
 
 ## 2.1 Credentials - Access key and Secret Key
@@ -227,10 +226,13 @@ Using 5.1.0 version of said dependency will have below issue:
 
 # 5. Deploy your Spring boot app on EC2
 
-https://medium.com/@kgaurav23/deploying-hosting-spring-boot-applications-on-aws-ec2-7babc15a1ab6
-https://www.javacodegeeks.com/2019/10/deploy-spring-boot-application-aws-ec2-instance.html
-https://www.javacodegeeks.com/2019/09/how-to-launch-an-ec2-instance-in-aws.html
-https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+## 5.0 Summary
+ - Create user, other than root user (if already done ignore)
+ - Create Spring boot App (with basic rest endpoint or any other existing app if you already have)
+ - Create EC2 instance (steps can be defined here, make sure to enable tcp 8080 port in security configuration and have key pair generated if not have already)
+ - Connect to this linux AMI via windows:
+   - Putty 
+   - WSL https://docs.microsoft.com/en-us/windows/wsl/about   
 
 ## 5.1 App creation
  - Considering you are following along from start. You already have a spring boot app working.
@@ -239,15 +241,44 @@ https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-u
    - directly via STS
  - Create dummy endpoint that we can access to verify its working
 
-## EC2 Instance creation
-
+## 5.2 EC2 Instance creation
  - Login to console
  - [EC2 Dashboard]()
  - Select EC2 
- - 
+
+## Connect to EC2
  
+WSL:
+Powershell: wsl --install
+Ref: https://docs.microsoft.com/en-us/windows/wsl/install
 
+Putty (For ssh):
+ - Install: https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html 
+ - Convert .pem to .ppk file
+ - user ec2-user@ipv4_address
+   - Error: no authentication method found
+   - Solution: Connection -> SSH -> AUTH -> browse .ppk FIle
+ - Detailed video: https://www.youtube.com/watch?v=jv-dgOfFN4o
 
+Winscp (For file transfer)
+S3
+
+After SSH:
+Install Java:
+ sudo yum install java-1.8.0
+ sudo yum remove java-1.7.0-openjdk (In case you have to ininstall previous version)
+
+From Unix:
+scp -i /Users/username/downloads/
+EC2Keypair.pem /Users/username/downloads/springbootproject/target/springbootproject-0.0.1-SNAPSHOT.jar ec2-user@ec2-11-111-11-111.compute-1.amazonaws.com:~
+
+# 5.X Resources
+ - https://cloudkatha.com/how-to-deploy-spring-boot-application-on-aws-ec2/
+ - https://medium.com/@kgaurav23/deploying-hosting-spring-boot-applications-on-aws-ec2-7babc15a1ab6
+ - https://www.javacodegeeks.com/2019/10/deploy-spring-boot-application-aws-ec2-instance.html
+ - https://www.javacodegeeks.com/2019/09/how-to-launch-an-ec2-instance-in-aws.html
+ - https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+ - SCP: https://en.wikipedia.org/wiki/Secure_copy_protocol
 
 # Resources
 

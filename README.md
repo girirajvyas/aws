@@ -377,15 +377,44 @@ You can find a Spring boot project with below examples in this repository
 You can check the code **[here](https://github.com/girirajvyas/aws/tree/main/aws-springboot)**
 
 # Resources
-
+Courses:  
+ - [Ultimate AWS Certified Cloud Practitioner - 2022](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/)
+ - [Ultimate AWS Certified Solutions Architect Associate 2022
+](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/)
+ - [AWS Solution Architect Practice Exams](https://www.udemy.com/course/practice-exams-aws-certified-solutions-architect-associate/)
+ 
+Official Documentation:  
  - [Official AWS Docs](https://docs.aws.amazon.com/index.html)
+
+Good Reads:  
  - [AWSGeek - Nice pictorial summary for different topics](https://www.awsgeek.com/)
- - [Introduction to AWS Services](https://www.youtube.com/watch?v=Z3SYDTMP3ME)
- - [Introduction to AWS Networking](https://www.youtube.com/watch?v=XZbvQWkpJTI)
  - [Open guides AWS](https://github.com/open-guides/og-aws)
  - [Resources with most stars on github are listed here](https://github.com/donnemartin/awesome-aws)
- - [Ultimate AWS Certified Cloud Practitioner - 2021](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/)
  - Notes: https://tutorialsdojo.com/aws-study-path-notes/
  - Repo: https://bitbucket.org/awsdevguru/awsdevassoc/src/master/
  - aws certified solutions architect jon bonso
+ - https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
+ - https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html
+ - https://courses.datacumulus.com/downloads/certified-solutions-architect-pn9/
 
+Exam:
+ - https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide_C03.pdf
+Practice Exams:  
+ - https://www.knowledgehut.com/practice-tests/aws-solutions-architect-associate
+ - https://www.awsboy.com/aws-practice-exams/
+ - Schedule AWS exam: https://aws.amazon.com/certification/certified-solutions-architect-associate/
+ - https://aws.amazon.com/certification/coming-soon/
+
+Youtube:  
+ - [Introduction to AWS Services](https://www.youtube.com/watch?v=Z3SYDTMP3ME)
+ - [Introduction to AWS Networking](https://www.youtube.com/watch?v=XZbvQWkpJTI)
+
+1. AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C02 - English) - old
+2. AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03 - English) - new
+
+AWS Certified Solutions Architect - Associate certification exam is changing from August 30, 2022
+	
+	AWS Certified Solutions Architect - Professional certification exam is changing from November 15, 2022
+    
+    https://aws.amazon.com/certification/coming-soon/
+    
