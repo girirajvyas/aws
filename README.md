@@ -398,7 +398,7 @@ Good Reads:
  - https://courses.datacumulus.com/downloads/certified-solutions-architect-pn9/
 
 Exam:
- - https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide_C03.pdf
+ - Good: https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide_C03.pdf
 Practice Exams:  
  - https://www.knowledgehut.com/practice-tests/aws-solutions-architect-associate
  - https://www.awsboy.com/aws-practice-exams/
@@ -417,4 +417,24 @@ AWS Certified Solutions Architect - Associate certification exam is changing fro
 	AWS Certified Solutions Architect - Professional certification exam is changing from November 15, 2022
     
     https://aws.amazon.com/certification/coming-soon/
-    
+  
+Whitepapers:
+ - https://aws.amazon.com/disaster-recovery/
+ - Architecting for cloud: AWS Best practices (https://aws.amazon.com/blogs/aws/new-whitepaper-architecting-for-the-cloud-best-practices/)
+ - AWS Well architected framework: https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html 
+
+1. Architecting for the cloud: https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf (Archived)
+
+2. Whitepapers related to well-architected framework are mentioned here: https://aws.amazon.com/blogs/aws/aws-well-architected-framework-updated-white-papers-tools-and-best-practices/
+
+3. Disaster recovery whitepaper: https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf (Archived)
+
+AWS now recommends a well-architected framework whitepaper: https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf
+
+FAQs:
+ - https://aws.amazon.com/s3/faqs/
+
+Reinvent on youtube
+
+Book 
+https://www.aws.training/certification

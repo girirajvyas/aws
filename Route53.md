@@ -64,6 +64,9 @@
 
 
 
+### Domain Registrar vs DNS Service
+
+
 
 
 
