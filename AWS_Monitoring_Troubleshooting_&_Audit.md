@@ -230,7 +230,73 @@
      - Events are stored for 90 days in CloudTrail
      - To keep events beyond this period, log them to S3 and use Athena
    - Usecase: CloudTrail integration with EventBridge -> to intercept API calls
- - 
 
+## AWS Config 
+
+### Overview
+ - Helps with auditing and recording compliance of your AWS resources
+ - Helps record configurations and changes over time
+ - Questions that can be solved with AWS config:
+   - Is there unrestricted SSH access to my security groups?
+   - Do my buckets have any public access?
+   - How has my ALB configuration changed over time?
+ - You can receive alerts (SNS notifications) for any change
+ - AWS config is a per region service
+ - Can be aggregated across regions and accounts
+ - possibility of storing the configuration data into s3 (analyzed by athena)
+
+### Config rules
+ - Can use AWS managed config rules (over 75)
+ - Can make custom config rules (Must be defined in AWS Lambda)
+   - Ex: Evaluate if each EBS disk is of type gp2
+   - Ex: Evaluate if each EC2 instance is t2.micro
+ - Rules can evaluated/triggered
+   - For each config change
+   - And/or at regular time intervals
+ - AWS config rules does not prevent actions from happening (no deny)
+ - Pricing: no free tier; $0.003 per onfiguration item recorded per region, $0.001 per config rule evaluation per region
+ 
+### Config
+ - View compliance of a resource over time
+ - View configuration of a resource over time
+ - View CloudTrail API calls of a resource over time
+
+### Config rules - remediations
+ - Automate Remediation of non-compliant resources using SSM automation Documents
+ - Use AWS-Managed automation Documents or Create custom Automation Documents
+   - Tip: you can create custom automation documents that invokes lambda functions
+ - You can set Remediation Retries if the resource is still non-compliant after auto-remediation
+
+### Config rules - notifications
+ - Use EventBridge to trigger notifications when AWS resources are non-compliant
+ - Ability to send configuration changes and complaince state notifications to SNS (All events - use SNS filtering or filter at client side)
+
+## CloudWatch vs CloudTrail vs Config
+
+### Comparison
+ - CloudWatch
+   - Performance monitoring (Metrics, CPU, Network, etc) & Dashboards
+   - Events and alerting
+   - Log Aggregation and Analysis
+ - CloudTrail
+   - Record API Calls made within your account by everyone
+   - Can define trails for specific resources
+   - Global Services
+ - Config
+   - Record Configuration changes
+   - Evaluate resources against compliance rules
+   - Get timeline of changes and compliance
+
+### Comparing with an example for an Elastic LoadBalancer
+ - CloudWatch
+   - Monitoring Incoming connections metric
+   - Visualize error codes as a % over time
+   - Make a dashboard to get an idea of your load balancer performance
+ - Config
+   - Track security group rules for the Load balancer
+   - Track configuration for the load balancer
+   - Ensure an SSL certificate is always assigned to the Load Balancer (Compliance)
+ - CloudTrail
+   - Track who made any changes to the load balancer config
 
 
