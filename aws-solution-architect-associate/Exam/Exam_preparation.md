@@ -179,3 +179,24 @@ OAI doesn't work for the scenarios in the preceding list, or it requires extra w
 AWS STS: Short term security tokens
 petabyte scale storage and instant retrieval and perform realt time analytics: DynamoDB
 OpsWorks for puppet and chef
+
+https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html
+
+S3:
+SSE-S3
+SSE-KMS
+SSE-C
+Client side encryption
+
+Retrieve sensitive data from S3:
+ - Use S3 Object Lambda to change objects, before they are retrieved by report generator application
+
+Verify if some of your employees are accessing S3 buckets that they dont have access to?
+ - Use S3 Access Logs 
+ - It logs all the requests made to S3 buckets and Amazon Athena can then be used to run serverless analytics on top of the log files.
+
+Limited time access to S3:
+S3 Pre-Signed URLs are temporary URLs that you generate to grant time-limited access to some actions in your S3 bucket.
+
+Database backups must be retained for 4 years
+Glacier vaults with Vault lock policies

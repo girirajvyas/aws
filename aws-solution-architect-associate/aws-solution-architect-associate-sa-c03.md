@@ -1,6 +1,6 @@
-# 2. Identity and Access Management (IAM)
+# 1. Identity and Access Management (IAM)
 
-## 2.1 Basics
+## 1.1 Basics
 
 **Components:**  
  - It is a *global Service*
@@ -18,17 +18,17 @@
  - Policies define what users/groups are allowed or in short the permissions of the users
  - [Least privilege access](http://docs.aws.amazon.com/wellarchitected/latest/security-pillar/permissions-management.html): It is recommended to follow this principle that states dont give user more permissions that he needs 
 
-## 2.2 How to land to IAM (Common step across this section)
+## 1.2 How to land to IAM (Common step across this section)
  - Go to: https://aws.amazon.com -> login with root user
  - You can use the Global search -> Search IAM -> Select
  - Or go to Services -> Security, Identity and compliance -> IAM
  - You will be landed to Dashboard of IAM
  - ![Landing Page](https://github.com/girirajvyas/aws/blob/main/resources/images/IAM/IAM_landing_page.PNG)
  
-## 2.3 Add User  
+## 1.3 Add User  
  - Go to Access Management -> Users -> Add Users
 
-**Step 1: user details and access type** 
+**Step 1: user details and access type**  
 **Set User Details**  
  - User Name: johndoe/raj
  - You can have multiple users added at the same time
@@ -80,7 +80,7 @@ get started with group
  - `root user:` you will directly have name 
  - `IAM user:` username @ account name
 
-## 2.4 Policies
+## 1.4 Policies
 
 **Overview**  
  - If you remove the user from the group admins having AdministratorAccess policy, user will not be able to create/read groups and users
@@ -88,23 +88,22 @@ get started with group
 
 **Basic structure of policy**  
  - On high level it has:
-   - Version: Policy language version
-   - Id: Identifier of policy
-   - Statement: Array of statemenets (atleast 1 required)
+   - **Version:** Policy language version
+   - **Id:** Identifier of policy
+   - **Statement:** Array of statemenets (atleast 1 required)
  - Array of statements include:
-   - Sid: identifier for statment
-   - Effect: whether it allows or Denies access
-   - Principal: account:user:role this policy is applied to
-   - Action: list of actions this policy allows or denies
-   - Resource: List of resources where this action will be applied
-
+   - **Sid:** identifier for statment
+   - **Effect:** whether it allows or Denies access
+   - **Principal:** account:user:role this policy is applied to
+   - **Action:** list of actions this policy allows or denies
+   - **Resource:** List of resources where this action will be applied
 
  - Go to Access Management -> Policies  
  - Here you can see all the policies and can create custom ones as well
  - you can see the policy summary and json tab of policy, where policy summary is human readable and json has the same thing in json format
  - For creating policy: you can do it via visual editor or directly write the json as well
 
-## 2.5 Multi Factor Authentication - MFA
+## 1.5 Multi Factor Authentication - MFA
 
 **Password policy Basics**  
  - Strong password means higher security for your account
@@ -152,7 +151,7 @@ get started with group
    - Success
  - Next time you login via your root account you have to provide MFA token along with your password
 
-## 2.6 Ways to access AWS
+## 1.6 Ways to access AWS
 
  - `AWS Management Console:`(Protected by password + MFA)
  - `AWS Command line Interface (CLI):` protected by access keys
@@ -165,10 +164,10 @@ get started with group
  - `Access Key Id` which is used like a username but it is not the same
  - `Secret Access Key` which is used like a password but it is not the same.
 
-### 2.6.1 AWS console
+### 1.6.1 AWS console
  - All the hands on we did till now is on console
 
-### 2.6.2 AWS cli on Windows
+### 1.6.2 AWS cli on Windows
 
 **Installation:**  
  - Google -> Download aws cli on windows -> [Link](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html)
@@ -195,14 +194,14 @@ get started with group
 **Reference documentation:** https://docs.aws.amazon.com/cli/latest/reference/
  - You get the same info via `aws help or aws ec2 help`
 
-### 2.6.3 AWS Cloudshell (Alternative to AWS cli on Windows)
+### 1.6.3 AWS Cloudshell (Alternative to AWS cli on Windows)
+ - https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html
 
-
-### 2.6.4 AWS SDK
+### 1.6.4 AWS SDK
  - https://aws.amazon.com/tools/
  - Here, you will find all the SDKs avaialble based on the programming language you use
 
-## 2.7 IAM Roles for services
+## 1.7 IAM Roles for services
 
 **Basics**  
  - Some AWS services will need to perform actions on your behalf
@@ -232,7 +231,7 @@ IAM roles are a secure way to grant permissions to entities that you trust. Exam
  - We can skip this and do `Next:Review`
  - Provide Role name -> Create Role
 
-## 2.8 IAM Security Tools
+## 1.8 IAM Security Tools
 
 **Basics**  
  - IAM Credentials Report(account-level)
@@ -252,7 +251,7 @@ Access Advisor
  - Gives you detailed summary of the services used and in turn helps in effectively managing the access
  - Ref: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
 
-## 2.9 IAM Guidelines and Best Practices
+## 1.9 IAM Guidelines and Best Practices
 
  - Don't use the root account except for AWS account setup
  - One Physical user = One AWS user
@@ -272,7 +271,7 @@ Access Advisor
  - Enable [IAM Access Analyzer](https://console.aws.amazon.com/access-analyzer/home): Enable IAM Access Analyzer to analyze public, cross-account, and cross-organization access.
  - Learn more about all **[security best practices](https://console.aws.amazon.com/access-analyzer/home)**.
 
-## 2.10 Shared Responsibility Model for IAM
+## 1.10 Shared Responsibility Model for IAM
 
 | AWS                                           | You                           |
 | -------------                                 |:-------------:                      |
@@ -282,7 +281,7 @@ Access Advisor
 |                                               | Use IAM tools to apply appropriate permissions|
 |                                               | Analyze access patterns and review permissions|
 
-## 2.11 IAM Summary
+## 1.11 IAM Basic Summary
 
  - Users: mapped to physical user, has a password for AWS Console
  - Groups: contains users only
@@ -292,28 +291,9 @@ Access Advisor
  - Access keys: Access AWS using the CLI/SDK
  - Audit: IAM Credential Reports and IAM Access Advisor
 
-## 2.12 QUIZ
+## 1.12 AWS Organizations
 
-What is a proper Definition of IAM roles:
- - An IAM entity that defines a set of permissions for making AWS service requests, that will be used by AWS services
- - Some AWS service will need to perform actions on your behalf. To do so, you assign permissions to aws services with IAM Roles
-
-Which is an IAM Security Tool?
- - IAM Credential Report
- - IAM Credentials report lists all your account's users and the status of their various credentials. The other IAM security Tool is IAM Access Advisor. It shows the service permissions granted to a user and when those services were last accessed.
- 
-What are IAM Policies?
- - JSON Documents to define Users, Groups or Roles' permissions
- - An IAM policy is an entity that, when attached to an identity or resource, defines their permissions.
-
-### Reference:
- - [Identity Management](https://www.aws.training/Details/eLearning?id=55148)
-
-# IAM - Advanced
-
-## AWS Organizations
-
-### Overview
+### 1.12.1 Overview
  - Global Service
  - Allows to manage multiple AWS accounts
  - The main account is the management account
@@ -324,22 +304,22 @@ What are IAM Policies?
  - Shared reserved instances and savings plans discounts across accounts
  - API is available to automate AWS account creation
  
-### Advantages
+### 1.12.2 Advantages
  - Multi Account vs One account multi VPC
  - Use tagging standards for billing purposes
  - Enable CloudTrail on all accounts, send logs to central s3 account
  - Send CloudWatch Logs to central logging account
  - Establish Cross Account Roles for admin purposes
 
-### Security: Service Control Policies
+### 1.12.3 Security: Service Control Policies
  - IAM Policies applied to OU or Accounts to restrict Users and Roles
  - They do not apply to the management account (Full admin power)
  - Must have an Explicit allow (does not allow anything by default - like IAM)
 
-### SCP Examples:
+### 1.12.4 SCP Examples:
  - Allowlist vs denyList
 
-## IAM Conditions
+## 1.13 IAM Conditions
  - `aws:SourceIP`: restrict the client IP **from** which the API calls are being made 
  - `aws:Requested Region`: restrict the region, the API calls are made **to**
  - `ec2:ResourceTag`: restrict based on tags
@@ -349,8 +329,10 @@ What are IAM Policies?
  - Resource Policies and aws:PrincipalOrgID
    - `aws:PrincipalOrgID` can be used in any resource policies to restrict access to accounts that are member of an AWS Orgainization
 
-## Resource based policy vs IAM Roles
- - Cross Acount:
+## 1.14 Resource based policy vs IAM Roles
+
+### 1.14.1 Overview 
+ - IAM Roles (Cross Acount):
    - Attaching a resource-based policy to a resource (example: S3 bucket policy)
    - Or using a role as a proxy
  - Resource based policy:
@@ -359,7 +341,7 @@ What are IAM Policies?
    - Example: User in Account A needs to scan a DynamoDB table in Account A and dump it in an S3 bucket in Account B
    - Supported by: Amazon S3 buckets, SNS topics, SQS queues, Lambdas, etc
 
-### Amazon EventBridge security example for both scenarios
+### 1.14.2 Amazon EventBridge security example for both scenarios
  - Resource based policy
    - When a rule runs it needs permission on the target
    - Resource based policy: Lambda, SNS, SQS, CloudWatch Logs, API Gateway
@@ -367,7 +349,7 @@ What are IAM Policies?
  - IAM Role: Kinesis stream, Systems Manager Run Command, ECS Task
    - EventBridge Rule (IAM Role) -> Kinesis
 
-## IAM Permission Boundaries
+## 1.15 IAM Permission Boundaries
  - IAM Permission Boundaries are supported for users and roles (not groups)
  - Advanced feature to use a managed policy to set the maximum permissions an IAM entity can get
  - Can be used in combinations of AWS Organizations SCP  
@@ -376,9 +358,9 @@ What are IAM Policies?
    - Allow developers to self-assign policies and manage their own permissions, while making sure they cant escalate their privileges ( = make themselves admin)
    - Useful to restrict one specific user (instead of a whole account using Organizations & SCP)
 
-## AWS Cognito
+## 1.16 AWS Cognito
 
-### Overview
+### 1.16.1 Overview
  - Give users an identity to interact with our web or mobile application
  - Cognito Users pool:
    - Sign in functionality for app users
@@ -388,7 +370,7 @@ What are IAM Policies?
    - Integrate with Cognito users pool as an Identity povider
  - Cognito vs IAM: "hundreds of users", "mobile users", "authenticate with SAML"
  
-### Cognito User Pools (CUP) - User Features
+### 1.16.2 Cognito User Pools (CUP) - User Features
  - Create a serverless database of user for your web and mobile apps
  - Simple Login: USername(or Email) / password combination
  - Password reset
@@ -397,7 +379,7 @@ What are IAM Policies?
  - Federated Identities: Users from Facebook,Google, SAML
  - CUP integrates with API Gateway and Application Load Balancer
 
-### Cognito Identity Pools (Federated Identities)
+### 1.16.3 Cognito Identity Pools (Federated Identities)
  - Get Identities for "users" so they obtain temporary AWS credentials
  - Users source can be Cognito User Pools, 3rd party logins, etc
  - Users can then access AWS services directly or through API Gateway
@@ -405,9 +387,9 @@ What are IAM Policies?
  - They can be customized based on the user_id for fine grained control
  - Default IAM roles for Authenticated and guest users
 
-## AWS IAM Identity center (Succesor to AWS Single Signon)
+## 1.17 AWS IAM Identity center (Succesor to AWS Single Signon)
 
-### Overview 
+### 1.17.1 Overview 
  - One Login (Single Sign-on) for all your:
    - AWS accounts in AWS Organizations
    - Business cloud applications (eg: Salesforce, Box, Microsoft 365, etc)
@@ -417,7 +399,7 @@ What are IAM Policies?
    - Built-in identity store in IAM Identity center
    - 3rd party: Active directory (AD), OneLogin, Okta
    
-### Fine grained permissions and assignments
+### 1.17.2 Fine grained permissions and assignments
  - Multi-Account permissions
    - Manage access across AWS accounts in your AWS Organization
    - Permission Sets - a collection of one or more IAM policies assigned to users and groups to define AWS Access
@@ -429,16 +411,16 @@ What are IAM Policies?
    - Example: cost center, title, Locale
    - Use case: Define permissions once, then modify AWS Access by changing the attributes
 
-## AWS Directory services
+## 1.18 AWS Directory services
 
-### What is Microsoft Active Directory (AD)?
+### 1.18.1 What is Microsoft Active Directory (AD)?
  - Found on any Windows server with AD domain Services
  - Database of Objects: User accounts, Computers, Printers, File Shares, Security Groups
  - Centralized security management, create account, assign permissions
  - Objects are organized in trees
  - A group of trees is a forest
 
-### AWS Directory services overview
+### 1.18.2 AWS Directory services overview
  - AWS Managed Microsoft AD
    - Create your own AD in AWS, Manage users locally, supports MFA
    - Establish "trust" connections with your on premise AD
@@ -449,16 +431,16 @@ What are IAM Policies?
    - AD-compatible managed directory on AWS
    - Cannot be joined with on-premise AD
 
-### IAM Identity center - Active Directory Setup
+### 1.18.3 IAM Identity center - Active Directory Setup
  - Connect to an AWS Managed Microsoft AD (Directory service)
    - Integration is out of the box
  - Connect to slf-managed Directory
    - Create Two-way trust relationship using AWS Managed Microsoft AD
    - Create an AD-Connector
    
-## AWS Control tower
+## 1.19 AWS Control tower
 
-### Overview
+### 1.19.1 Overview
  - Easy way to setup and govern a secure and compliant multi-account AWS environment based on best practices
  - AWS Control Tower uses AWS Organizations to create accounts
  - Benefits:
@@ -467,29 +449,43 @@ What are IAM Policies?
    - Detect Policy violations and remediate them
    - Monitor Compliance through an interactive dashboard
 
-### Guardrails
+### 1.19.2 Guardrails
  - Provides ongoing governance for your control tower environments (AWS Accounts)
  - Preventive GuardRails - using SCPs (Eg: Restrict regions across all your accounts)
  - Detective GuardRails - Using AWS Config (Eg: Identify untagged resources)
 
+## 1.20 QUIZ
 
+What is a proper Definition of IAM roles:  
+ - An IAM entity that defines a set of permissions for making AWS service requests, that will be used by AWS services
+ - Some AWS service will need to perform actions on your behalf. To do so, you assign permissions to aws services with IAM Roles
 
+Which is an IAM Security Tool?  
+ - IAM Credential Report
+ - IAM Credentials report lists all your account's users and the status of their various credentials. The other IAM security Tool is IAM Access Advisor. It shows the service permissions granted to a user and when those services were last accessed.
+ 
+What are IAM Policies?
+ - JSON Documents to define Users, Groups or Roles' permissions
+ - An IAM policy is an entity that, when attached to an identity or resource, defines their permissions.
 
-# 4. EC2 - Elastic Compute Cloud
+## 1.21 Reference:
+ - [Identity Management](https://www.aws.training/Details/eLearning?id=55148)
 
-## 4.1 EC2 Basics
+# 2. EC2 - Elastic Compute Cloud Fundamentals
 
-**Basics**  
+## 2.1 EC2 Basics
+
+## 2.1.1 Overview  
  - EC2 is one of te most popular AWS offering
  - EC2 = Elastic Compute Cloud = Infrastructe as a Service (IaaS)
- - It mainly consiste of capability of:
+ - It mainly consists capability of:
    - Renting virtual machines **(EC2)**  
    - Storing data on Virtual drives **(EBS)**
    - Distributing load across machines **(ELB)**
    - Scaling the services using an auto-scaling group **(ASG)**
  - Knowing EC2 is fundamental to understand how the Cloud Works
 
-**EC2 Sizing and configuration options**  
+## 2.1.2 EC2 Sizing and configuration options
  - Operating System (OS): **Linux or Windows**
  - How much compute power and cores **(CPU)**
  - How much random-access memory **(RAM)**
@@ -500,11 +496,11 @@ What are IAM Policies?
  - Firewall rules: **security group**
  - Bootstrap script (configure at first launch): **EC2 User Data**
 
-**EC2 instance types**
+## 2.1.3 EC2 instance types
  - Different depending on the cpu ram storage and network performance
  - [High level image]
 
-**EC2 User data**
+## 2.1.4 EC2 User data
  - It is possible to bootstrap our instances using and `EC2 user data` script
  - Bootstrapping means launching commands when a machine starts
  - That Script is only run once at the instance first start
@@ -566,7 +562,7 @@ Launch EC2 instance running Linux
       - Stop: Stop the instance, starting again will have new ip address assigned to the instance
       - Terminate: it will delete everything of this instance
 
-## 4.2 Introduction to Security Groups
+## 2.2 Introduction to Security Groups
 
 **Basics**  
  - Security Groups are the fundamental of network security in AWS
@@ -611,7 +607,7 @@ Launch EC2 instance running Linux
 not accesible/Timeout: Security group issues
 "connection refused error": application error/app not launched 
 
-## 4.3 SSH Overview
+## 2.3 SSH Overview
 
 **Summary**  
 
@@ -662,7 +658,7 @@ not accesible/Timeout: Security group issues
  - EC2 -> instances -> Actions -> Instance Settings -> Attach/Replace IAM roles -> Assign DemoRoleForEC2 -> Apply
  - try again `aws iam list-users` and it will work for you this time.
 
-## 4.4 EC2 Instance Launch types
+## 2.4 EC2 Instance Launch types
 
 **Summary**  
   - **On Demand**: Ideal for short workload, predictable procing
@@ -727,7 +723,7 @@ not accesible/Timeout: Security group issues
  - No control over instance placement (can move hardware after stop/start)
  - Soft version of dedicated host
 
-## 4.5. Shared Responsibility Model for IAM
+## 2.5 Shared Responsibility Model for IAM
 
 | AWS                                           | You                           |
 | -------------                                 |:-------------:                      |
@@ -737,7 +733,7 @@ not accesible/Timeout: Security group issues
 | Compliance Validation                         | IAM Roles assigned to EC2 and IAM user access management|
 |                                               | Data security on your instance|
 
-## 4.6 EC2 Summary
+## 2.6 EC2 Summary
  
  - *EC2 Instance:*
    - AMI(OS)
@@ -756,7 +752,7 @@ not accesible/Timeout: Security group issues
    - Dedicated Hosts
    - Dedicated Insance
 
-## 4.7 EC2 Quiz
+## 2.7 EC2 Quiz
 
 Which network security tool can you use to control traffic in and out of EC2 instances?
  - Security groups
