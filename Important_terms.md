@@ -85,3 +85,11 @@ Lifecycle rules
 Unicast vs ANycast IPs
 
 https://medium.com/javarevisited/6-best-aws-solution-architect-associate-certification-practice-test-mock-exams-and-dumps-240c269dab4f
+
+EC2 COsts: https://aws.amazon.com/ec2/pricing/
+
+- https://aws.amazon.com/ec2/pricing/
+  - https://aws.amazon.com/ec2/spot/pricing/
+- https://aws.amazon.com/lambda/pricing/
+
+- https://aws.amazon.com/ec2/spot/instance-advisor/
