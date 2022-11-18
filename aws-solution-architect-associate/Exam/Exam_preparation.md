@@ -1,5 +1,7 @@
 # Exam Preparation
 
+https://aws.amazon.com/compliance/shared-responsibility-model/
+
 # Compute
 
 ## EC2
@@ -14,6 +16,9 @@
  - Instance states and lifecycle: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
  - How many security groups per EC2 (5)
  - In which state security group can be changed for EC2?
+ - Restrict 50 users out of 100 to launch EC2
+ - There is a vCPU based on-demand instance limit per region. Your aws account has default quotas (formerly referred as limits), for each AWS service. Unless otherwise noted, Each quota is region specific. you can request increase for some quotas, and other quotas cannot be increased.
+ - Ephermal storage (Check with EBS as well) - a reboot will not lose the data. This storage is located in disks that are physically attached to the host computer
  
  
 ### Types
@@ -29,6 +34,8 @@
 
 ## S3
  - Macie vs Guard Duty
+ - Event notification destinations (SNS, SQS, Lambda, EventBridge)
+ 
  
 ### Bucket policies
 Bucket policies in Amazon S3 can be used to add or deny permissions across some or all of the objects within a single bucket. Policies can be attached to users, groups, or Amazon S3 buckets, enabling centralized management of permissions. With bucket policies, you can grant users within your AWS Account or other AWS Accounts access to your Amazon S3 resources.
@@ -171,3 +178,4 @@ OAI doesn't work for the scenarios in the preceding list, or it requires extra w
 
 AWS STS: Short term security tokens
 petabyte scale storage and instant retrieval and perform realt time analytics: DynamoDB
+OpsWorks for puppet and chef

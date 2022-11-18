@@ -93,3 +93,6 @@ EC2 COsts: https://aws.amazon.com/ec2/pricing/
 - https://aws.amazon.com/lambda/pricing/
 
 - https://aws.amazon.com/ec2/spot/instance-advisor/
+
+RTO
+RPO
