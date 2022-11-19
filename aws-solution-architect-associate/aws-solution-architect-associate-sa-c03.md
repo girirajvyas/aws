@@ -255,10 +255,10 @@ Access Advisor
 
  - Don't use the root account except for AWS account setup
  - One Physical user = One AWS user
- - Assign Users to groups and assign permissions to groups to make sure security is maintained at group level
- - Create a Strong password policy/
+ - **Assign Users to groups and assign permissions to groups to make sure security is maintained at group level**
+ - Create a Strong password policy
  - Use and enforce the use of Multi Factor Authentication (MFA)
- - Create and use Roles for giving permissions to AWS services.
+ - **Create and use Roles for giving permissions to AWS services.**
  - Use access keys for Programatic access (CLI/SDK)
  - Audit permissions of your account with the IAM Credentials Report and IAM Access Advisor
  - **Never share IAM users and Access Keys**
@@ -468,7 +468,10 @@ What are IAM Policies?
  - JSON Documents to define Users, Groups or Roles' permissions
  - An IAM policy is an entity that, when attached to an identity or resource, defines their permissions.
 
-## 1.21 Reference:
+## 1.21 Exam Points
+ - 
+
+## 1.22 Reference:
  - [Identity Management](https://www.aws.training/Details/eLearning?id=55148)
 
 # 2. EC2 - Elastic Compute Cloud Fundamentals
@@ -505,7 +508,7 @@ What are IAM Policies?
  - Bootstrapping means launching commands when a machine starts
  - That Script is only run once at the instance first start
  - EC2 user data is used to automate boot tasks such as:
-   - Installing updates|
+   - Installing updates
    - Installing softwares
    - Downloading common files from internet
    - Any other use cases as well
@@ -532,8 +535,8 @@ Launch EC2 instance running Linux
      - Number of instances: 1
      - Network: same as default
      - IAM roles: same as default (none)
-     - User data
-        - ```cmd
+     - User data  
+       ```cmd
           # Install httpd
           yum update -yaml
           yum install -y httpd
@@ -752,16 +755,39 @@ not accesible/Timeout: Security group issues
    - Dedicated Hosts
    - Dedicated Insance
 
-## 2.7 EC2 Quiz
+## 2.7 EC2 Metadata
+ - EC2 instance Metadata is powerful but less known features
+ - It allows EC2 instances to "learn about themselves" without using an IAM Role for that purpose.
+ - URL: http://169.254.169.254/latest/meta-data
+ - You can retrieve the IAM Role name from the metadat, but you CANNOT retrieve the IAM policy
+ - Metadata: info about EC2 instance
+ - Userdata: Launch script of EC2 instance
+ 
+## 2.8 Exam guide
 
-Which network security tool can you use to control traffic in and out of EC2 instances?
- - Security groups
-
-How long can you reserve an EC2 Reserved instance?
- - 1 or 3 years (Not anytime between 1 and 3 years)
-
-Which EC2 purchasing option should you use for an application you plan on running on a server continously for 1 year?
- - Reserved Instances
+ - Which network security tool can you use to control traffic in and out of EC2 instances?
+   - Security groups
+ - How long can you reserve an EC2 Reserved instance?
+   - 1 or 3 years (Not anytime between 1 and 3 years)
+ - Which EC2 purchasing option should you use for an application you plan on running on a server continously for 1 year?
+   - Reserved Instances
+ - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+   - User data:
+     - http://169.254.169.254/latest/user-data
+   - Metadata: 
+     - IPV4: http://169.254.169.254/latest/meta-data/
+	 - IPV6: http://[fd00:ec2::254]/latest/meta-data/
+   - Dynamic data:
+     - http://169.254.169.254/latest/dynamic/
+ - Instance states and lifecycle:
+   - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+ - How many security groups per EC2?
+   - 5
+ - In which state security group can be changed for EC2?
+   - TBD
+ - How to restrict 50 users out of 100 to launch EC2?
+   - TBD
+ - There is a vCPU based on-demand instance limit per region. Your aws account has default quotas (formerly referred as limits), for each AWS service. Unless otherwise noted, Each quota is region specific. you can request increase for some quotas, and other quotas cannot be increased.
 
 # 3. EC2 Instance Storage
 
@@ -821,7 +847,7 @@ Which EC2 purchasing option should you use for an application you plan on runnin
  - AMI are built for a specific region (and can be copied across regions)
  - You can launch EC2 instances from:
    - A public AMI: AWS provided
-   - Your Oen AMI: you make and maintain them yourself
+   - Your Own AMI: you make and maintain them yourself
    - An AWS Marketplace AMI: An AMI someone lese made (and potentially sells)
 
 **How to create an Custom AMI**  
@@ -831,7 +857,7 @@ Which EC2 purchasing option should you use for an application you plan on runnin
  - Launch instances from other AMIs
 
 **Hands on**  
- - We already have an EC2 instance created, in case it is not dn follow the steps defined above to create the same
+ - We already have an EC2 instance created, in case it is not, then follow the steps defined above to create the same
  - Instances -> Action -> Image -> Create Image -> provide name and then create
  - Go to Images -> AMI -> it will take some time(3 to 5 minutes for me) to create and will be in pending state.
  - Now lets use this above created custom AMI to create an Instance
@@ -878,14 +904,13 @@ Which EC2 purchasing option should you use for an application you plan on runnin
  - **EFS**
    - Network file system, can ve attached to 100s of instances in a region
 
-
-## 3.8 EC2 Metadata
- - EC2 instance Metadata is powerful but less known features
- - It allows EC2 instances to "learn about themselves" without using an IAM Role for that purpose.
- - URL: http://169.254.169.254/latest/meta-data
- - You can retrieve the IAM Role name from the metadat, but you CANNOT retrieve the IAM policy
- - Metadata: info about EC2 instance
- - Userdata: LAunch script of EC2 instance
+##  3.7 Exam Guide
+ - Ephermal storage (Check with EBS as well) - a reboot will not lose the data. This storage is located in disks that are physically attached to the host computer
+ - EBS Volume types:
+   - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
+ - While taking EBS snapshots, EBS volumes can be used for read and write as usual
+ - Snapshot restorations are restricted to the region in which the snapshots are created
+ - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-snapshot.html
  
 # 4. Elastic Load balancing and Auto scaling groups
 
@@ -1004,7 +1029,7 @@ Which EC2 purchasing option should you use for an application you plan on runnin
 
 **Hands on**  
  - EC2 -> AUTO SCALING -> Auto Scaling Groups -> Create Auto Scaling Group 
- - 1. Choose launch template or configuration: Provide name
+ -  **1. Choose launch template or configuration:** Provide name
    - As we donot have Launch template, Create a launch template. This helps in defining the type of instances we want ASG to spinoff
      - Launch Template name
      - Amazon Machine Image (AMI): Amazon Linux 2 AMI
@@ -1015,20 +1040,20 @@ Which EC2 purchasing option should you use for an application you plan on runnin
      - Storage: Default
      - Expand Advanced settings -> use User data
    - Use the template created above -> Next
- - 2. Configure Settings
+ -  **2. Configure Settings**
    - Instance Purchase Options: Adhere to launch template
    - Network -> Subnets: select all for higher availability -> Next
- - 3. Configure Advanced options
+ -  **3. Configure Advanced options**
    - Load balancing -> Attach to an existing load balancer -> Choose from Application or network load balancer target groups -> select the target group already created
    - Health checks: check ELB option as well -> Next
- - 4. Configure group size and scaling options
+ -  **4. Configure group size and scaling options**
    - Desired Capacity: 2 (number of instances that will be created)
    - Minimum Capacity: 1
    - Maximum Capacity: 4
    - Scaling policies: None
    - Next
- - 5. Add Notifications: Next
- - 6. Add tags: Next
+ -  **5. Add Notifications: Next**
+ -  **6. Add tags: Next**
  - Create Auto Scaling Group
  - Now you can go to Instance Management section to verify if the instances are created
  - Verification:
@@ -1048,19 +1073,462 @@ Which EC2 purchasing option should you use for an application you plan on runnin
    - Scale EC2 instances based on the demand on your system, replace unhealthy
    - Integrated with the ELB
 
-## 4.10 Quiz
-Which load balancer should you use to handle hundreds of thousands of connections with low latency
- - Network Load balancer: A network load balancer can handle millions of requests per second with low-latency. It operates at Layer 4 and is best suited for load-balancing TCP, UDP and TLS traffic with ultra high-performance
+## 4.10 Exam Guide
+ - Which load balancer should you use to handle hundreds of thousands of connections with low latency
+   - Network Load balancer: A network load balancer can handle millions of requests per second with low-latency. It operates at Layer 4 and is best suited for load-balancing TCP, UDP and TLS traffic with ultra high-performance
+ - Amazon EC2 Auto Scaling doesn't terminate an instance that came into service based on EC2 status checks and ELB health checks until the health check grace period expires.
+ - **Launch configurations** were released in 2010 and **Launch templates** were released as successor in 2017
+   - https://aws.amazon.com/blogs/compute/amazon-ec2-auto-scaling-will-no-longer-add-support-for-new-ec2-features-to-launch-configurations/
 
 ## 4.11 Resources
 
  - https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html?icmpid=docs_elbv2_console#elb-features
  - Instance types and comparison: https://instances.vantage.sh/
 
+# 5. Amaozon S3 (Simple storage Service)
 
-# Containers 
+## 5.1 S3 Overview
 
-## Docker container management on AWS
+**Basics**  
+ - S3 is one of the main building blocks of AWS
+ - Its advertised as "infinity scaling" storage
+ - Many website use Amazon S3 as a backbone
+ - Many AWS Services uses Amazon S3 as an integration as well
+ - EBS snapshots are stored in S3 in backend
+ - Certified cloud Practitioner requires deeper knowledge of S3
+
+**Use Cases**  
+ - Backup and Storage
+ - Disaster recovery
+ - Archive
+ - Hybrid Cloud Storage
+ - Application Hosting
+ - Media hosting
+ - Data lakes and big data analytics
+ - Software delivery
+ - Static website
+
+**Buckets**  
+ - Amazon S3 allows people to store object (files) in "buckets" (directories)
+ - Buckets must have a globally unique name (across all regions and all accounts)
+ - Bucktes are defined at the region level
+ - S3 looks like a global service but buckets are created in a region
+ - Naming Convention
+   - No uppercase
+   - No Underscore
+   - 3-62 characters long
+   - Not an IP
+   - Must start with lowercase letter or number
+
+**Objects**  
+ - Objects (files) have a key
+ - The key is the full path:
+   - s3://my-bucket/my_file.txt
+   - s3://my-bucket/my_folder/another_folder/my_file.txt
+ - The key is composed of `prefix` + *object name*
+   - s3://my-bucket/`my_folder/another_folder/`*my_file.txt*
+ - Theres no concept of "directories" within buckets (although the UI will trick you to think otherwise)
+ - Just keys with very long names that contains slashes ("/")
+ - Object values are the content of the body
+   - Max Object size is 5TB (5000GB)
+   - If uploading more that 5 GB, must use "multi-part upload"
+ - Metadata (list of text key/value pairs - system or metadata)
+ - Tags (Unicode key / value pair - upto 10) - useful for security/lifecycle
+ - Version ID (if Versioning is enabled)
+
+**S3 Hands on**  
+
+ - S3 -> buckets -> Create Bucket -> provide uniques bucket name and region along with default options
+ - [Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules)
+ - Add files -> select file -> upload
+ - Now, if you select the uploaded file, you will get the details about that file
+ - You will see the Object url under Object Overview heading in Properties tag
+ - Now, as we had chosen all the default options that means block public access included in it and hence if you click on object URL, you will not be able to access the same
+ - Whereas clicking on Object Actions -> Open will open the file in new tab
+
+## 5.2 Bucket Policy
+
+**S3 Security**  
+ - User Based
+   - IAM policies - Which API calls should be allowed for a specific user from IAM console
+ Resource Based
+   - Bucket Policies - bucket wide rules from the S3 console - allows cross account
+   - Object Access Control List (ACL) - Fine grained
+   - Bucket Access Control List (ACL) - Less Common
+
+ - Note: An IAM principal can access an S3 object if
+   - the user IAM permissions allow it **OR** the resource policy allows it
+   - **AND** there's no explicit DENY
+ - Encryption: encrypt objects in Amazon S3 using encryption keys
+
+**Examples**  
+ - Public Access ->   Use Bucket policy (Allow S3 bucket policy)
+ - IAM User Access -> IAM Policy only will be sufficient
+ - EC2 Instance -> Create EC2 instance role and assign IAM permissions to this role
+ - Cross-Account access -> S3 bucket policy allow cross account policy
+
+**Policy**  
+ - JSON based Policies
+   - Resources: buckets and Objects
+   - Actions: Set of API to allow or Deny
+   - Effect: Allow/Deny
+   - Principal: The Account or user to apply the policy to
+ - Use S3 bucket for policy to:
+   - Grant public access to the bucket
+   - Force Objects to be encrypted at upload
+   - Grant Access to another Account (Cross Account)
+
+**Bucket Settings for Block public access**  
+[Screenshot]
+
+ - These settings were created to prevent company data leaks
+ - If you know your bucket should never be public, leave thse on
+ - Can be set at the account level
+
+**Hands On**  
+
+ - go to S3 bucket created above -> permissions -> Bucket policy
+ - To enable this, you have to uncheck "block public access" policies
+ - Once done, you can click on edit button in edit bucket policy 
+   - Select "policy generator" as it provides a nice ui to generate a policy -> select
+   - Also notice you have Bucket ARN that will be used in next steps
+   - Select type of policy: S3 bucket policy
+   - Principal: *
+   - Actions: getObject
+   - ARN: copy from the step above with `/*`
+   - Add statement
+   - Generate Policy -> copy content 
+   - now go back to previous tab and update the copied policy and save
+   - now you will have the objects inside this bucket as accessible
+
+## 5.3 S3 Websites
+
+**basics**  
+ - S3 can host static websites and have them accessible on the www
+ - The website URL will be:
+   - <bucket-name>.s3-website-<aws-region>.amazonaws.com or
+   - <bucket-name>.s3-website.<aws-region>.amazonaws.com
+ - If you get a 403 (Forbidden) error, make sure the bucket policy allows public reads
+
+**hands on**  
+ - upload your static content
+ - in Properties tab -> Static website hosting -> Enable
+ - host a static wbesite
+ - provide name of your index and error document
+ - save
+ - now you get the url for the newly hosted website
+ 
+## 5.4 S3 Versioning
+
+**basics**
+ - you can version your files in Amazon S3
+ - It is enabled at the biucket level
+ - Same key overrite will increment the version: 1,2,3..
+ - It is best practice to version your buckets
+   - protect against unintended deletes (ability to restore a version)
+   - Easy roll back to previous version
+ - Notes: 
+   - Any file that is not versioned prior to enabling versioning will have version null
+   - Suspending versioning does not delete the previous versions
+
+**hands on**
+ - S3 -> Select the bucket you created above -> properties tab -> Bucket versioning -> edit -> Enable -> Save changes
+ - Now any file uploaded from now on will have version in it
+ - you can select the file and click on versions tab you will see the versions
+ - Also in S3 bucket level -> Objects section -> List Versions and you will see the versions of the file
+ - you can select the version you want to rollback and delete that so it will be rolled back to the previous version
+ - Deleting a file with list versions enabled will do a soft delete.
+   - To get back this file you have to enable List versions and then you will see the deleted file with "Delete marker" and then select delete tp restore
+
+## 5.5 S3 Access logs
+
+**basics**  
+ - For audit purpose, you may want to log all access to S3 buckets
+ - Any request made to S3, from any account, authorized or denied will be logged into another S3 bucket
+ - That data can be analyzed using data analysis tools..
+ - Very helpful to come down to the root cause of an issue, or audit usage, view suspicious patterns, etc..
+
+**Hands on**  
+ - To enable logging you have to create a new bucket where access logs will be written
+ - Go to original S3 bucket -> Properties -> Server access logging setting -> edit -> enable and provide the target bucket that we created above.
+ - You can access the objects and then these logs will be reflected in another s3 bucket after an hour or two.
+
+## 5.6 S3 Replication (CRR and SRR)
+
+**basics**  
+ - Must enable versioning in source and destination
+ - Cross Region Replication (CRR) 
+ - Same Region Replication (SRR)
+ - Buckets can be in different accounts
+ - Copying is asynchronous
+ - Must give proper IAM permissions to S3
+ - CRR use cases
+   - Compliance
+   - lower latency access
+   - Replication across accounts
+ - SRR use cases
+   - log aggregation
+   - live replication between production and test accounts
+
+**hands on**  
+ - create a new S3 bucket where you need data to be replicated
+ - enable versioning in source and target bucket
+ - go to main bucket -> management tab -> Replication rule -> Create replication rule
+   - provide rule name
+   - status : enabled
+   - Source bucket
+   - Destination: buckte in this account, provide the name
+   - IAM role: Create a new role
+   - Save
+   - Replication rule created
+ - Replication will work only for objects that are being uploaded after enabling the replication rule
+
+## 5.7 S3 Storage classes
+
+**Types**  
+ - Amazon S3 Standard - General purpose
+ - Amazon S3 Standard-Infrequent Access (not accessed ver often)
+ - Amazon S3 one Zone-Infrequent Access (you can recreate and fine with losing it)
+ - Amazon S3 Intelligent tiering (Not sure which one to choose between frquent and infrequent access)
+ - Amazon Glacier (Backups and archives)
+ - Amazon Glacier Deep Archive (Backups and archives)
+
+**Durability and Availability**  
+**Durability:**  
+ - High durability (99.99999999999, 11 time 9) of objects across multiple Azure
+ - If you store 10,000,000 objects with Amazon S3, you can on average expect to incur a loss of a single object once every 10,000 years
+ - `Same for all storage classess`
+
+**Availability**  
+ - Measures how readily available a service is
+ - S3 standard has 99.99% availability, which means it wil not be available 53 minutes a year
+ - `Varies depending on storage class`
+
+***1. Amazon S3 Standard - General purpose**  
+ - 99.99% availability
+ - Used for frequently accessed data
+ - low latency and high throughput
+ - sustain 2 concurrent facility failures
+ - Use cases:
+   - Big Data analytics
+   - Mobile and gamin applications
+   - content distribution
+
+***2. Amazon S3 Standard-Infrequent Access (IA)**  
+ - Suitable for data that is less frequently accessed, but requires rapid access when needed
+ - 99.9% Availability
+ - Lower cost compared to Amazon S3 standard, but retrieval fee
+ - Sustain 2 concurrent facility failures
+ - Use Cases: 
+   - As a data store for disaster recovery
+   - backups
+
+***3. Amazon S3 one Zone-Infrequent Access (IA)**  
+ - Same as IA but data is stored in a single Azure
+ - 99.5% Availability
+ - Low latency and high throughput performance
+ - Lower cost compared to S3-IA (by 20%)
+ - Use Cases:
+   - Storing secondary backup copies of on premise data or
+   - storing data you can recreate
+
+***4. Amazon S3 Intelligent tiering**  
+ - 99.9% Availability
+ - Same low latency and high throughput performance of S3 Standard
+ - Cost optimized by automatically moving objects between two access tiers based on changing access patterns:
+   - frequent access
+   - Infrequent access
+ - Resilient against events that impact an entire Availability zone
+
+***5. Amazon Glacier and Amazon Glacier Deep Archive**  
+ - Low cost object storage (in GB/month) meant for archiving/backup
+ - Data is retained for the longer term (years)
+ - Various retrieval options of time + fees for retrieval
+ - Amazon Glacier: Cheap
+   - Expedited (1 to 5 minutes)
+   - Standard (3 to 5 hours)
+   - Bulk (5 to 12 hours)
+ - Amazon Glacier Deep Archive: Cheapest
+   - Standard (12 hours)
+   - Bulk (48 hours)
+
+**Summary**  
+ - https://aws.amazon.com/s3/storage-classes/
+
+**Moving between storage classes**  
+ - You can transition objects between storage classes
+ - For infrequently accessed object, move them to Standard_IA
+ - For archive objects you dont need in real-time, GLACIER or DEEP_ARCHIVE
+ - Moving Objects can be automated using a lifecycle configuration
+
+**Hands on**  
+ - S3 -> Objects -> upload -> Additional upload options, here you can select the storage class and details are also available on the same -> upload
+ - if you select the uploaded file, yyou can verify the storage class and you can update the same if needed
+ - S3 -> Buckets -> Select bucket -> management tab -> Create lifecycle rule
+   - LifeCycle Rule name
+   - Choose a rule scope
+   - Lifecycle Rule actions: depending on the checkboxes you select, you will be provided with the options to configure below
+   - Create Rule
+
+## 5.8 Snowball, Snowball Edge and SnowMobile Overview
+
+### 5.8.1 Snowball
+
+**Basics**    
+ - Physical data transport solution that heps moving TBs or PBs of data in or out of AWS
+ - Alternative to moving data over the network (and paying network fees)
+ - pay per data transfer jobs
+ - Use cases:
+   - Large data cloud migrations
+   - Data center decommision
+   - Disaster recovery
+ - if it takes more than a week to transfer over the network, use snowball devices
+
+**Snowball Process**  
+ - Request snowball devices from the AWS console for delivery
+ - Install the snowball client on your servers
+ - Connect the snowball to your servers and copy files using the client
+ - Ship back the device when you are done (goes to the right AWS facility)
+ - Data will be loaded into an S3 bucket
+ - Snowball is completely wiped
+
+### 5.8.2 Snowball Edge  
+ - Snowball Edge (100 TB) add computational capability to the device
+ - Supports a custom EC2 AMI so you cab perform processing on the go
+ - Supports customm lambda functions
+ - Very useful to pre-process the data while moving
+ - Use case:
+   - data migrations
+   - image collation
+   - IoT capture
+   - Machine Learning
+ - "Snowball" is deprecated in favour of "Snowball Edge"
+
+### 5.8.3 AWS Snowmobile (Truck)  
+ - Transfer exabytes of data (1 EB = 1,000 PB = 10,000,00 TBs)
+ - Each Snowmobile has 100PB of capacity (use multiple in parallel)
+ - Better than snowball if you transfer more than 10 PB
+
+Snow *
+
+Snowball Edge
+
+Snowcone
+
+
+## 5.9 Storage gateway overview
+
+**Where do we need?**  
+ - AWS is pushing for "hybrid cloud"
+   - Part of your infrastructure is on-premises
+   - Part of your infrastructure is on the cloud
+ - This can be due to
+   - Long cloud migrations
+   - Security requirements
+   - Compliance requirements
+   - IT strategy
+ - S3 is a propritary storage technology (unlike EFS/NFS), **so how do you expose the S3 data in-premise?**
+    - via AWS Storage Gateway
+
+**AWS Storage Cloud Native Options**  
+ - Block storage
+   - Amazon EBS
+   - EC2 instance store
+ - File Syorage
+   - Amazon EFS
+ - Object storage
+   - Amazon S3
+   - Glacier
+
+**AWS storage gateway**  
+ - Bridge between on-premise data and cloud data in S3
+ - Hybrid storage service to allow on-premises to seamlessly use the AWS Cloud
+ - Use cases:
+   - Disaster recovery
+   - Backup and restore
+   - Tiered storage
+ - Types of storage gateway
+   - File gateway
+   - Volume gateway
+   - Tape gateway
+ - No need to know the types at the exam
+
+## 5.10 Shared responsibility model for S3
+
+| AWS                                                 | You                           |
+| -------------                                       |:-------------:                      |
+| Infrastructure (global security, durability, availability, sustain concurrent loss of data in two facilities) | S3 Versioning |
+| Configuration and vulnerability analysis            | S3 Bucket Policies|
+| Compliance Validation                               | S3 Replication Setup |
+|                                                     | Logging and Monitoring |
+|                                                     | S3 Storage Classes |
+|                                                     | Data encryption at rest and in transit |
+
+## 5.12 S3 Summary
+
+ - Buckets vs Objects: global unique name, tied to a region
+ - S3 security: IAM policy, S3 bucket Policy (public access), S3 encryption
+ - S3 Websites: host a static website on Amazon S3
+ - S3 Versioning: Multiple versions for files, prevents accidental deletes
+ - S3 Access Logs: Log requests made within your S3 buckets
+ - S3 Replication: Same-region or Cross-Region, must enable versioning
+ - S3 Storage Classes: Standard, IA, IZ-IA, Intelligent, Glacier, Deep Archive
+ - S3 Lifecycle Rules: transition objects between classes
+ - Snowball/Snowmobile: import data into S3 through a physical device
+ - Storage gateway: hybrid solution to extend on-premises storage to S3
+
+## 5.13 S3 Encryption
+Their are 4 methods of encrypting objects in s3:
+ - SSE-S3: Encrypts S3 objects using keys handled and managed by aws
+ - SSE-KMS: leverage aws key management service to manage encryption keys
+ - SSE-C: When you want to manage your encryption keys
+ - Client Side encryption
+
+### 5.13.1 SSE-S3
+ - Encryption using keys handled and managed by aws
+ - Object is encrypted server side
+ - AES-256 encryption type
+ - Must set header: "x-amz-server-side-encryption":"AES256"
+
+### 5.13.2 SSE-KMS
+ - Encryption using keys managed and handles by KMS
+ - Object is encrypted server side
+ - KMS advantages: User control + audit trail
+ - Must set header: "x-amz-server-side-encryption":"aws:kms"
+
+### 5.13.3 SSE-C
+ - Encryption using data keys fully managed by the customer outside of AWS
+ - Amazon S3 does not store the encryption keys you provide
+ - HTTPS must be used
+ - Encryption key must be provided in headers, for every HTTP request made
+
+### 5.13.4 Client Side encryption
+ - Cleint library such as Amazon S3 encryption client
+ - Clients must encrypt data themselves before sending to S3
+ - Clients must decrypt data themselves when retrieving from S3
+ - Customer fully manages the keys and encryption cycle
+
+### 5.13.5 Encryption in Transit:
+ - Amazon S3 exposes:
+   - HTTP endpoint: non encrypted
+   - HTTPS endpoint: encryption in flight
+ - You are free to use the endpoint you want, but HTTPS is recommended
+ - Most clients would use the HTTPS endpoint by default
+ - HTTPS is mandatory for SSE-C
+ - Encryption in flight is also called SSL/TLS
+
+## 5.14 Exam Guide
+ - Bucket policies in Amazon S3 can be used to add or deny permissions across some or all of the objects within a single bucket. Policies can be attached to users, groups, or Amazon S3 buckets, enabling centralized management of permissions. With bucket policies, you can grant users within your AWS Account or other AWS Accounts access to your Amazon S3 resources.
+ - You can further restrict access to specific resources based on certain conditions. For example:
+  - You can restrict access based on request time (Date Condition)
+  - Whether the request was sent using SSL (Boolean Conditions)
+  - A requester’s IP address (IP Address Condition)
+  - Or based on the requester's client application (String Conditions). To identify these conditions, you use policy keys
+
+
+# 6. Containers 
+
+## 6.1 Docker container management on AWS
  - Amazon Elastic Container Service (ECS)
    - Amazon's own container platform
  - Amazon Elastic Kubernetes Service (EKS)
@@ -1071,16 +1539,16 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Amazon ECR
    - Store container images 
 
-## ECS
+## 6.2 ECS
 
-### ECS - EC2 Launch type
+### 6.2.1  ECS - EC2 Launch type
  - ECS = Elastic container servvice
  - Launch Docker container on AWS = Launch ECS Tasks on ECS clusters
  - EC2 Launch Type: you must provision and maintain the infrastructure (the EC2 instances)
  - Each EC2 instance must run the ECS agent to register in the ECS cluster
  - AWS takes care of starting/stopping containers
 
-### ECS - EC2 Launch Type - Autoscaling EC2 instances
+### 6.2.2 ECS - EC2 Launch Type - Autoscaling EC2 instances
  - Accomodate ECS Service scaling by adding underlying EC2 instances
  - Auto scaling Group scaling
    - Scale your ASG based on CPU utilization
@@ -1090,7 +1558,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
    - Capacity provider paired with an Auto scaling group
    - Add EC2 instances when you are missing capacity (CPU, RAM,)
  
-### ECS - Fargate Launch type 
+### 6.2.3 ECS - Fargate Launch type 
  - Launch Docker containers on AWS
  - You do not provision the infrastructure (no EC2 instances to manage)
  - Its all serverless
@@ -1098,7 +1566,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - AWS just runs the ECS tasks for you based on the CPU/RAM you need
  - To scale, just increase the number of tasks. Simple - no more EC2 instances
  
-### IAM Roles
+### 6.2.4 IAM Roles
  - EC2 instance profiles (EC2 Launchtype only)
    - Used by ECS agent
    - Makes API calls to ECS service   
@@ -1110,12 +1578,12 @@ Which load balancer should you use to handle hundreds of thousands of connection
    - Use different roles for different ECS services you run
    - task role is defined in the task definition
 
-### Load balancer integrations
+### 6.2.5 Load balancer integrations
  - Application Load Balancer supported and works for most use cases
  - Network Load balancer recommended only for high throughput/high performance use cases, or to pair it with AWS private link
  - Elastic load balancer supported but not recommended (no advance features, no fargate)
 
-### Data Persistances/Volumes (EFS)
+### 6.2.6 Data Persistances/Volumes (EFS)
  - Mount EFS file systems to ECS tasks
  - Works for both EC2 and Fargate launch types
  - Taks running in any AZ will share the same data in the EFS file system
@@ -1123,7 +1591,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Use cases: Persistent multi-az shared storage for your containers
  - Note: Amazon S3 cannot be mountes as a file system
 
-### ECS Service Auto scaling
+### 6.2.7 ECS Service Auto scaling
  - Automatically increase/decrease the desired number of ECS tasks
  - Amazon ECS Auto Scaling uses AWS Application Auto Scaling
    - ECS serice average CPU utilization
@@ -1135,7 +1603,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - ECS service auto scaling (task level) != EC2 Auto scaling (EC2 instance level)
  - Fargate Autoscaling is much easier to setup (as serverless)
 
-## ECR
+## 6.3 ECR
  - ECR = Elastic container registry
  - Store and Manage Docker images on AWS
  - private and public repository (Amazon ECR public gallery - https://gallery.ecr.aws)
@@ -1143,9 +1611,9 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Access is controlled through IAM  (permissions error are related to policy)
  - Supports image vulnerability scanning, versioning, image tags, image lifecycle
 
-## EKS
+## 6.4 EKS
 
-### EKS Overview
+### 6.4.1 EKS Overview
  - EKS = Elastic kubernetes service
  - It is a way to launch managed kubernetes clusters on AWS
  - K8s is an open source system for automatic deployment, scaling and management of containerized (usually docker) application
@@ -1154,7 +1622,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Use case: if your company is already using k8s on premises or in another cloud, and wants to migrate to AWS using K8s
  - Kubernetes is cloud agnostic (can be used in any cloud: Azure, GCP)
  
-### EKS Node Types
+### 6.4.2 EKS Node Types
  - Managed Node Groups
    - Creates and manages Nodes (EC2 Instances) for you
    - Nodes are part of an ASG managed by EKS
@@ -1166,7 +1634,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - AWS Fargate:
    - No Maintenance required; no nodes managed
 
-### EKS Data volumes
+### 6.4.3 EKS Data volumes
  - Need to specify StorageClass manifest on your EKS cluster
  - Leverages a Container Storage Interface (CSI) compliant driver
  - Support for:
@@ -1175,7 +1643,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
    - Amazon Fsx for Lustre
    - Amazon Fsx for NetApp ONTAP
  
-## App Runner
+## 6.5 App Runner
  - Fully managed service that makes it easy to deploy web applications and the APIs at scale
  - No Infrastructure experience required
  - Start with your source code or container image
@@ -1185,10 +1653,308 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Connect to database, cache and message queue services
  - Use case: WebApps, APIs, Micro-services, Rapid production deployments
 
+# 7. Serverless
 
-# Databases
+## 7.1 Overview
+ - Serverless is a new paradigm in which the developers dont have to manage servers anymore
+ - The just need to deploy code, rather functions at start
+ - Initially Serverless = FaaS (Function as a service)
+ - Serverless was pioneered by AWS Lambda but now also includes anything thats managed: "databases, messaging, storage, etc"
+ - Serverless does not mean there are no servers, it means you just dont need to manage/provision/see them
+ 
+## 7.2 Serverless Services 
+ - AWS Lambda
+ - DynamoDB
+ - AWS Cognito
+ - AWS API Gateway
+ - Amazon S3
+ - SNS and SQS
+ - Kinesis Data Firehose
+ - Aurora Serverless
+ - Step Functions
+ - Fargate
+ 
+## 7.3 Lambda
 
-## Choose Database
+### 7.3.1 Overview
+ - Good overview: https://aws.amazon.com/lambda/
+
+### 7.3.2 Why Lambda?
+ - EC2 
+   - Virtual servers in the cloud 
+   - Limited by RAM and CPU
+   - Continuously running
+   - Scaling means intervention to add/remove servers
+ - Lambda
+   - Virtual functions - no servers to manage!
+   - Limited by time - short executions
+   - Run on-demand
+   - Scaling is automated!
+
+### 7.3.3 Benefits
+ - Easy pricing
+   - pay per request and compute time
+   - free tier of 10,00,000 Lambda requests and 4,00,000 GBs of compute time
+ - Integrated with whole suite of AWS services
+ - Easy monitoring through AWS cloudwatch
+ - Easy to get more resources per functions (upto 10GB RAM)
+ - Increasing RAM will also improve CPU and network
+
+### 7.3.4 Language support
+ - Node.js (JavaScript)
+ - Python
+ - Java (Java 8/11 compatible)
+ - C# (.NET core)
+ - Golang
+ - C# / powershell
+ - Ruby
+ - Custom Runtime API (community supported example is RUST)
+ - Lambda container image
+   - The container image must implement the Lambda Runtime API
+   - ECS/Fargate is preferred for running arbitrary Docker images
+   - NOte: Docker is not for Lambda but for ECS/Fargate
+
+### 7.3.5 Examples
+ - CRON job application
+ - image in multiple formats creation app
+
+### 7.3.6 Pricing
+ - Latest Pricing: https://aws.amazon.com/lambda/pricing/
+ - Pay per calls:
+   - First 10,00,000 requests are free
+   - $0.20 per 1 million requests thereafter ($0.0000002 per request)
+ - pay per duration:
+   - 4,00,000 GB seconds of compute time per month if free
+   - == 4,00,000 Seconds if function is 1 GB RAM
+   - == 32,00,000 seconds if function is 128MB RAM
+   - After that $1.00 for 6,00,000 GB-seconds
+ - It is usually very cheap to run AWS Lambda so its very popular
+
+### 7.3.7 Lambda Limits - per region
+ - Execution
+   - Memory allocation: 128MB - 10GB (1 MB increments)
+   - Maximum execution time: 900 seconds (15 minutes)
+   - Environment variables (4KB)
+   - Disk capacity in the "function container" (in /tmp): 512MB to 10 GB
+      - Use case: load file to process
+   - Concurrency executions: 1000 (can be increased)
+ - Deployment
+   - Lambda function deployment size (compressed .zip): 50MB
+   - size of uncompressed deployment (code + dependencies): 250MB
+   - can use /tmp directory to load other files at startup   
+   - size of environment variables 4KB
+
+### 7.3.8 Lambda@Edge
+ - You have deployed a CDN using CloudFront
+ - What if you wanted to run a global AWS Lambda alongside?
+ - or how to implement request filtering before reaching your application?
+ - For all above scenarios, you can use Lambda@Edge
+   - **Deploy Lambda functions alongside your cloudfront CDN**
+   - Build more responsive applications
+   - you dont manage servers, Lambda is deployed globally
+   - Customize the CDN content
+   - Pay only for what you use
+ - Usage: Lambda can be used to change CloudFront requests and responses
+   - After CloudFront receives a request from a viewer (viewer request)
+   - Before CloudFront forwards the request to the origin (origin request)
+   - After CloudFront receives the response from origin (origin response)
+   - Before CloudFront forwards the response to viewer (viewer response)
+ - Usage: Lambda can be used to generate responses to viewers without even sending them to origin
+ - Use cases:
+   - Website security and Privacy
+   - Dynamic web application at edge
+   - Search Engine Optimization (SEO)
+   - Intelligently route across origins and data centers
+   - Bot Mitigation at the edge
+   - Real time image transformation
+   - A/B Testing
+   - User Authentication and authorization
+   - User prioritization
+   - User Tracking and analytics 
+
+### 7.3.9 Lambda Networking (VPC)
+ - By Default
+   - Lambda function is launched outside your own VPC (in AWS owned VPC)
+   - Therefore it cannot access resources in your VPC (RDS, ElastiCache, internal ELB, etc)
+   - But can access global services like dynamoDB and also to external world
+ - Lambda in VPC
+   - You must define the VPC ID, the subnets and security groups
+   - Lambda will create an ENI (Elastic Network Interface) in your subnets
+
+### 7.3.10 Lambda with RDS Proxy
+ - if lambda function directly access your database, they may open too many connections under high load
+ - RDS Proxy:
+   - Improve scalability by pooling and sharing DB connections
+   - Improve availability by reducing 66% the failover time and preserving connections
+   - Improve security by enforcing IAM authentication and storing credentials in secrets manager
+ - Lambda function must be deployed in your VPC , because **RDS proxy is never publicly accessible**
+
+## 7.4 DynamoDB
+
+### 7.4.1 Overview
+ - Fully managed, Highly available with replication across Multiple AZs
+ - NoSQL database: with transaction support
+ - Scales to massive workloads, disctributed database
+ - Millions of requests per second, trillions of row, 100s of TBs of storage
+ - Fast and Consistent in peroformance (Single Digit millisecond)
+ - Integrated with IAM for security, authorization and administration
+ - Low cost and auto-scaling capabilities
+ - No Maintenance or patching, always available
+ - Standard and Infrequent Access (IA) Table class
+
+### 7.4.2 Basics
+ - It is made of tables
+ - Each table has a primary key (must be decided at creation time)
+ - Each table can have an infinite number of items (=rows)
+ - Each item has attributes (can be added over time and can be null)
+ - Maximum size of an item is 400KB
+ - Data types supported:
+   - Scalar types: String, Binary, Boolean, Null
+   - Document types: List, Map
+   - Set Types: String Set, Number Set, Binary Set
+ - Therefore, in DynamoDB you can rapidly evolve schemas
+
+### 7.4.3 Read/Write capacity modes
+ - Control how you manage your table's capacity (read/write throughput)
+ - Provisioned mode (default)
+   - You specify the number of reads/writes per second
+   - You need to plan the capacity beforehand
+   - Pay for provisioned Read Capacity Units (RCU) and Write Capacity Units (WCU)
+   - Possibility to add auto-scaling mode for RCU and WCU
+
+### 7.4.4 On Demand Mode
+ - Read/Writes automatically scale up/down with you workloads
+ - No Capacity planning needed
+ - Pay for what you use, more expensive
+ - Great for unpredictable workloads, steep sudden spikes
+
+### 7.4.5 DynamoDB Accelerator (DAX)
+ - Fully managed, Highly avaialble, seamless in-memory cache for DynamoDB
+ - Help solve read congestion by caching
+ - Micro-seconds latency for cached data
+ - Doesn't require application logic modification (Compatible with existing DynamoDB APIs)
+ - 5 minutes TTL for cache
+
+### 7.4.6 DAX vs ElastiCache
+ - DAX:
+   - Individual Object cache
+   - Query and Scan cache
+ - ElastiCache
+   - Store aggregation result
+
+### 7.4.7 DynamoDB - Stream processing
+ - Ordered stream of item level modifications (create/update/delete) in a table
+ - Use Cases:
+   - React to changes in real time (Welcom email to users)
+   - Real time usage anlytics
+   - Insert into derivative tables
+   - Implement cross-region replication
+   - Invoke AWS Lambda on changes to your DynamoDB table
+ - DynamoDB Streams:
+   - 24 hours retention
+   - Limited number of consumers
+   - Process using AWS Lambda triggers or DynamoDB stream kinesis adapter
+ - Kinesis data strems (newer)
+   - 1 year retention
+   - High number of consumers
+   - Process using AWS Lambda, Kinesis data analytics, Kinesis data firehose, AWS Glue Streaming ETL 
+
+### 7.4.8 DynamoDB Streams use case diagram
+ - https://aws.amazon.com/blogs/database/dynamodb-streams-use-cases-and-design-patterns/
+
+### 7.4.9 DynamoDB Global Tables
+ - Make a DynamoDB table accesible with low-latency in multiple regions
+ - Active-Active replication
+ - Applications can READ and WRITE to the table in any region
+ - Must enable DynamoDB Streams as a pre-requisite
+
+### 7.4.10 DynamoDB - Time To Live (TTL)
+ - Automatically delete items after an expiry timestamp
+ - Use cases: reduce stored data by keeping only current items, adhere to regulatory obligations
+
+### 7.4.11 DynamoDB - Backups for disaster recovery
+ - Continous backups using point in time recovery (PITR)
+  - Optionally enabled for last 35 days
+  - Point in time recovery to any time within the backup window
+  - The backup process creates a new table
+ - On demand backups
+  - Full backups for long-term retention, until explicitly deleted
+  - Doesnt affect performance or latency
+  - Can be configured and managed in AWS backup (enable cross-region copy)
+  - The recovery process creates a new table
+
+### 7.4.12 DynamoDB - Integration with Amazon S3
+ - Export to S3 (must enable PITR)
+   - Works for any point of time in the last 35 days
+   - Does not affect the read capacity of your table
+   - Perform data analysis on top of DynamoDB
+   - Retain snapshots for auditing
+   - ETL on top of S3 data before importing back into DynamoDB
+   - Export in DynamoDB JSOn or ION format
+ - Import to S3 
+   - Import CSV, DynamoDB JSOn or ION format
+   - Doesn't consume any write capacity
+   - Creates a new table
+   - Import errors are logged in CloudWatch Logs
+
+## 7.5 API Gateway
+
+### 7.5.1 Overview
+ - AWS Lambda + API Gateway: No Infrastructure to manage
+ - Support for the websocket protocol
+ - Handle API Versioning (v1, v2)
+ - Handle different environments (dev, test, prod, etc)
+ - Handle Security (Authentication and Authorization)
+ - Create API keys, handle request throttling
+ - Swagger/Open API import to quickly define APIs
+ - Transform and validate requests and responses
+ - Generate SDK and API specifications
+ - Cache API responses
+
+### 7.5.2 API Gateway - Integrations 
+ - Lambda Function
+   - Invoke Lambda function
+   - Easy way to expose Rest API backed by AWS lambda
+ - HTTP
+   - Expose HTTP endpoints in the backend
+   - Example: Internal HTTP API on premise, Application load balancer
+   - Why? to add rate limiting, caching, user authentications, API keys, etc
+ - AWS Service
+   - Expose any AWS API therough the API gateway
+   - Example: start an AWS step function workflow, post a message to SQS
+   - Why? Add authentication, deploy publicly, rate control   
+
+### 7.5.3 API Gateway - Endpoint Types
+ - Edge Optimized (default)
+   - Requests are routed through the CloudFront Edge Locations (improves latency)
+   - The API gateway still lives in only 1 region
+ - Regional
+   - For clients within the same region
+   - Could Manually combine with CloudFront (More control over the caching strategies and the distribution)
+ - Private
+   - Can only be accessed from your VPC using an interface VPC Endpoint (ENI)
+   - Use a resource policy to define access
+
+### 7.5.4 API Gateway - Security
+ - User authentication via:
+   - IAM Roles (usefule for Internal applications)
+   - Cognito (Identity for external users - example mobile users)
+   - Custom Authorizer (Your own  logic)
+ - Custom Domain Name HTTPS security through integration with AWS Certificate Manager (ACM)
+   - If using Edge optimized endpoint, then the certificate must be in us-east-1
+   - If using regional endpoint, then the certificate must be in API Gateway Region
+   - Must setup CNAME or A-alias record in Route 53
+
+## 7.6 AWS Step functions
+ - Build serverless visual workflow to orchestrate your Lambda functions
+ - Features: Sequence, parallel, conditions, timeouts, error handling
+ - Can integrate with EC2, ECS, On-premises servers, API Gateway, SQS queues, etc
+ - Possibility of implementing human approval feature
+ - Use cases: order fullfillment, data processing, web applications, any workflow
+
+# 8. Databases
+
+## 8.1 Choose Database
  - We have a lot of Managed databases on AWS to choose from
  - Questions to ask to choose the right database based on your architecture
    - Read-heavy, write-heavy or balanced workload?
@@ -1216,7 +1982,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
    - License Costs
      - Switch to cloud native DB such as Aurora
 
-## Database Types:
+## 8.2 Database Types:
  - RDBMS (=SQL/OLTP):  great for Joins
    - RDS
    - Aurora
@@ -1242,7 +2008,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Time Series
    - Amazon Timestream
 
-## Amazon RDS
+## 8.3 Amazon RDS
  - Managed PostgreSQL/MySQL/Oracle/SQL Server/MariaDB/Custom
  - Provisioned RDS instance size and EBS Volume Type and size
  - Auto-scaling capability for storage
@@ -1255,7 +2021,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - RDS Custom for Access to and customize the underlying instance (Oracle and SQL Server)
  - **Use Case:** Store relational datasets (RDBMS/OLTP), perform SQL queries, transactions
  
-## Amazon Aurora
+## 8.4 Amazon Aurora
  - Compatible API for PostgreSQL/MySQL, Saperation of storage and compute
  - Storage data is stored in 6 replicas, across 3 AZ - Highly Available, Self-healing, Auto-scaling
  - **Compute:** Cluster of DB instances across Multiple AZ, Ato scaling of read replicas
@@ -1269,7 +2035,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - **Aurora Database Cloning:** New CLuster from existing one, faster than restoring a snapshot
  - **Use Case:** Same as RDS, but with less maintenance/More flexibility/more performance/more features
  
-## ElastiCache
+## 8.5 ElastiCache
  - Managed Redis/Memcached (Similar offering as RDS, but for caches)
  - In-memory data store, sub millisecond latency
  - Must provision an EC2 instance type
@@ -1280,7 +2046,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - **Requires some application code changes to be leveraged**
  - **Use Case:** Key/Value store, Frequent reads, Less writes, Cache results for DB queries, store session data for websites, Cannot use SQL
 
-## DynamoDB
+## 8.6 DynamoDB
  - AWS proprietary technology, managed serverless NoSQL database, millisecond latency
  - **Capacity modes:** Provisioned capacity with optional auto-scaling or on-demand capacity
  - Can replace ElastiCache as a kkey/value store (storing sessiondata for example, Using TTL feature)
@@ -1294,7 +2060,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - **Great to rapidly evolve schemas**
  - **Use case:** Serverless application development (small documents upto 400 kbs), distributed serverless cache, does not have SQL query language available
 
-## S3
+## 8.7 S3
  - S3 is a key/value store for objects
  - Great for bigger objects, not so great for many small objects
  - Serverless, Scales infinitely, Max object size is 5TB, versioning capability
@@ -1307,7 +2073,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - **Automation:** S3 event Notifications (SNS, SQS, Lambda, Event Bridge)
  - **Use Cases:** static files, key value store for big files, website hosting
  
-## DocumentDB
+## 8.8 DocumentDB
  - Like Aurora is an "AWS implementation" of PostgreSQL/MySQL, DocumentDB is same for MongoDB which is a NOSQL DB 
  - MongoDB is used to store, query and index JSON data
  - Similar "deployment concepts" as Aurora
@@ -1315,7 +2081,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - DocumentDB storage automatically grows in increments of 10GB, upto 64TB
  - Automatically scales to workloads with millions of requests per second
 
-## Neptune
+## 8.9 Neptune
  - Fully managed graph Database
  - A popular graph dataset  would be socal network
    - Users have friends
@@ -1328,7 +2094,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Highly available with replications across Multiple AZs
  - Great for storing knowledge graphs (Wikipedia), Fraud detection, recommendation engines, social networking
 
-## KeySpaces 
+## 8.10 KeySpaces 
  - Apache cassandra is an opensource NoSQL Database and Keyspaces is a managed Apache cassandra-compatible service
  - Serverless, scalable, Highly available, fully managed by AWS
  - Automatically scale table up/down based on applications traffic
@@ -1339,7 +2105,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - Encryption, Backup, Point-In-Time Recovery upto 35 days
  - Use cases: Stre IoT devices info, time series data
 
-## Quantum Ledger DB (QLDB)
+## 8.11 Quantum Ledger DB (QLDB)
  - A ledger is a book recording financial transactions
  - Fully managed, serverless, High available, Replication across 3 AZ
  - Used to review history of all the changes made to your application data over time
@@ -1347,7 +2113,7 @@ Which load balancer should you use to handle hundreds of thousands of connection
  - 2-3 times better performance than common ledger blockchain frameworks, manipulate data using SQL
  - Difference with Amazon Managed Blockchain: No decentralization in accordance with the financial regulation rules in QLDB
 
-## Timestream
+## 8.12 Timestream
  - Fully managed, Fast, Scalable, Serverless time series database
  - Automatically scales up/down to adjust capacity
  - Store and Analyze trillions of events per day
@@ -1481,7 +2247,7 @@ Advanced:
  - SnowMobile
 
 ### Snowball data into glacier
- - Snowball cannot improt data into glacier
+ - Snowball cannot import data into glacier
  - You must use Amazon S3 first, in combination with an S3 lifecycle
  
 ## Amazon FSx
@@ -1520,6 +2286,14 @@ Advanced:
 ## Cache Invalidations
 
 ## AWS Global Accelerator
+
+
+
+
+
+
+
+
 
 # Route 53
 
@@ -1590,304 +2364,7 @@ Advanced:
 ### Domain Registrar vs DNS Service
 
 
-# Serverless
 
-## Overview
- - Serverless is a new paradigm in which the developers dont have to manage servers anymore
- - The just need to deploy code, rather functions at start
- - Initially Serverless = FaaS (Function as a service)
- - Serverless was pioneered by AWS Lambda but now also includes anything thats managed: "databases, messaging, storage, etc"
- - Serverless does not mean there are no servers, it means you just dont need to manage/provision/see them
- 
-## Serverless Services 
- - AWS Lambda
- - DynamoDB
- - AWS Cognito
- - AWS API Gateway
- - Amazon S3
- - SNS and SQS
- - Kinesis Data Firehose
- - Aurora Serverless
- - Step Functions
- - Fargate
- 
-## Lambda
-
-### Overview
- - Good overview: https://aws.amazon.com/lambda/
-
-### Why Lambda?
- - EC2 
-   - Virtual servers in the cloud 
-   - Limited by RAM and CPU
-   - Continuously running
-   - Scaling means intervention to add/remove servers
- - Lambda
-   - Virtual functions - no servers to manage!
-   - Limited by time - short executions
-   - Run on-demand
-   - Scaling is automated!
-
-### Benefits
- - Easy pricing
-   - pay per request and compute time
-   - free tier of 10,00,000 Lambda requests and 4,00,000 GBs of compute time
- - Integrated with whole suite of AWS services
- - Easy monitoring through AWS cloudwatch
- - Easy to get more resources per functions (upto 10GB RAM)
- - Increasing RAM will also improve CPU and network
-
-### Language support
- - Node.js (JavaScript)
- - Python
- - Java (Java 8/11 compatible)
- - C# (.NET core)
- - Golang
- - C# / powershell
- - Ruby
- - Custom Runtime API (community supported example is RUST)
- - Lambda container image
-   - The container image must implement the Lambda Runtime API
-   - ECS/Fargate is preferred for running arbitrary Docker images
-   - NOte: Docker is not for Lambda but for ECS/Fargate
-
-### Examples
- - CRON job application
- - image in multiple formats creation app
-
-### Pricing
- - Latest Pricing: https://aws.amazon.com/lambda/pricing/
- - Pay per calls:
-   - First 10,00,000 requests are free
-   - $0.20 per 1 million requests thereafter ($0.0000002 per request)
- - pay per duration:
-   - 4,00,000 GB seconds of compute time per month if free
-   - == 4,00,000 Seconds if function is 1 GB RAM
-   - == 32,00,000 seconds if function is 128MB RAM
-   - After that $1.00 for 6,00,000 GB-seconds
- - It is usually very cheap to run AWS Lambda so its very popular
-
-### Lambda Limits - per region
- - Execution
-   - Memory allocation: 128MB - 10GB (1 MB increments)
-   - Maximum execution time: 900 seconds (15 minutes)
-   - Environment variables (4KB)
-   - Disk capacity in the "function container" (in /tmp): 512MB to 10 GB
-      - Use case: load file to process
-   - Concurrency executions: 1000 (can be increased)
- - Deployment
-   - Lambda function deployment size (compressed .zip): 50MB
-   - size of uncompressed deployment (code + dependencies): 250MB
-   - can use /tmp directory to load other files at startup   
-   - size of environment variables 4KB
-
-### Lambda@Edge
- - You have deployed a CDN using CloudFront
- - What if you wanted to run a global AWS Lambda alongside?
- - or how to implement request filtering before reaching your application?
- - For all above scenarios, you can use Lambda@Edge
-   - **Deploy Lambda functions alongside your cloudfront CDN**
-   - Build more responsive applications
-   - you dont manage servers, Lambda is deployed globally
-   - Customize the CDN content
-   - Pay only for what you use
- - Usage: Lambda can be used to change CloudFront requests and responses
-   - After CloudFront receives a request from a viewer (viewer request)
-   - Before CloudFront forwards the request to the origin (origin request)
-   - After CloudFront receives the response from origin (origin response)
-   - Before CloudFront forwards the response to viewer (viewer response)
- - Usage: Lambda can be used to generate responses to viewers without even sending them to origin
- - Use cases:
-   - Website security and Privacy
-   - Dynamic web application at edge
-   - Search Engine Optimization (SEO)
-   - Intelligently route across origins and data centers
-   - Bot Mitigation at the edge
-   - Real time image transformation
-   - A/B Testing
-   - User Authentication and authorization
-   - User prioritization
-   - User Tracking and analytics 
-
-### Lambda Networking (VPC)
- - By Default
-   - Lambda function is launched outside your own VPC (in AWS owned VPC)
-   - Therefore it cannot access resources in your VPC (RDS, ElastiCache, internal ELB, etc)
-   - But can access global services like dynamoDB and also to external world
- - Lambda in VPC
-   - You must define the VPC ID, the subnets and security groups
-   - Lambda will create an ENI (Elastic Network Interface) in your subnets
-
-### Lambda with RDS Proxy
- - if lambda function directly access your database, they may open too many connections under high load
- - RDS Proxy:
-   - Improve scalability by pooling and sharing DB connections
-   - Improve availability by reducing 66% the failover time and preserving connections
-   - Improve security by enforcing IAM authentication and storing credentials in secrets manager
- - Lambda function must be deployed in your VPC , because **RDS proxy is never publicly accessible**
-
-# DynamoDB
-
-## Overview
- - Fully managed, Highly available with replication across Multiple AZs
- - NoSQL database: with transaction support
- - Scales to massive workloads, disctributed database
- - Millions of requests per second, trillions of row, 100s of TBs of storage
- - Fast and Consistent in peroformance (Single Digit millisecond)
- - Integrated with IAM for security, authorization and administration
- - Low cost and auto-scaling capabilities
- - No Maintenance or patching, always available
- - Standard and Infrequent Access (IA) Table class
-
-## Basics
- - It is made of tables
- - Each table has a primary key (must be decided at creation time)
- - Each table can have an infinite number of items (=rows)
- - Each item has attributes (can be added over time and can be null)
- - Maximum size of an item is 400KB
- - Data types supported:
-   - Scalar types: String, Binary, Boolean, Null
-   - Document types: List, Map
-   - Set Types: String Set, Number Set, Binary Set
- - Therefore, in DynamoDB you can rapidly evolve schemas
-
-## Read/Write capacity modes
- - Control how you manage your table's capacity (read/write throughput)
- - Provisioned mode (default)
-   - You specify the number of reads/writes per second
-   - You need to plan the capacity beforehand
-   - Pay for provisioned Read Capacity Units (RCU) and Write Capacity Units (WCU)
-   - Possibility to add auto-scaling mode for RCU and WCU
-
-## On Demand Mode
- - Read/Writes automatically scale up/down with you workloads
- - No Capacity planning needed
- - Pay for what you use, more expensive
- - Great for unpredictable workloads, steep sudden spikes
-
-## DynamoDB Accelerator (DAX)
- - Fully managed, Highly avaialble, seamless in-memory cache for DynamoDB
- - Help solve read congestion by caching
- - Micro-seconds latency for cached data
- - Doesn't require application logic modification (Compatible with existing DynamoDB APIs)
- - 5 minutes TTL for cache
-
-## DAX vs ElastiCache
- - DAX:
-   - Individual Object cache
-   - Query and Scan cache
- - ElastiCache
-   - Store aggregation result
-
-## DynamoDB - Stream processing
- - Ordered stream of item level modifications (create/update/delete) in a table
- - Use Cases:
-   - React to changes in real time (Welcom email to users)
-   - Real time usage anlytics
-   - Insert into derivative tables
-   - Implement cross-region replication
-   - Invoke AWS Lambda on changes to your DynamoDB table
- - DynamoDB Streams:
-   - 24 hours retention
-   - Limited number of consumers
-   - Process using AWS Lambda triggers or DynamoDB stream kinesis adapter
- - Kinesis data strems (newer)
-   - 1 year retention
-   - High number of consumers
-   - Process using AWS Lambda, Kinesis data analytics, Kinesis data firehose, AWS Glue Streaming ETL 
-
-## DynamoDB Streams use case diagram
- - https://aws.amazon.com/blogs/database/dynamodb-streams-use-cases-and-design-patterns/
-
-## DynamoDB Global Tables
- - Make a DynamoDB table accesible with low-latency in multiple regions
- - Active-Active replication
- - Applications can READ and WRITE to the table in any region
- - Must enable DynamoDB Streams as a pre-requisite
-
-## DynamoDB - Time To Live (TTL)
- - Automatically delete items after an expiry timestamp
- - Use cases: reduce stored data by keeping only current items, adhere to regulatory obligations
-
-## DynamoDB - Backups for disaster recovery
- - Continous backups using point in time recovery (PITR)
-  - Optionally enabled for last 35 days
-  - Point in time recovery to any time within the backup window
-  - The backup process creates a new table
- - On demand backups
-  - Full backups for long-term retention, until explicitly deleted
-  - Doesnt affect performance or latency
-  - Can be configured and managed in AWS backup (enable cross-region copy)
-  - The recovery process creates a new table
-
-## DynamoDB - Integration with Amazon S3
- - Export to S3 (must enable PITR)
-   - Works for any point of time in the last 35 days
-   - Does not affect the read capacity of your table
-   - Perform data analysis on top of DynamoDB
-   - Retain snapshots for auditing
-   - ETL on top of S3 data before importing back into DynamoDB
-   - Export in DynamoDB JSOn or ION format
- - Import to S3 
-   - Import CSV, DynamoDB JSOn or ION format
-   - Doesn't consume any write capacity
-   - Creates a new table
-   - Import errors are logged in CloudWatch Logs
-
-# API Gateway
-
-## Overview
- - AWS Lambda + API Gateway: No Infrastructure to manage
- - Support for the websocket protocol
- - Handle API Versioning (v1, v2)
- - Handle different environments (dev, test, prod, etc)
- - Handle Security (Authentication and Authorization)
- - Create API keys, handle request throttling
- - Swagger/Open API import to quickly define APIs
- - Transform and validate requests and responses
- - Generate SDK and API specifications
- - Cache API responses
-
-## API Gateway - Integrations 
- - Lambda Function
-   - Invoke Lambda function
-   - Easy way to expose Rest API backed by AWS lambda
- - HTTP
-   - Expose HTTP endpoints in the backend
-   - Example: Internal HTTP API on premise, Application load balancer
-   - Why? to add rate limiting, caching, user authentications, API keys, etc
- - AWS Service
-   - Expose any AWS API therough the API gateway
-   - Example: start an AWS step function workflow, post a message to SQS
-   - Why? Add authentication, deploy publicly, rate control   
-
-## API Gateway - Endpoint Types
- - Edge Optimized (default)
-   - Requests are routed through the CloudFront Edge Locations (improves latency)
-   - The API gateway still lives in only 1 region
- - Regional
-   - For clients within the same region
-   - Could Manually combine with CloudFront (More control over the caching strategies and the distribution)
- - Private
-   - Can only be accessed from your VPC using an interface VPC Endpoint (ENI)
-   - Use a resource policy to define access
-
-## API Gateway - Security
- - User authentication via:
-   - IAM Roles (usefule for Internal applications)
-   - Cognito (Identity for external users - example mobile users)
-   - Custom Authorizer (Your own  logic)
- - Custom Domain Name HTTPS security through integration with AWS Certificate Manager (ACM)
-   - If using Edge optimized endpoint, then the certificate must be in us-east-1
-   - If using regional endpoint, then the certificate must be in API Gateway Region
-   - Must setup CNAME or A-alias record in Route 53
-
-# AWS Step functions
- - Build serverless visual workflow to orchestrate your Lambda functions
- - Features: Sequence, parallel, conditions, timeouts, error handling
- - Can integrate with EC2, ECS, On-premises servers, API Gateway, SQS queues, etc
- - Possibility of implementing human approval feature
- - Use cases: order fullfillment, data processing, web applications, any workflow
 
 
 # AWS Monitoring, Troubleshooting & Audit
@@ -2449,568 +2926,6 @@ Advanced:
 
 
 
-# Machine Learning
-
-## Rekognition
-
-### Overview
- - Find Objects, people, text, scenes, in Images and Videos using ML
- - Facial analysis and facial search to do user Verification, people counting
- - Create a Database of "Familiar Faces" r compare against celebrities
- - Use cases:
-   - Labelling
-   - Content Moderation
-   - Text Detection
-   - Face Detection and Analysis (Gender, Age range, Emotions)
-   - Face Search and Verification
-   - Celebrity Recognition
-   - Pathing (example: for sports game analysis)
-
-### Use case: Content moderation
- - Detect content that is inappropriate, unwanted, or offensive (images and videos)
- - Used in Social media, Broadcast media, advertising, and e-commerce situations to create a safer user experience
- - Set a minimum confidence threshold for items that will be flagged
- - Flag sensitive content for manual review in Amazon Augmented AI (A2I)
- - Help comply with regulations
-
-## Transcribe
- - Automaticaly convert speech to text
- - uses a deep learning process called Automatic Speech Recognition (ASR) to convert speech to text quickly and accurately
- - Automatically remove Personally Identifiable Information (PII) using Redaction
- - Supports Automatic Language Identification for multi-lingual audio
- - Use cases:
-   - Transcribe customer service calls
-   - Automate closed captioning and subtitling
-   - Generate metadata for media assets to create a fully searchable archive
-
-## Polly
- - Opposite of Transcribe 
- - Turn text into lifelike speech using deep learning
- - Allows you to create applications that talk
- - Feature: Lexicon and SSML
-   - Customize the pronouniciation of words with Pronounciation lexicons
-     - Styled words: St3ph4ne -> Stephane
-     - Acronyms: AWS -> Amazon Web services
-   - Upload the Lixicons and use them in the Synthesize speech operation
-   - Generate speech from Plain text or from documents markded up with Speech synthesis Markup Langauage (SSML) - Enables more Customization
-     - Emphasizing specific words or phrases
-     - Using phonetic pronounciation
-     - Including breathig sounds, whispering
-     - Using the Newscaster speaking style
-
-## Translate
- - Natural and accurate Language translation
- - Amazon Translate allows you to localize content - for internatioal users, and to easily translate large volumes of text efficiently
-
-## Amazon Lex and Connect 
- - Amazon Lex: Same technology that powers Alexa
-   - Automatic speech recognition (ASR) to convert speech to text
-   - Natural Language Understanding to recognize the intent of text, callers
-   - Helps build chatbots, call center bots
- - Amazon Connect
-   - Receive calls, create contact flows, cloud based viryual contact center
-   - Can integrate with other CRM systems or AWS
-   - No upfront payments, 80$ cheaper than traditional cost center solutions
-   
-## Amazon Comprehend
- - For Natural Language Processing (NLP)
- - Fully managed and serverless service
- - Uses Machine learning to find insights and relationships in text
-   - Language of the text
-   - Extracts key phrases, places, people, brands or events
-   - Understands how positive or negative the text is
-   - Analyzes text using tokenization and parts of speech
-   - Automatically organizes a collection of text files by topic
- - Sample Use cases:
-   - Analyze customer interations (Emails) to find what leads to a positive or negative experience
-   - Create and Group articles by topics that Comprehend will uncover
-   
-## Amazon Comprehend Medical
- - Amazon Comprehend Medical detects and returns useful information in unstructured clinical text:
-   - Physician's Notes
-   - Discharge summaries
-   - Test Results
-   - Case Notes
- - Uses NLP to detect protected Health Information (PHI) - DetectPHI API
- - Store your documents in Amazon S3, Analyze realtime data with kinesis Data Firehose, or use Amazon Transcribe to transcribe patient narratives into text that can be analyzed by Amazon Comprehend Medical
- 
-## Amazon SageMaker
- - Fully managed service for Developers/data scientists to build ML models
- - Typically difficult to do all the process in one place  + Provision servers
- - Machine Learning process (Simplified): predicting your exam score 
-
-## Amazon Forecast
- - Fully managed service that uses ML to deliver highly accurate forecasts
- - Example: Predict the future sales of a raincoat
- - 50% more accurate than looking at the data itself
- - Reduce forecasting time from months to hours
- - Use Cases: Product Demand planning, Financial Planning, Resource Planning
-
-## Amazon Kendra
- - Fully Managed document search service powered by machine learning
- - Extract answers from within a document (text, pdf, HTML, Powerpoint, MS Word, FAQs)
- - Natural Language Search capabilities
- - Learn from user interactions/feedback to promote preferred results (Incremental Learning)
- - Ability to manually fine-tune search results (Importance of data, freshness, Custom, etc)
-
-## Amazon Personalize
- - Fully managed ML-Service to build apps with real-time personalized recommendations
- - Example: Personalized product recommendations-ranking, customized direct marketing
-   - Example: User brought gardening tools, provide recommendations on the next one to buy
- - Same technology is used by Amazon.com
-
-## Amazon Textract 
- - Automatically extracts text, handwriting and data from any scanneddocuments using AI and ML
- - Extract data from forms and tables
- - Read and process any type of document (PDFs, Images )
- - Use cases: 
-   - Finanial Services (eg: Invoices, financial reports)
-   - HealthCare (eg: medical records, insurance claims)
-   - Public Sector (eg: tax forms, ID docuemnts, passports)
-
-## Machine Learning Summary
- - **Rekognition: ** Face detection, Labelling, Celebrity recognition
- - **Transcribe: ** audio to text (ex: subtitles)
- - **Polly: ** text to audio
- - **Translate: ** translations
- - **Lex: ** build conversational bots - chatbots
- - **Connect: ** cloud contact center
- - **Comprehend: ** Natural Language Processing
- - **SageMaker: ** Machine Learning for every developer and data scientist
- - **Forecast: ** Build highly accurate forecasts
- - **Kendra: ** ML-powered search engines
- - **Personalize: ** Real time personalized recommendations
- - **Textract: ** Detect text and data in documents
-
-# 7. Amaozon S3 (Simple storage Service)
-
-## 7.1 S3 Overview
-
-**Basics**  
- - S3 is one of the main building blocks of AWS
- - Its advertised as "infinity scaling" storage
- - Many website use Amazon S3 as a backbone
- - Many AWS Services uses Amazon S3 as an integration as well
- - EBS snapshots are stored in S3 in backend
- - Certified cloud Practitioner requires deeper knowledge of S3
-
-**Use Cases**  
- - Backup and Storage
- - Disaster recovery
- - Archive
- - Hybrid Cloud Storage
- - Application Hosting
- - Media hosting
- - Data lakes and big data analytics
- - Software delivery
- - Static website
-
-**Buckets**  
- - Amazon S3 allows people to store object (files) in "buckets" (directories)
- - Buckets must have a globally unique name (across all regions and all accounts)
- - Bucktes are defined at the region level
- - S3 looks like a global service but buckets are created in a region
- - Naming Convention
-   - No uppercase
-   - No Underscore
-   - 3-62 characters long
-   - Not an IP
-   - Must start with lowercase letter or number
-
-**Objects**  
- - Objects (files) have a key
- - The key is the full path:
-   - s3://my-bucket/my_file.txt
-   - s3://my-bucket/my_folder/another_folder/my_file.txt
- - The key is composed of `prefix` + *object name*
-   - s3://my-bucket/`my_folder/another_folder/`*my_file.txt*
- - Theres no concept of "directories" within buckets (although the UI will trick you to think otherwise)
- - Just keys with very long names that contains slashes ("/")
- - Object values are the content of the body
-   - Max Object size is 5TB (5000GB)
-   - If uploading more that 5 GB, must use "multi-part upload"
- - Metadata (list of text key/value pairs - system or metadata)
- - Tags (Unicode key / value pair - upto 10) - useful for security/lifecycle
- - Version ID (if Versioning is enabled)
-
-**S3 Hands on**  
-
- - S3 -> buckets -> Create Bucket -> provide uniques bucket name and region along with default options
- - [Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules)
- - Add files -> select file -> upload
- - Now, if you select the uploaded file, you will get the details about that file
- - You will see the Object url under Object Overview heading in Properties tag
- - Now, as we had chosen all the default options that means block public access included in it and hence if you click on object URL, you will not be able to access the same
- - Whereas clicking on Object Actions -> Open will open the file in new tab
-
-## 7.1 Bucket Policy
-
-**S3 Security**  
- - User Based
-   - IAM policies - Which API calls should be allowed for a specific user from IAM console
- Resource Based
-   - Bucket Policies - bucket wide rules from the S3 console - allows cross account
-   - Object Access Control List (ACL) - Fine grained
-   - Bucket Access Control List (ACL) - Less Common
-
- - Note: An IAM principal can access an S3 object if
-   - the user IAM permissions allow it **OR** the resource policy allows it
-   - **AND** there's no explicit DENY
- - Encryption: encrypt objects in Amazon S3 using encryption keys
-
-**Examples**  
- - Public Access ->   Use Bucket policy (Allow S3 bucket policy)
- - IAM User Access -> IAM Policy only will be sufficient
- - EC2 Instance -> Create EC2 instance role and assign IAM permissions to this role
- - Cross-Account access -> S3 bucket policy allow cross account policy
-
-**Policy**  
- - JSON based Policies
-   - Resources: buckets and Objects
-   - Actions: Set of API to allow or Deny
-   - Effect: Allow/Deny
-   - Principal: The Account or user to apply the policy to
- - Use S3 bucket for policy to:
-   - Grant public access to the bucket
-   - Force Objects to be encrypted at upload
-   - Grant Access to another Account (Cross Account)
-
-**Bucket Settings for Block public access**  
-[Screenshot]
-
- - These settings were created to prevent company data leaks
- - If you know your bucket should never be public, leave thse on
- - Can be set at the account level
-
-**Hands On**  
-
- - go to S3 bucket created above -> permissions -> Bucket policy
- - To enable this, you have to uncheck "block public access" policies
- - Once done, you can click on edit button in edit bucket policy 
-   - Select "policy generator" as it provides a nice ui to generate a policy -> select
-   - Also notice you have Bucket ARN that will be used in next steps
-   - Select type of policy: S3 bucket policy
-   - Principal: *
-   - Actions: getObject
-   - ARN: copy from the step above with `/*`
-   - Add statement
-   - Generate Policy -> copy content 
-   - now go back to previous tab and update the copied policy and save
-   - now you will have the objects inside this bucket as accessible
-
-## 7.2 S3 Websites
-
-**basics**  
- - S3 can host static websites and have them accessible on the www
- - The website URL will be:
-   - <bucket-name>.s3-website-<aws-region>.amazonaws.com or
-   - <bucket-name>.s3-website.<aws-region>.amazonaws.com
- - If you get a 403 (Forbidden) error, make sure the bucket policy allows public reads
-
-**hands on**  
- - upload your static content
- - in Properties tab -> Static website hosting -> Enable
- - host a static wbesite
- - provide name of your index and error document
- - save
- - now you get the url for the newly hosted website
- 
-## 7.3 S3 Versioning
-
-**basics**
- - you can version your files in Amazon S3
- - It is enabled at the biucket level
- - Same key overrite will increment the version: 1,2,3..
- - It is best practice to version your buckets
-   - protect against unintended deletes (ability to restore a version)
-   - Easy roll back to previous version
- - Notes: 
-   - Any file that is not versioned prior to enabling versioning will have version null
-   - Suspending versioning does not delete the previous versions
-
-**hands on**
- - S3 -> Select the bucket you created above -> properties tab -> Bucket versioning -> edit -> Enable -> Save changes
- - Now any file uploaded from now on will have version in it
- - you can select the file and click on versions tab you will see the versions
- - Also in S3 bucket level -> Objects section -> List Versions and you will see the versions of the file
- - you can select the version you want to rollback and delete that so it will be rolled back to the previous version
- - Deleting a file with list versions enabled will do a soft delete.
-   - To get back this file you have to enable List versions and then you will see the deleted file with "Delete marker" and then select delete tp restore
-
-## 7.4 S3 Access logs
-
-**basics**  
- - For audit purpose, you may want to log all access to S3 buckets
- - Any request made to S3, from any account, authorized or denied will be logged into another S3 bucket
- - That data can be analyzed using data analysis tools..
- - Very helpful to come down to the root cause of an issue, or audit usage, view suspicious patterns, etc..
-
-**Hands on**  
- - To enable logging you have to create a new bucket where access logs will be written
- - Go to original S3 bucket -> Properties -> Server access logging setting -> edit -> enable and provide the target bucket that we created above.
- - You can access the objects and then these logs will be reflected in another s3 bucket after an hour or two.
-
-## 7.5 S3 Replication (CRR and SRR)
-
-**basics**  
- - Must enable versioning in source and destination
- - Cross Region Replication (CRR) 
- - Same Region Replication (SRR)
- - Buckets can be in different accounts
- - Copying is asynchronous
- - Must give proper IAM permissions to S3
- - CRR use cases
-   - Compliance
-   - lower latency access
-   - Replication across accounts
- - SRR use cases
-   - log aggregation
-   - live replication between production and test accounts
-
-**hands on**  
- - create a new S3 bucket where you need data to be replicated
- - enable versioning in source and target bucket
- - go to main bucket -> management tab -> Replication rule -> Create replication rule
-   - provide rule name
-   - status : enabled
-   - Source bucket
-   - Destination: buckte in this account, provide the name
-   - IAM role: Create a new role
-   - Save
-   - Replication rule created
- - Replication will work only for objects that are being uploaded after enabling the replication rule
-
-## 7.6 S3 Storage classes
-
-**Types**  
- - Amazon S3 Standard - General purpose
- - Amazon S3 Standard-Infrequent Access (not accessed ver often)
- - Amazon S3 one Zone-Infrequent Access (you can recreate and fine with losing it)
- - Amazon S3 Intelligent tiering (Not sure which one to choose between frquent and infrequent access)
- - Amazon Glacier (Backups and archives)
- - Amazon Glacier Deep Archive (Backups and archives)
-
-**Durability and Availability**  
-**Durability:**  
- - High durability (99.99999999999, 11 time 9) of objects across multiple Azure
- - If you store 10,000,000 objects with Amazon S3, you can on average expect to incur a loss of a single object once every 10,000 years
- - `Same for all storage classess`
-
-**Availability**  
- - Measures how readily available a service is
- - S3 standard has 99.99% availability, which means it wil not be available 53 minutes a year
- - `Varies depending on storage class`
-
-***1. Amazon S3 Standard - General purpose**  
- - 99.99% availability
- - Used for frequently accessed data
- - low latency and high throughput
- - sustain 2 concurrent facility failures
- - Use cases:
-   - Big Data analytics
-   - Mobile and gamin applications
-   - content distribution
-
-***2. Amazon S3 Standard-Infrequent Access (IA)**  
- - Suitable for data that is less frequently accessed, but requires rapid access when needed
- - 99.9% Availability
- - Lower cost compared to Amazon S3 standard, but retrieval fee
- - Sustain 2 concurrent facility failures
- - Use Cases: 
-   - As a data store for disaster recovery
-   - backups
-
-***3. Amazon S3 one Zone-Infrequent Access (IA)**  
- - Same as IA but data is stored in a single Azure
- - 99.5% Availability
- - Low latency and high throughput performance
- - Lower cost compared to S3-IA (by 20%)
- - Use Cases:
-   - Storing secondary backup copies of on premise data or
-   - storing data you can recreate
-
-***4. Amazon S3 Intelligent tiering**  
- - 99.9% Availability
- - Same low latency and high throughput performance of S3 Standard
- - Cost optimized by automatically moving objects between two access tiers based on changing access patterns:
-   - frequent access
-   - Infrequent access
- - Resilient against events that impact an entire Availability zone
-
-***5. Amazon Glacier and Amazon Glacier Deep Archive**  
- - Low cost object storage (in GB/month) meant for archiving/backup
- - Data is retained for the longer term (years)
- - Various retrieval options of time + fees for retrieval
- - Amazon Glacier: Cheap
-   - Expedited (1 to 5 minutes)
-   - Standard (3 to 5 hours)
-   - Bulk (5 to 12 hours)
- - Amazon Glacier Deep Archive: Cheapest
-   - Standard (12 hours)
-   - Bulk (48 hours)
-
-**Summary**  
- - https://aws.amazon.com/s3/storage-classes/
-
-**Moving between storage classes**  
- - You can transition objects between storage classes
- - For infrequently accessed object, move them to Standard_IA
- - For archive objects you dont need in real-time, GLACIER or DEEP_ARCHIVE
- - Moving Objects can be automated using a lifecycle configuration
-
-**Hands on**  
- - S3 -> Objects -> upload -> Additional upload options, here you can select the storage class and details are also available on the same -> upload
- - if you select the uploaded file, yyou can verify the storage class and you can update the same if needed
- - S3 -> Buckets -> Select bucket -> management tab -> Create lifecycle rule
-   - LifeCycle Rule name
-   - Choose a rule scope
-   - Lifecycle Rule actions: depending on the checkboxes you select, you will be provided with the options to configure below
-   - Create Rule
-
-## 7.7 Snowball, Snowball Edge and SnowMobile Overview
-
-**Snowball**  
- - Physical data transport solution that heps moving TBs or PBs of data in or out of AWS
- - Alternative to moving data over the network (and paying network fees)
- - pay per data transfer jobs
- - Use cases:
-   - LArge data cloud migrations
-   - Data center decommision
-   - Disaster recovery
- - if it takes more than a week to transfer over the network, use snowball devices
-
-**Snowball Process**  
- - Request snowball devices from the AWS console for delivery
- - Install the snowball client on your servers
- - Connect the snowball to your servers and copy files using the client
- - Ship back the device when you are done (goes to the right AWS facility)
- - Data will be loaded into an S3 bucket
- - Snowball is completely wiped
-
-**Snowball Edge**  
- - Snowball Edge (100 TB) add computational capability to the device
- - Supports a custom EC2 AMI so you cab perform processing on the go
- - Supports customm lambda functions
- - Very useful to pre-process the data while moving
- - Use case:
-   - data migrations
-   - image collation
-   - IoT capture
-   - Machine Learning
- - "Snowball" is deprecated in favour of "Snowball Edge"
-
-**AWS Snowmobile (Truck)**  
- - Transfer exabytes of data (1 EB = 1,000 PB = 10,000,00 TBs)
- - Each Snowmobile has 100PB of capacity (use multiple in parallel)
- - Better than snowball if you transfer more than 10 PB
-
-Snow *
-
-Snowball Edge
-
-Snowcone
-
-
-## 7.8 Storage gateway overview
-
-**Where do we need?**  
- - AWS is pushing for "hybrid cloud"
-   - Part of your infrastructure is on-premises
-   - Part of your infrastructure is on the cloud
- - This can be due to
-   - Long cloud migrations
-   - Security requirements
-   - Compliance requirements
-   - IT strategy
- - S3 is a propritary storage technology (unlike EFS/NFS), **so how do you expose the S3 data in-premise?**
-    - via AWS Storage Gateway
-
-**AWS Storage Cloud Native Options**  
- - Block storage
-   - Amazon EBS
-   - EC2 instance store
- - File Syorage
-   - Amazon EFS
- - Object storage
-   - Amazon S3
-   - Glacier
-
-**AWS storage gateway**  
- - Bridge between on-premise data and cloud data in S3
- - Hybrid storage service to allow on-premises to seamlessly use the AWS Cloud
- - Use cases:
-   - Disaster recovery
-   - Backup and restore
-   - Tiered storage
- - Types of storage gateway
-   - File gateway
-   - Volume gateway
-   - Tape gateway
- - No need to know the types at the exam
-
-## 7.9 Shared responsibility model for S3
-
-| AWS                                                 | You                           |
-| -------------                                       |:-------------:                      |
-| Infrastructure (global security, durability, availability, sustain concurrent loss of data in two facilities) | S3 Versioning |
-| Configuration and vulnerability analysis            | S3 Bucket Policies|
-| Compliance Validation                               | S3 Replication Setup |
-|                                                     | Logging and Monitoring |
-|                                                     | S3 Storage Classes |
-|                                                     | Data encryption at rest and in transit |
-
-## 7.10 S3 Summary
-
- - Buckets vs Objects: global unique name, tied to a region
- - S3 security: IAM policy, S3 bucket Policy (public access), S3 encryption
- - S3 Websites: host a static website on Amazon S3
- - S3 Versioning: Multiple versions for files, prevents accidental deletes
- - S3 Access Logs: Log requests made within your S3 buckets
- - S3 Replication: Same-region or Cross-Region, must enable versioning
- - S3 Storage Classes: Standard. IA, IZ-IA, Intelligent, Glacier, Deep Archive
- - S3 Lifecycle Rules: transition objects between classes
- - Snowball/Snowmobile: import data into S3 through a physical device
- - Storage gateway: hybrid solution to extend on-premises storage to S3
-
-## S3 Encryption
-Their are 4 methods of encrypting objects in s3:
- - SSE-S3: Encrypts S3 objects using keys handled and managed by aws
- - SSE-KMS: leverage aws key management service to manage encryption keys
- - SSE-C: When you want to manage your encryption keys
- - Client Side encryption
-
-### SSE-S3
- - Encryption using keys handled and managed by aws
- - Object is encrypted server side
- - AES-256 encryption type
- - Must set header: "x-amz-server-side-encryption":"AES256"
-
-### SSE-KMS
- - Encryption using keys managed and handles by KMS
- - Object is encrypted server side
- - KMS advantages: User control + audit trail
- - Must set header: "x-amz-server-side-encryption":"aws:kms"
-
-### SSE-C
- - Encryption using data keys fully managed by the customer outside of AWS
- - Amazon S3 does not store the encryption keys you provide
- - HTTPS must be used
- - Encryption key must be provided in headers, for every HTTP request made
-
-### Client Side encryption
- - Cleint library such as Amazon S3 encryption client
- - Clients must encrypt data themselves before sending to S3
- - Clients must decrypt data themselves when retrieving from S3
- - Customer fully manages the keys and encryption cycle
-
-### Encryption in Transit:
- - Amazon S3 exposes:
-   - HTTP endpoint: non encrypted
-   - HTTPS endpoint: encryption in flight
- - You are free to use the endpoint you want, but HTTPS is recommended
- - Most clients would use the HTTPS endpoint by default
- - HTTPS is mandatory for SSE-C
- - Encryption in flight is also called SSL/TLS
 
 # AWS Security and Encryption
 
@@ -3634,6 +3549,140 @@ SQS Access policies:
  - SQS to decouple between application tiers
 
 
+
+
+# Machine Learning
+
+## Rekognition
+
+### Overview
+ - Find Objects, people, text, scenes, in Images and Videos using ML
+ - Facial analysis and facial search to do user Verification, people counting
+ - Create a Database of "Familiar Faces" r compare against celebrities
+ - Use cases:
+   - Labelling
+   - Content Moderation
+   - Text Detection
+   - Face Detection and Analysis (Gender, Age range, Emotions)
+   - Face Search and Verification
+   - Celebrity Recognition
+   - Pathing (example: for sports game analysis)
+
+### Use case: Content moderation
+ - Detect content that is inappropriate, unwanted, or offensive (images and videos)
+ - Used in Social media, Broadcast media, advertising, and e-commerce situations to create a safer user experience
+ - Set a minimum confidence threshold for items that will be flagged
+ - Flag sensitive content for manual review in Amazon Augmented AI (A2I)
+ - Help comply with regulations
+
+## Transcribe
+ - Automaticaly convert speech to text
+ - uses a deep learning process called Automatic Speech Recognition (ASR) to convert speech to text quickly and accurately
+ - Automatically remove Personally Identifiable Information (PII) using Redaction
+ - Supports Automatic Language Identification for multi-lingual audio
+ - Use cases:
+   - Transcribe customer service calls
+   - Automate closed captioning and subtitling
+   - Generate metadata for media assets to create a fully searchable archive
+
+## Polly
+ - Opposite of Transcribe 
+ - Turn text into lifelike speech using deep learning
+ - Allows you to create applications that talk
+ - Feature: Lexicon and SSML
+   - Customize the pronouniciation of words with Pronounciation lexicons
+     - Styled words: St3ph4ne -> Stephane
+     - Acronyms: AWS -> Amazon Web services
+   - Upload the Lixicons and use them in the Synthesize speech operation
+   - Generate speech from Plain text or from documents markded up with Speech synthesis Markup Langauage (SSML) - Enables more Customization
+     - Emphasizing specific words or phrases
+     - Using phonetic pronounciation
+     - Including breathig sounds, whispering
+     - Using the Newscaster speaking style
+
+## Translate
+ - Natural and accurate Language translation
+ - Amazon Translate allows you to localize content - for internatioal users, and to easily translate large volumes of text efficiently
+
+## Amazon Lex and Connect 
+ - Amazon Lex: Same technology that powers Alexa
+   - Automatic speech recognition (ASR) to convert speech to text
+   - Natural Language Understanding to recognize the intent of text, callers
+   - Helps build chatbots, call center bots
+ - Amazon Connect
+   - Receive calls, create contact flows, cloud based viryual contact center
+   - Can integrate with other CRM systems or AWS
+   - No upfront payments, 80$ cheaper than traditional cost center solutions
+   
+## Amazon Comprehend
+ - For Natural Language Processing (NLP)
+ - Fully managed and serverless service
+ - Uses Machine learning to find insights and relationships in text
+   - Language of the text
+   - Extracts key phrases, places, people, brands or events
+   - Understands how positive or negative the text is
+   - Analyzes text using tokenization and parts of speech
+   - Automatically organizes a collection of text files by topic
+ - Sample Use cases:
+   - Analyze customer interations (Emails) to find what leads to a positive or negative experience
+   - Create and Group articles by topics that Comprehend will uncover
+   
+## Amazon Comprehend Medical
+ - Amazon Comprehend Medical detects and returns useful information in unstructured clinical text:
+   - Physician's Notes
+   - Discharge summaries
+   - Test Results
+   - Case Notes
+ - Uses NLP to detect protected Health Information (PHI) - DetectPHI API
+ - Store your documents in Amazon S3, Analyze realtime data with kinesis Data Firehose, or use Amazon Transcribe to transcribe patient narratives into text that can be analyzed by Amazon Comprehend Medical
+ 
+## Amazon SageMaker
+ - Fully managed service for Developers/data scientists to build ML models
+ - Typically difficult to do all the process in one place  + Provision servers
+ - Machine Learning process (Simplified): predicting your exam score 
+
+## Amazon Forecast
+ - Fully managed service that uses ML to deliver highly accurate forecasts
+ - Example: Predict the future sales of a raincoat
+ - 50% more accurate than looking at the data itself
+ - Reduce forecasting time from months to hours
+ - Use Cases: Product Demand planning, Financial Planning, Resource Planning
+
+## Amazon Kendra
+ - Fully Managed document search service powered by machine learning
+ - Extract answers from within a document (text, pdf, HTML, Powerpoint, MS Word, FAQs)
+ - Natural Language Search capabilities
+ - Learn from user interactions/feedback to promote preferred results (Incremental Learning)
+ - Ability to manually fine-tune search results (Importance of data, freshness, Custom, etc)
+
+## Amazon Personalize
+ - Fully managed ML-Service to build apps with real-time personalized recommendations
+ - Example: Personalized product recommendations-ranking, customized direct marketing
+   - Example: User brought gardening tools, provide recommendations on the next one to buy
+ - Same technology is used by Amazon.com
+
+## Amazon Textract 
+ - Automatically extracts text, handwriting and data from any scanneddocuments using AI and ML
+ - Extract data from forms and tables
+ - Read and process any type of document (PDFs, Images )
+ - Use cases: 
+   - Finanial Services (eg: Invoices, financial reports)
+   - HealthCare (eg: medical records, insurance claims)
+   - Public Sector (eg: tax forms, ID docuemnts, passports)
+
+## Machine Learning Summary
+ - **Rekognition: ** Face detection, Labelling, Celebrity recognition
+ - **Transcribe: ** audio to text (ex: subtitles)
+ - **Polly: ** text to audio
+ - **Translate: ** translations
+ - **Lex: ** build conversational bots - chatbots
+ - **Connect: ** cloud contact center
+ - **Comprehend: ** Natural Language Processing
+ - **SageMaker: ** Machine Learning for every developer and data scientist
+ - **Forecast: ** Build highly accurate forecasts
+ - **Kendra: ** ML-powered search engines
+ - **Personalize: ** Real time personalized recommendations
+ - **Textract: ** Detect text and data in documents
 
 
      

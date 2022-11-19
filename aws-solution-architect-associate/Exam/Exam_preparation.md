@@ -5,26 +5,12 @@ https://aws.amazon.com/compliance/shared-responsibility-model/
 # Compute
 
 ## EC2
- - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-   - User data:
-     - http://169.254.169.254/latest/user-data
-   - Metadata: 
-     - IPV4: http://169.254.169.254/latest/meta-data/
-	 - IPV6: http://[fd00:ec2::254]/latest/meta-data/
-   - Dynamic data:
-     - http://169.254.169.254/latest/dynamic/
- - Instance states and lifecycle: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
- - How many security groups per EC2 (5)
- - In which state security group can be changed for EC2?
- - Restrict 50 users out of 100 to launch EC2
- - There is a vCPU based on-demand instance limit per region. Your aws account has default quotas (formerly referred as limits), for each AWS service. Unless otherwise noted, Each quota is region specific. you can request increase for some quotas, and other quotas cannot be increased.
- - Ephermal storage (Check with EBS as well) - a reboot will not lose the data. This storage is located in disks that are physically attached to the host computer
- 
+
  
 ### Types
 
 ### AutoScaling:
- -  Amazon EC2 Auto Scaling doesn't terminate an instance that came into service based on EC2 status checks and ELB health checks until the health check grace period expires.
+
 
 ## Lambda
 
@@ -38,9 +24,7 @@ https://aws.amazon.com/compliance/shared-responsibility-model/
  
  
 ### Bucket policies
-Bucket policies in Amazon S3 can be used to add or deny permissions across some or all of the objects within a single bucket. Policies can be attached to users, groups, or Amazon S3 buckets, enabling centralized management of permissions. With bucket policies, you can grant users within your AWS Account or other AWS Accounts access to your Amazon S3 resources.
 
-You can further restrict access to specific resources based on certain conditions. For example, you can restrict access based on request time (Date Condition), whether the request was sent using SSL (Boolean Conditions), a requester’s IP address (IP Address Condition), or based on the requester's client application (String Conditions). To identify these conditions, you use policy keys
  
 EFS
  - 
@@ -48,12 +32,9 @@ EFS
 ## EBS
 
 ### Volume types
- - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
 
 ### Snapshots
- - While taking EBS snapshots, EBS volumes can be used for read and write as usual
- - Snapshot restorations are restricted to the region in which the snapshots are created
- - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-snapshot.html
+
 
 # Databases
 
