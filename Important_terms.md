@@ -96,3 +96,7 @@ EC2 COsts: https://aws.amazon.com/ec2/pricing/
 
 RTO
 RPO
+
+Boot Volume is a volume where operating system (Windows) stores its system files.
+
+Point in Time Recovery
