@@ -94,9 +94,42 @@ EC2 COsts: https://aws.amazon.com/ec2/pricing/
 
 - https://aws.amazon.com/ec2/spot/instance-advisor/
 
-RTO
-RPO
+Vertical scaling: increase instance size ( = scale up), decrease instance size ( = scale down)
+   - from t2.nano (0.5Gb of RAM, 1vCPU) to u-12tbl.metal (12.3 TB of RAM, 448 vCpus) 
+ - Horizontal Scaling: increase number of instances ( = scaling out), decrease number of instances (scaling in)
+
+
+RTO: Recovery Time Objective
+RPO: Recovery Point Objective
 
 Boot Volume is a volume where operating system (Windows) stores its system files.
 
-Point in Time Recovery
+Throttling is the process of limiting the number of requests an authorized program can submit to a given operation in a given amount of time.
+
+Throughput
+
+Point in Time Recovery -  point-in-time recovery
+point-in-time restore (PITR)
+
+
+Blue/green deployment is a technique for releasing applications by shifting traffic between two identical environments running different versions of the application: "Blue" is the currently running version and "green" the new version. This type of deployment allows you to test features in the green environment without impacting the currently running version of your application. When you’re satisfied that the green version is working properly, you can gradually reroute the traffic from the old blue environment to the new green environment. Blue/green deployments can mitigate common risks associated with deploying software, such as downtime and rollback capability.
+
+IPsec (internet protocol security) is a protocol suite for securing IP communications by authenticating and encrypting each IP packet in a data stream.
+
+
+# Scalability
+
+## Types
+ - Vertical scalability means increasing the size of the instance. 
+   - For example, your application runs on a t2.micro. 
+   - *Scaling up* that application vertically means running it on a larger instance such as t2.large. 
+   - *Scaling down* that application vertically means running it on a smaller instance such as t2.nano. 
+   - Scalability is very common for non-distributed systems, such as a database. There’s usually a limit to how much you can vertically scale (hardware limit). 
+   - Example can be the instance type was upgraded from t2.nano to u-12tb1.metal, this is a scale-up example of vertical scalability.
+ - Horizontal Scalability means increasing the number of instances/systems for your application.
+   - When you increase the number of instances, it's called *scale-out*, whereas if you decrease the number of instances, it's called *scale-in*. 
+   - Scale-up is used in conjunction with vertical scaling and not with horizontal scaling. 
+
+# Availability
+ - High availability means running your application/system in at least 2 data centers (== Availability Zones). 
+ - The goal of high availability is to survive a data center loss. An example of High Availability is when you run instances for the same application across multi AZ.

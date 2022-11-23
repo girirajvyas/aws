@@ -199,7 +199,7 @@ get started with group
 
 ### 1.6.4 AWS SDK
  - https://aws.amazon.com/tools/
- - Here, you will find all the SDKs avaialble based on the programming language you use
+ - Here, you will find all the SDKs available based on the programming language you use
 
 ## 1.7 IAM Roles for services
 
@@ -455,22 +455,30 @@ Access Advisor
  - Preventive GuardRails - using SCPs (Eg: Restrict regions across all your accounts)
  - Detective GuardRails - Using AWS Config (Eg: Identify untagged resources)
 
-## 1.20 QUIZ
-
-What is a proper Definition of IAM roles:  
- - An IAM entity that defines a set of permissions for making AWS service requests, that will be used by AWS services
- - Some AWS service will need to perform actions on your behalf. To do so, you assign permissions to aws services with IAM Roles
-
-Which is an IAM Security Tool?  
- - IAM Credential Report
- - IAM Credentials report lists all your account's users and the status of their various credentials. The other IAM security Tool is IAM Access Advisor. It shows the service permissions granted to a user and when those services were last accessed.
- 
-What are IAM Policies?
- - JSON Documents to define Users, Groups or Roles' permissions
- - An IAM policy is an entity that, when attached to an identity or resource, defines their permissions.
-
 ## 1.21 Exam Points
- - 
+ - An IAM user with full administrator access can perform almost all AWS tasks except a few tasks designated only for the root account user. Some of the AWS tasks that only a root account user can do are as follows: 
+   - Change account name
+   - Root password or 
+   - Root email address, 
+   - Change AWS support plan, 
+   - Close AWS account, 
+   - Enable MFA on S3 bucket delete, 
+   - Create Cloudfront key pair
+   - Register for GovCloud. 
+ - What is a proper Definition of IAM roles:  
+   - An IAM entity that defines a set of permissions for making AWS service requests, that will be used by AWS services
+   - Some AWS service will need to perform actions on your behalf. To do so, you assign permissions to aws services with IAM Roles
+ - Which is an IAM Security Tool?  
+   - IAM Credential Report
+   - IAM Credentials report lists all your account's users and the status of their various credentials. The other IAM security Tool is IAM Access Advisor. It shows the service permissions granted to a user and when those services were last accessed.
+ - What are IAM Policies?
+   - JSON Documents to define Users, Groups or Roles' permissions
+   - An IAM policy is an entity that, when attached to an identity or resource, defines their permissions.
+ - Use AZ ID to uniquely identify the Availability Zones across the two AWS Accounts
+   - An Availability Zone is represented by a region code followed by a letter identifier; for example, us-east-1a. To ensure that resources are distributed across the Availability Zones for a region, AWS maps Availability Zones to names for each AWS account. For example, the Availability Zone us-west-2a for one AWS account might not be the same location as us-west-2a for another AWS account.
+   - To coordinate Availability Zones across accounts, you must use the AZ ID, which is a unique and consistent identifier for an Availability Zone. For example, usw2-az2 is an AZ ID for the us-west-2 region and it has the same location in every AWS account.
+   - Viewing AZ IDs enables you to determine the location of resources in one account relative to the resources in another account. For example, if you share a subnet in the Availability Zone with the AZ ID usw2-az2 with another account, this subnet is available to that account in the Availability Zone whose AZ ID is also usw2-az2.
+   - You can view the AZ IDs by going to the service health section of the EC2 Dashboard via your AWS Management Console.
 
 ## 1.22 Reference:
  - [Identity Management](https://www.aws.training/Details/eLearning?id=55148)
@@ -761,11 +769,29 @@ not accesible/Timeout: Security group issues
  - You can retrieve the IAM Role name from the metadat, but you CANNOT retrieve the IAM policy
  - Metadata: info about EC2 instance
  - Userdata: Launch script of EC2 instance
- 
-## 2.8 Exam guide
 
+## 2.8 EC2 Placement Group
+ - **Cluster**: packs instances close together inside an Availability Zone. This strategy enables workloads to achieve the low-latency network performance necessary for tightly-coupled node-to-node communication that is typical of high-performance computing (HPC) applications.
+ - **Partition**: spreads your instances across logical partitions such that groups of instances in one partition do not share the underlying hardware with groups of instances in different partitions. This strategy is typically used by large distributed and replicated workloads, such as Hadoop, Cassandra, and Kafka.
+ - **Spread**: strictly places a small group of instances across distinct underlying hardware to reduce correlated failures.
+ - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+
+## 2.8 Exam guide - EC2
+**Security Groups**
  - Which network security tool can you use to control traffic in and out of EC2 instances?
    - Security groups
+ - How many security groups per EC2?
+   - 5
+ - In which state security group can be changed for EC2?
+   - TBD
+ - A security group acts as a virtual firewall that controls the traffic for one or more instances. When you launch an instance, you can specify one or more security groups; otherwise, **we use the default security group**. You can add rules to each security group that allow traffic to or from its associated instances. You can modify the rules for a security group at any time; the new rules are automatically applied to all instances that are associated with the security group. When we decide whether to allow traffic to reach an instance, we evaluate all the rules from all the security groups that are associated with the instance.
+ - Characterstics of security groups:
+   - By default, security groups allow all outbound traffic.
+   - Security group rules are always permissive; you can't create rules that deny access.
+   - Security groups are stateful.
+ - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html  
+ - Can be attached to running or stopped EC2 instance  
+**EC2**
  - How long can you reserve an EC2 Reserved instance?
    - 1 or 3 years (Not anytime between 1 and 3 years)
  - Which EC2 purchasing option should you use for an application you plan on running on a server continously for 1 year?
@@ -780,14 +806,13 @@ not accesible/Timeout: Security group issues
      - http://169.254.169.254/latest/dynamic/
  - Instance states and lifecycle:
    - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
- - How many security groups per EC2?
-   - 5
- - In which state security group can be changed for EC2?
-   - TBD
+
  - How to restrict 50 users out of 100 to launch EC2?
    - TBD
  - There is a vCPU based on-demand instance limit per region. Your aws account has default quotas (formerly referred as limits), for each AWS service. Unless otherwise noted, Each quota is region specific. you can request increase for some quotas, and other quotas cannot be increased.
-
+ - A spread placement group can span multiple Availability Zones in the same Region. **You can have a maximum of seven running instances per Availability Zone per group.** Therefore, to deploy 15 EC2 instances in a single Spread placement group, the company needs to use 3 AZs. And accordingly you can calculate for any number of instances
+ - ENI: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/best-practices-for-configuring-network-interfaces.html
+ 
 # 3. EC2 Instance Storage
 
 ## 3.1 Whats an EBS Volume
@@ -801,7 +826,7 @@ not accesible/Timeout: Security group issues
  - Its a network drive (i.e not a physical drive)
    - It uses a network to communicate the instance, which means there might be a bit of latency
    - It can be detached from an EC2 instance and attached to another one quickly
- - Its locked to an avaialbility zone (AZ)
+ - Its locked to an availability zone (AZ)
    - An EBS volume in `us-east-1a` cannot be attached to `us-east-1b`
    - To move a volume across, you first need to snapshot it
  - Have a provisioned capacity (size in GBs and IOPS - I/O operations per second)
@@ -810,7 +835,7 @@ not accesible/Timeout: Security group issues
 
 **Hands on**  
  - EC2 -> instances -> already one instance created -> verify `Root device` and `Block devices` in the details which links to an EBS volume -> you can click on the link or go as below
- - EC2 -> Elastic Block Store -> Volume -> a root block store is already avaialble (this is the one we provisioned while creating an EC2 instance)
+ - EC2 -> Elastic Block Store -> Volume -> a root block store is already available (this is the one we provisioned while creating an EC2 instance)
  - Create new Volume: EC2 -> Elastic Block Store -> Volumes -> Create Volume -> 
    - Volume type: default (General Purpose SSD (gp2))
    - Size (GiB): 2
@@ -840,9 +865,17 @@ not accesible/Timeout: Security group issues
  - Amazon EBS provides the following volume types, which differ in performance characteristics and price, so that you can tailor your storage performance and cost to the needs of your applications
  - **Solid state drives (SSD)**: Optimized for transactional workloads involving frequent read/write operations with small I/O size, where the dominant performance attribute is IOPS. SSD-backed volume types include:
    - General Purpose SSD volumes (gp2,gp3)
+     - General Purpose SSD (gp2) volumes offer cost-effective storage that is ideal for a broad range of workloads. These volumes deliver single-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods. 
+	 - Between a minimum of 100 IOPS (at 33.33 GiB and below) and a maximum of 16,000 IOPS (at 5,334 GiB and above), baseline performance scales linearly at 3 IOPS per GiB of volume size. 
+	 - AWS designs gp2 volumes to deliver its provisioned performance 99% of the time. A gp2 volume can range in size from 1 GiB to 16 TiB. EBS gp2 is persistent storage and costlier than Instance Stores (the cost of the storage volume is in addition to that of the EC2 instance)
    - Provisioned IOPS SSD volumes (io1, io2)
+     - Provisioned IOPS SSD (io1) volumes are designed to meet the needs of I/O-intensive workloads, particularly database workloads, that are sensitive to storage performance and consistency. 
+	 - Unlike gp2, which uses a bucket and credit model to calculate performance, an io1 volume allows you to specify a consistent IOPS rate when you create the volume, and Amazon EBS delivers the provisioned performance 99.9 percent of the time. 
+	 - EBS io1 is persistent storage and costlier than Instance Stores (the cost of the storage volume is in addition to that of the EC2 instance)
  - **Hard disk drives (HDD):** Optimized for large streaming workloads where the dominant performance attribute is throughput. HDD-backed volume types include Throughput Optimized HDD and Cold HDD volumes
    - Throughput optimized (st1)
+     -  Throughput Optimized HDD (st1) are low-cost HDD volumes designed for frequently accessed, throughput-intensive workloads such as Big data and Data warehouses. 
+	 - EBS st1 is persistent storage and costlier than Instance Stores (the cost of the storage volume is in addition to that of the EC2 instance)
    - Cold HDD volumes (sc1)
  - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
 
@@ -887,7 +920,7 @@ not accesible/Timeout: Security group issues
 
 **Basics**  
  - Managed NFS (Network file system) that can be mounted on 100s of EC2
- - EFS works with linux EC2 instances in multi avaialbility zones
+ - EFS works with linux EC2 instances in multi availability zones
  - High available, Scalable, expensive (3x gp2), pay per use, no capacity planning 
  - Amazon Elastic File System (Amazon EFS) provides a simple, scalable, fully managed elastic NFS file system for use with AWS Cloud services and on-premises resources.
  - Amazon EFS is a regional service storing data within and across multiple Availability Zones (AZs) for high availability and durability. 
@@ -908,8 +941,8 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
 
  - **EBS Volumes**
    - network drives attached to one EC2 instance at a time
-   - mapped to an avaialbility zones
-   - Can use EBS snapshots for backups/transferring EBS volumes across avaialbility zones
+   - mapped to an availability zones
+   - Can use EBS snapshots for backups/transferring EBS volumes across availability zones
  - **AMI**
    - Create ready-to-use EC2 instance with our customizations
  - **EC2 instance store**
@@ -925,8 +958,13 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - While taking EBS snapshots, EBS volumes can be used for read and write as usual
  - Snapshot restorations are restricted to the region in which the snapshots are created
  - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-snapshot.html
+ - Capabilities of an encrypted EBS volume
+   - Data at rest inside the volume is encrypted
+   - Any snapshot created from the volume is encrypted
+   - Data moving between the volume and the instance is encrypted
  - for a scenario where a group needs a fleet of EC2 instances for a specialized task that must deliver high random I/O performance. Each instance in the fleet would have access to a dataset that is replicated across the instances. Because of the resilient application architecture, the specialized task would continue to be processed even if any instance goes down, as the underlying application architecture would ensure the replacement instance has access to the required dataset.
    - EC2 Instance Store: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+ 
  
 # 4. Elastic Load balancing and Auto scaling groups
 
@@ -983,7 +1021,7 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - Seamlessly handle failures of downstream instances
  - Do regular health checks to your instances
  - Provide SSL termination (Https) for your websites
- - High avaialbility across zones
+ - High availability across zones
 
 **Why use Elastic Load balancers (ELB)**  
 
@@ -996,11 +1034,12 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
    - Application Load Balancer (HTTP/HTTPS only) - Layer 7
    - Network Load Balancer (ultra-high performance, allows for TCP) = Layer 4
    - Classic Load Balancer (retiring soon) - Layer 4 and 7 (Previous generation)
-
+ - https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html
+ 
 ## 4.3 Classic Load balancers
 
 
-## 4.4 Application Load Balancer 
+## 4.4 Application Load Balancer (ALB)
 
 
 **hands on**  
@@ -1008,7 +1047,7 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - First create 1 instance -> right click -> "Launch more like this" -> Edit instance details -> change subnet i.e change the zone now so that it is highly available
  - Verify both the instances are up via hitting the public ip
  - EC2 -> LOAD BALANCING -> Load Balancers -> Create Load balancer -> Select Application Load Balancer as we are using http over browser-based
- - 1. Configure load balancer: Provide Name and all the avaialbility zones 
+ - 1. Configure load balancer: Provide Name and all the availability zones 
  - 2. Configure security settings: it suggests to have https, we ignore for now
  - 3. Configure Security groups: create new security group -> next 
  - 4. Configure Routing: Create new target group via giving name
@@ -1018,7 +1057,7 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - Now, use DNS name to verify if it is working and you can refresh the page to verify if it is sending request to different servers
  - In case you stop one of the instance, then elb will redirect all the calls to the instance that is up (I got 502 bad gateway once and then it was flawless)
 
-## 4.5 Network Load Balancer
+## 4.5 Network Load Balancer (NLB)
 
 ## 4.6 Gateway Load Balancer
 
@@ -1027,6 +1066,7 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - Cross Zone Load Balancing
  - SSL Certificates
  - Connection Draining
+ - Elastic Load Balancing does not work across regions
 
 ## 4.8 Auto Scaling Groups (ASG)
 
@@ -1095,10 +1135,16 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - Amazon EC2 Auto Scaling doesn't terminate an instance that came into service based on EC2 status checks and ELB health checks until the health check grace period expires.
  - **Launch configurations** were released in 2010 and **Launch templates** were released as successor in 2017
    - https://aws.amazon.com/blogs/compute/amazon-ec2-auto-scaling-will-no-longer-add-support-for-new-ec2-features-to-launch-configurations/
+ - Problem: Launch Configuration selected for the Auto Scaling group is using the incorrect instance type that is not optimized to handle the application workflow
+   - A launch configuration is an instance configuration template that an Auto Scaling group uses to launch EC2 instances. When you create a launch configuration, you specify information for the instances. Include the ID of the Amazon Machine Image (AMI), the instance type, a key pair, one or more security groups, and a block device mapping.
+   - It is not possible to modify a launch configuration once it is created. The correct option is to create a new launch configuration to use the correct instance type. Then modify the Auto Scaling group to use this new launch configuration. Lastly to clean-up, just delete the old launch configuration as it is no longer needed
+   - https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html
  - In ASG, When we want to specify a range of instances, then we must use min and max values. And if the use-case requires exactly 10 instances to be available during the peak hour, so we must set the desired capacity to 10 or whatever mentioned
  - Update/install patches to EC2 instances in ASG
    - You can put an instance that is in the InService state into the Standby state, update some software or troubleshoot the instance, and then return the instance to service. Instances that are on standby are still part of the Auto Scaling group, but they do not actively handle application traffic
  - ELB target health checks https://docs.aws.amazon.com/elasticloadbalancing/latest/network/target-group-health-checks.html
+ - ALB vs NLB: https://blog.cloudcraft.co/alb-vs-nlb-which-aws-load-balancer-fits-your-needs
+ - What happens when EC2 instance fails health check
 
 ## 4.11 Resources
 
@@ -1556,7 +1602,7 @@ Their are 4 methods of encrypting objects in s3:
  - HTTPS is mandatory for SSE-C
  - Encryption in flight is also called SSL/TLS
 
-## 5.14 Exam Guide
+## 5.14 Exam Guide - S3
  - Bucket policies in Amazon S3 can be used to add or deny permissions across some or all of the objects within a single bucket. Policies can be attached to users, groups, or Amazon S3 buckets, enabling centralized management of permissions. With bucket policies, you can grant users within your AWS Account or other AWS Accounts access to your Amazon S3 resources.
  - You can further restrict access to specific resources based on certain conditions. For example:
    - You can restrict access based on request time (Date Condition)
@@ -1576,6 +1622,11 @@ Their are 4 methods of encrypting objects in s3:
  - When you apply a retention period to an object version explicitly, you can specify a `Retain Until Date` for the oject version
    - https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html
  - S3 versioning: Once you version-enable a bucket, it can never return to an unversioned state. Versioning can only be suspended once it has been enabled. 
+ - A process replaces an existing object and immediately tries to read it. Amazon S3 always returns the latest version of the object
+   - Amazon S3 delivers strong read-after-write consistency automatically, without changes to performance or availability, without sacrificing regional isolation for applications, and at no additional cost.
+   - After a successful write of a new object or an overwrite of an existing object, any subsequent read request immediately receives the latest version of the object. S3 also provides strong consistency for list operations, so after a write, you can immediately perform a listing of the objects in a bucket with any changes reflected.
+   - Strong read-after-write consistency helps when you need to immediately read an object after a write. For example, strong read-after-write consistency when you often read and list immediately after writing objects.
+   - **To summarize, all S3 GET, PUT, and LIST operations, as well as operations that change object tags, ACLs, or metadata, are strongly consistent.** What you write is what you will read, and the results of a LIST will be an accurate reflection of what’s in the bucket.
 
  
 # 6. Containers 
@@ -2018,6 +2069,8 @@ Their are 4 methods of encrypting objects in s3:
    - Route incoming messages based on message content.
  - So API Gateway supports stateless RESTful APIs as well as stateful WebSocket APIs. 
  - https://aws.amazon.com/api-gateway/
+ - To prevent your API from being overwhelmed by too many requests, Amazon API Gateway throttles requests to your API using the token bucket algorithm, where a token counts for a request. 
+   - Specifically, API Gateway sets a limit on a steady-state rate and a burst of request submissions against all APIs in your account. In the token bucket algorithm, the burst is the maximum bucket size.
 
 **Lambda**  
  - AWS Lambda currently supports 1000 concurrent executions per AWS account per region. You need to contact AWS support to raise the account limit.
@@ -2217,9 +2270,22 @@ Please see the sections below
    - Store temporary session data in a cache (using Time to live (TTL) feature)
 
 **Use case - Redis:**
- - Gaming Leaderboards are complutationally complex
+ - Gaming Leaderboards are computationally complex
  - Redis sorted sets guarantee both uniqueness and element ordering
  - Each time a new element is added, its ranked in real time, then added in correct order
+
+### 8.5.4 ElastiCache for Redis
+ - Amazon ElastiCache is a web service that makes it easy to set up, manage, and scale a distributed in-memory data store or cache environment in the cloud. 
+ - **Redis, which stands for Remote Dictionary Server**, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue. 
+ Redis now delivers sub-millisecond response times enabling millions of requests per second for real-time applications in Gaming, Ad-Tech, Financial Services, Healthcare, and IoT. 
+ - Redis is a popular choice for caching, session management, gaming, leaderboards, real-time analytics, geospatial, ride-hailing, chat/messaging, media streaming, and pub/sub apps.
+ - All Redis data resides in the server’s main memory, in contrast to databases such as PostgreSQL, Cassandra, MongoDB and others that store most data on disk or on SSDs. In comparison to traditional disk based databases where most operations require a roundtrip to disk, in-memory data stores such as Redis don’t suffer the same penalty. They can therefore support an order of magnitude more operations and faster response times. The result is – blazing fast performance with average read or write operations taking less than a millisecond and support for millions of operations per second.
+ - Redis has purpose-built commands for working with real-time geospatial data at scale. You can perform operations like finding the distance between two elements (for example people or places) and finding all elements within a given distance of a point
+
+### 8.5.5 ElastiCache for Memcached
+ - Both Redis and MemCached are in-memory, open-source data stores. 
+ - Memcached, a high-performance distributed memory cache service, is designed for simplicity while Redis offers a rich set of features that make it effective for a wide range of use cases. Memcached does not offer support for geospatial data.
+
 
 ## 8.6 DynamoDB
  - AWS proprietary technology, managed serverless NoSQL database, millisecond latency
@@ -2316,129 +2382,23 @@ Please see the sections below
  - https://cloud.in28minutes.com/aws-certification-multi-az-vs-multi-region-vs-read-replicas
  - Cross Region Multi-AZ replication
  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html
+ - Problem: make the database instance resilient from a disaster recovery perspective
+   - Use cross-Region Read Replicas
+   - Enable the automated backup feature of Amazon RDS in a multi-AZ deployment that creates backups across multiple Regions
+ - Failover is automatically handled by Amazon RDS so that you can resume database operations as quickly as possible without administrative intervention. When failing over, Amazon RDS simply flips the canonical name record (CNAME) for your DB instance to point at the standby, which is in turn promoted to become the new primary. Multi-AZ means the URL is the same, the failover is automated, and the CNAME will automatically be updated to point to the standby database.
+ 
 **Aurora**  
  - For Amazon Aurora, each Read Replica is associated with a priority tier (0-15). 
    - In the event of a failover, Amazon Aurora will promote the Read Replica that has the highest priority (the lowest numbered tier). 
    - If two or more Aurora Replicas share the same priority, then Amazon RDS promotes the replica that is largest in size. 
    - If two or more Aurora Replicas share the same priority and size, then Amazon Aurora promotes an arbitrary replica in the same promotion tier.
-   
-# CloudFront
+**Redis vs Memcached**
+ - https://aws.amazon.com/elasticache/redis-vs-memcached/
 
-## Overview
- - Content Delivery Network (CDN)
- - Improves read performance, content is cached at the edge
- - 216 Points of Presence globally (edge locations)
- - DDoS protection, Integration with Shield, AWS Web application Firewall (WAF)
- - Can expose external HTTPS and can talk to internal HTTPS backends
+# 9. AWS Monitoring, Troubleshooting & Audit
+ - (CloudWatch, X-ray and CloudTrail)
 
-## Origins
- - S3 Bucket
-   - For distributed files and caching them at the edge
-   - Enhanced Security with CloudFront Origin Access Identity
-   - CloudFront can be used as an ingress (to upload files to S3)
- - Custom Origin (HTTP)
-   - Application Load Balancer
-   - EC2 Instance
-   - S3 Website (must first enable the bucket as a static S3 website)
-   - Any HTTP backend you want
-
-## Security (how to access)
-  - S3
-  - EC2
-  - ELB
-
-## Geo Location
-
-## Price Classes
-
-## Cache Invalidations
-
-## AWS Global Accelerator
-
-
-
-
-
-
-
-
-
-# Route 53
-
-### Overview
- - A highly available, scalable, fully managed and Authoritative DNS
-   - Authoritative = customer can update the DNS records
- - Route 53 is also a Domain Registrar
- - Ability to check the health of your resources
- - Only service that provide 100% availability
- - Why Route 53?
-   - 53 is a reference to the traditional DNS port
-
-### Records
- - How you want to route traffic for a domain
- - Each Record contains
-   - Domain/Sub-domain Nam: Eg: example.com
-   - Record Type: eg: A or AAAA
-   - Value: eg 12.34.56.78
-   - Routing policy: How route 53 responds to queries
-   - TTL: amount of time the record is cached at DNS resolvers
- - Route 53 supports the following DNS record types:
-   - Must know: A/AAAA/CNAME/NS
-   - Advanced : CAA/DS/MX/NAPTR/PTR/SOA/TXT/SPF/SRV
-
-### Record Types
- - A: maps a hostname to IPV4
- - AAAA: maps a hostname to IPV6
- - CNAME: Maps a hostname to another hostname
-   - The target is a domain name which must have an A or AAAA record
-   - Can't create a CNAME record for the top node of a DNS namespace (Zone APEX)
-   - Example: You cant create for example.com, but you can create for www.example.com
- - NS: Name Servers for the hosted zone
-   - Controls how traffic is routed to a domain
-
-### Hosted Zones
- - A container for records that define how to route traffic to a domain and its subdomains
- - Public Hosted Zones: contains records that specify how to route traffic on the internet (Public domain names), eg: application1.mypublicdomain.com  
- - Private Hosted Zones: contains record that specify how you route traffic within one of more VPCs (Private Domain names), eg: application1.company.internal
- - you pay $ 0.50 per month per hosted zone
-
-### TTL
-
-
-### CNAME vs Alisas
-
-
-### Route 53  health checks
-
-
-### Routing Policies
- - Defines how Route 53 responds to DNS queries
- - Note:
-    - Its not same as the load balancer routing which routes the traffic
-    - DNS does not route any traffic, it only responds to DNS queries.
- - Route 53 supports following policies:
-   - Simple
-   - Weighted
-   - Latency based
-   - Failover (Active-Passive)
-   - Geolocation
-   - Geoproximity (Using Route53 traffic floe feature)
-   - Multi-value Answer
-    
-#### Routing Policies - Simple
-
-
-
-### Domain Registrar vs DNS Service
-
-
-
-
-
-# AWS Monitoring, Troubleshooting & Audit
-(CloudWatch, X-ray and CloudTrail)
-
-## Cloudwatch Metrics
+## 9.1 Cloudwatch Metrics
  - Cloudwatch provides metrics for every services in AWS
  - Metric is a variable to monitor (EC2: CPU Utilization, Networking, S3: Bucket size)
  - Metric belong to namespaces
@@ -2448,17 +2408,17 @@ Please see the sections below
  - Can create CloudWatch dashboard of metrics
  - Can create Cloudwatch custom metrics (Example: For the RAM)
 
-## CloudWatch Metric Streams
+## 9.2 CloudWatch Metric Streams
  - Continuosly stream CloudWatch metric to a destination of your choice, with near-real-time delivery and low latency
    - Amazon Kinesis Data Firehose (and then its destinations)
    - 3rd party service provider: Dynatrace, DataDog, New relic, Splunk, Sumo Logic
  - Option to filter metrics to only stream a subset of them
 
-## CloudWatch Logs
+## 9.3 CloudWatch Logs
 
-### Overview
- - Log Groups: Arbitrary name, Ususally representing an application
- - Log Stream: Instances within application/log files/containers
+### 9.3.1 Overview
+ - **Log Groups:** Arbitrary name, Ususally representing an application
+ - **Log Stream:** Instances within application/log files/containers
  - Can define log expiration policies (never expire, 30 days, etc)
  - CloudWatch logs can end logs to:
    - Amazon S3 (exports)
@@ -2467,7 +2427,7 @@ Please see the sections below
    - AWS Lambda
    - ElasticSearch
 
-### Sources
+### 9.3.2 Sources
  - SDK, CloudWatch logs Agent (older), CloudWatch Unified agent (newer)
  - ElasticBeanstalk: Collection of logs from application
  - ECS: Collection from containers
@@ -2477,32 +2437,32 @@ Please see the sections below
  - CloudTrail based on filter
  - Route53: Log DNS queries
 
-### Metric Filter and Insights
+### 9.3.3 Metric Filter and Insights
  - CloudWatch Logs can use filter expressions
    - For Example: Find a specific IP inside of a log
    - Or Count occurances of "Error" in your logs
  - Metric Filters can be used to trigger CloudWatch alarms
  - CloudWatch Logs Insights can be used to query logs and add queries to CloudWatch Dashboards
 
-### CloudWatch Logs - S3 Export
+### 9.3.4 CloudWatch Logs - S3 Export
  - Flow: CloudWatch Logs -> S3 
  - Log data can take upto 12 hours to become available for export
- - The API call is CreateExportTask
- - Not near-real time or real-time , use logs subscripton instead
+ - The API call is `CreateExportTask`
+ - Not near-real time or real-time , use logs subscription instead
  
-### CloudWatch Logs Subscription
+### 9.3.5 CloudWatch Logs Subscription
  - TBD
  
-### CloudWatch Logs Aggregation (Multi Account and Multi Region)
+### 9.3.6 CloudWatch Logs Aggregation (Multi Account and Multi Region)
  - TBD
 
-### CloudWatch Logs for EC2
+### 9.3.7 CloudWatch Logs for EC2
  - By default, No Logs from your EC2 machine will go to CloudWatch
  - You need to run a CloudWatch agent on EC2 to push the log files you want
  - Make sure IAM permissions are correct
  - The Cloudwatch Log agent can be setup on-premises too
 
-### CloudWatch logs Agent (older), Unified agent (newer)
+### 9.3.8 CloudWatch logs Agent (older), Unified agent (newer)
  - For virtual servers (EC2 instances, On-premise servers)
  - CloudWatch Logs Agent:
    - Old version of the Agent
@@ -2521,9 +2481,9 @@ Please see the sections below
      - Swap Space (free, used, used %)
    - Reminder: out of the box metrics for EC2 - disk, CPU, Network (high level)
 
-## CloudWatch Alarms
+## 9.4 CloudWatch Alarms
 
-### Overview
+### 9.4.1 Overview
  - Alarms are used to trigger notifications for any metric
  - Various Options (Sampling, %, Max, Min, etc)
  - Alarm states
@@ -2534,12 +2494,12 @@ Please see the sections below
    - Length of time in seconds to evaluate the metric
    - High resolution custom metrics: 10 sec, 30 sec or multiple of 60 sec
 
-### CloudWatch Alarm Targets
+### 9.4.2 CloudWatch Alarm Targets
  - Stop, Terminate, Reebot or recover an EC2 instance
  - Trigger Autoscaling action
  - Send notifications to SNS (From which you can do pretty much anything)
 
-### EC2 instance Recovery
+### 9.4.3 EC2 instance Recovery
  - Status check
    - instance status = check the EC2 VM
    - system status = check the underlying hardware
@@ -2547,12 +2507,14 @@ Please see the sections below
    - While recovering, you get same private, public, Elastic IP, Metadata, Placement group
    - Can also send alarm/notification to SNS Topic
 
-### CloudWatch Alarm: Good To Know
+### 9.4.4 CloudWatch Alarm: Good To Know
  - Alarms can be created based on CloudWatch Logs Metrics Filters
  - To test alarms and notifications, set the Alarm state to Alarm using CLI
  - `aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --state-reason "testing purpose"`
 
-### CloudWatch Container Insights
+## 9.5 CloudWatch Insights
+
+### 9.5.1 CloudWatch Container Insights
  - Collect, Aggregate, summarize metrics and logs from containers
  - Available for containers on:
    - Amazon Elastic container services (Amazon ECS)
@@ -2561,13 +2523,13 @@ Please see the sections below
    - Fargate (both for ECS and EKS)
  - In Amazon EKS and Kubernetes, CloudWatch insights is using a containerized version of the CloudWatch agent to discover containers
 
-### CloudWatch Lambda Insights
+### 9.5.2 CloudWatch Lambda Insights
  - Monitoring and troubleshooting solution for serverless applications running on AWS Lambda
  - Collects, Aggregates and summarizes system-level metrics including CPU time, Memory, Disk and network
  - Collects, Aggregates, and summarizes diagnostic information such as cold starts and Lambda worker shutdowns
  - Lambda insights is provided as a Lambda layer
 
-### CloudWatch Contributor Insights
+### 9.5.3 CloudWatch Contributor Insights
  - Analyze log data and create time series that display contributor data
    - See metrics about the top-N tier contributors
    - The total number of unique contributors and their usage
@@ -2577,7 +2539,7 @@ Please see the sections below
  - You can build your rules from scratch, or you can also use sample rules that AWS has created - leverages your cloudwatch logs 
  - CloudWatch also provides built-in rules that you can us to analyze metrics from other AWS services
 
-### CloudWatch Application Insights
+### 9.5.4 CloudWatch Application Insights
  - Provides automated dashboards that show potential problems with monitored applications, to help isolate ongoing issues
  - Your application run on Amazon EC2 instances with select technologies only (Java, .Net, Microsoft IIS Web server, databases)
  - And you can use other AWS resources such as Amazon EBS, RDS, ELB, ASG, Lambda, SQS, DynamoDB, S3 bucket, ECS, EKS, SNS, API Gateway, etc
@@ -2585,7 +2547,7 @@ Please see the sections below
  - Enhanced visibility into your application health to reduce the time it will take you to troubleshoot and repair your applications
  - Findings and alerts are sent to Amazon EventBridge and SSM OpsCenter
 
-### CloudWatch Insights and Operational Visibility Summary
+### 9.5.5 CloudWatch Insights and Operational Visibility Summary
  - CloudWatch container insights
    - ECS, EKS, Kubernetes on EC2, Fargate, needs agent for kubernetes
    - Metrics and logs
@@ -2596,9 +2558,9 @@ Please see the sections below
  - CloudWatch application logs
    - Automatic dashboard to troubleshoot your application and related aws services
 
-## EventBridge (Formerly CloudWatch Events)
+## 9.6 EventBridge (Formerly CloudWatch Events)
 
-### Overview
+### 9.6.1 Overview
  - Schedule: cron jobs (scheduled scripts)
    - Schedule every hour -> Trigger script on Lambda function
  - Event Pattern: Event rules to react to a service doing something
@@ -2612,22 +2574,22 @@ Please see the sections below
  - You can archieve events (all/filter) sent to an event bus (indefinitely or set period)
  - Ability to replay archieved events
 
-### EventBridge Rules
+### 9.6.2 EventBridge Rules
  - TBD
 
-### EventBridge Schema Registry
+### 9.6.3 EventBridge Schema Registry
  - EventBridge can analyze the events in your bus and infer the schema
  - The Schema Registry allows you to generate code for your application, that will know in advance how data is structured in the event bus
  - Schema can be versioned
 
-### EventBridge - Resource based policy
+### 9.6.4 EventBridge - Resource based policy
  - Manage permissions for a specific event bus
  - Example: allow/deny events from another AWS account or Region
  - Use case: Aggregate all events from your AWS organizations in a single aws account or region
 
-## CloudTrail
+## 9.7 CloudTrail
 
-### CloudTrail Overview
+### 9.7.1 CloudTrail Overview
  - Provides governance, compliance and audit for your AWS account
  - CloudTrail is enabled by default!
  - Get an history of events/API calls made within your AWS account by:
@@ -2639,7 +2601,7 @@ Please see the sections below
  - A trail can be applied to all regions (default) or single Region
  - If a resource is deleted in AWS, investigate CloudTrail first!
 
-### CloudTrail Events
+### 9.7.2 CloudTrail Events
  - Management Events
    - Operations that are performed in your AWS account
    - Examples:
@@ -2668,9 +2630,9 @@ Please see the sections below
      - To keep events beyond this period, log them to S3 and use Athena
    - Usecase: CloudTrail integration with EventBridge -> to intercept API calls
 
-## AWS Config 
+## 9.8 AWS Config 
 
-### Overview
+### 9.8.1 Overview
  - Helps with auditing and recording compliance of your AWS resources
  - Helps record configurations and changes over time
  - Questions that can be solved with AWS config:
@@ -2682,7 +2644,7 @@ Please see the sections below
  - Can be aggregated across regions and accounts
  - possibility of storing the configuration data into s3 (analyzed by athena)
 
-### Config rules
+### 9.8.2 Config rules
  - Can use AWS managed config rules (over 75)
  - Can make custom config rules (Must be defined in AWS Lambda)
    - Ex: Evaluate if each EBS disk is of type gp2
@@ -2693,24 +2655,24 @@ Please see the sections below
  - AWS config rules does not prevent actions from happening (no deny)
  - Pricing: no free tier; $0.003 per onfiguration item recorded per region, $0.001 per config rule evaluation per region
  
-### Config
+### 9.8.3 Config
  - View compliance of a resource over time
  - View configuration of a resource over time
  - View CloudTrail API calls of a resource over time
 
-### Config rules - remediations
+### 9.8.4 Config rules - remediations
  - Automate Remediation of non-compliant resources using SSM automation Documents
  - Use AWS-Managed automation Documents or Create custom Automation Documents
    - Tip: you can create custom automation documents that invokes lambda functions
  - You can set Remediation Retries if the resource is still non-compliant after auto-remediation
 
-### Config rules - notifications
+### 9.8.5 Config rules - notifications
  - Use EventBridge to trigger notifications when AWS resources are non-compliant
  - Ability to send configuration changes and complaince state notifications to SNS (All events - use SNS filtering or filter at client side)
 
-## CloudWatch vs CloudTrail vs Config
+## 9.9 CloudWatch vs CloudTrail vs Config
 
-### Comparison
+### 9.9.1 Comparison
  - CloudWatch
    - Performance monitoring (Metrics, CPU, Network, etc) & Dashboards
    - Events and alerting
@@ -2724,7 +2686,7 @@ Please see the sections below
    - Evaluate resources against compliance rules
    - Get timeline of changes and compliance
 
-### Comparing with an example for an Elastic LoadBalancer
+### 9.9.2 Comparing with an example for an Elastic LoadBalancer
  - CloudWatch
    - Monitoring Incoming connections metric
    - Visualize error codes as a % over time
@@ -2736,10 +2698,21 @@ Please see the sections below
  - CloudTrail
    - Track who made any changes to the load balancer config
 
+### 9.9.3 CloudWatch vs CloudTrail vs Config. 
+ - **Think resource performance monitoring, events, and alerts;** think CloudWatch.
+ - **Think account-specific activity and audit;** think CloudTrail.
+ - **Think resource-specific history, audit, and compliance;** think Config.
 
-# Data and Analytics
+## 9.10 Exam Guide
+**CloudWatch**  
+ - Using Amazon CloudWatch alarm actions, you can create alarms that automatically **stop, terminate, reboot, or recover** your EC2 instances. You can use the stop or terminate actions to help you save money when you no longer need an instance to be running. You can use the reboot and recover actions to automatically reboot those instances or recover them onto new hardware if a system impairment occurs.
+ - You can create an Amazon CloudWatch alarm that monitors an Amazon EC2 instance and automatically reboots the instance. The reboot alarm action is recommended for Instance Health Check failures (as opposed to the recover alarm action, which is suited for System Health Check failures)
 
-## Athena
+# 10. Data and Analytics
+
+## 10.1 Athena
+
+### 10.1.1 Overview
  - Serverless query service to analyze data stored in Amazon S3
  - Uses standard SQL Language to query the files (built on Presto)
  - Supports CSV, JSON, ORC, Avro, Parquet
@@ -2748,7 +2721,7 @@ Please see the sections below
  - Use Cases: Business Intelligence/ Analytics/ Reporting Analyze and query VPC flow logs, ELB Logs, CloudTrail trails, etc
  - Examp Tip: Analyze data in S3 using serverless SQL, use Athena
  
-## Athena - Improve performance while using Athena Tips
+### 10.1.2 Improve performance while using Athena Tips
  - Use Columnar data for cost savings (less scans)
    - Apache Parquet or ORC is recommended
    - Huge Performance improvement
@@ -2764,10 +2737,9 @@ Please see the sections below
 ```
  - Use Larger files  (>128MB) to minimize overhead
 
+## 10.2 RedShift
 
-## RedShift
-
-### Overview
+### 10.2.1 Overview
  - RedShift is based on PostgreSql, but its not used for OLTP
  - Its OLAP - Online Analytical Processing (Analytics and data warehousing)
  - 10x better performance than other data warehouses, scale to petabytes of data
@@ -2777,13 +2749,13 @@ Please see the sections below
  - BI Tools such as AMazon QUickSight or Tableau integrate with it
  - Redshift vs Athena: faste queries/joins/aggregations thanks of indexes
 
-### RedShift Cluster
- - Leader Node: for query planning, rsults aggregation
+### 10.2.2 RedShift Cluster
+ - Leader Node: for query planning, results aggregation
  - Compute Node: for performing the queries, send results to leader
  - You provision the node size in advance
  - You can use reserved instances for cost savings
 
-### Snapshots and Disaster recovery
+### 10.2.3 Snapshots and Disaster recovery
  - Redshift as no Multi-AZ mode
  - Snapshots are Point in Time backups of a cluster, stored internally in S3
  - Snapshots are incremental (Only what has changed is saved)
@@ -2792,7 +2764,7 @@ Please see the sections below
  - Manual: Snapshot is retained until you delete it
  - You can configure Amazon Redshift to automatically copy snapshots (Automated or Manual) of a cluster to another AWS Region
 
-### Loading data into Redshift: Large inserts are much better
+### 10.2.4 Loading data into Redshift: Large inserts are much better
  - Amazon Kinesis Data Firehose
    - Kinesis Data Firehose to Redshift cluster (through S3 copy)
  - S3 using COPY command
@@ -2801,14 +2773,14 @@ Please see the sections below
  - EC2 instance JDBC driver
    - Ec2 instance to Amazon Redshift cluster (Better to write data in batches)
 
-### Redshift Spectrum
+### 10.2.5 Redshift Spectrum
  - Query data that is already in S3, without loading it
  - Must have a Redshift cluster available to start the query
  - The query is then submitted to thousands of Redshift spectrum nodes
 
-## OpenSearch
+## 10.3 OpenSearch
 
-### Overview
+### 10.3.1 Overview
  - Amazon Opensearch is successor to ElasticSearch and name change was due to some licensing issue
  - In DynamoDB, queries only exist by primary keys or indexes
  - With OpenSearch, you can search any field, even partially matches
@@ -2819,7 +2791,7 @@ Please see the sections below
  - Security through Cognito and IAM, KMS encryption, TLS
  - Comes with OpenSearch Dashboard (Visualization)
 
-### OpenSearch Patterns 
+### 10.3.2 OpenSearch Patterns 
  - DynamoDB 
    - CRUD -> DynamoDB Table -> DynamoDB Stream -> Lambda -> Amazon Opensearch -> API to search items -> and finally the details data is fetched from DynamoDB by using the id returned from ElasticSearch
  - CloudWatch Logs
@@ -2827,9 +2799,9 @@ Please see the sections below
    - CloudWatch Logs -> Subscription filter -> Kinesis data firehose -> OpenSearch (Near Real time)
  - Kinesis Data streams and data Firehose
 
-## EMR
+## 10.4 EMR
 
-### Overview
+### 10.4.1 Overview
  - EMR stands for Elastic MapReduce
  - EMR helps creating Hadoop clusters (Big Data) to analyze and process vast amount of data
  - The clusters can be made of hundreds of EC2 instances
@@ -2838,7 +2810,7 @@ Please see the sections below
  - Auto-scaling and Integrated with spot instances
  - Use Cases: Data processing, Machine learning, Web Indexing, Big Data
 
-### Node types and purchasing
+### 10.4.2 Node types and purchasing
  - Master Node: Manage the cluster, coordinate, manage health - long running
  - Core Node: Run Tasks and store data - long running
  - Task Node (Optional): Just to run tasks  - usually spot
@@ -2848,9 +2820,9 @@ Please see the sections below
    - Spot instances: Cheaper, can be terminated, less reliable
  - Can have long running cluster, or transient (temporary) cluster
 
-## QuickSight
+## 10.5 QuickSight
 
-### Overview
+### 10.5.1 Overview
  - Serverless machine learning powered business intelligence service to create interactive dashboards
  - Fast, automatically scalable, embeddable, with per session pricing
  - Use cases:
@@ -2858,10 +2830,10 @@ Please see the sections below
    - Building Visualizations
    - Perform Ad-hoc analysis
  - Integrated with RDS, Aurora, Athena, Redshift, S3
- - In Memory computation using SPICE enhine if data is imported into QuickSight
+ - In Memory computation using SPICE engine if data is imported into QuickSight
  - Enterprise edition: Possibility to setup Column level Security (CLS)
  
-### Integrations
+### 10.5.2 Integrations
  - AWS Services
    - RDS, Aurora, RedShift, Athena, S3, OpenSearch, TimeStream
  - Data Sources (SaaS)
@@ -2872,7 +2844,7 @@ Please see the sections below
  - Imports via data sources
    - XLSX, CSV, JSON, .TSV, ELF and CLF (Log format)
    
-### Dashboards and Analysis
+### 10.5.3 Dashboards and Analysis
  - Define users (standard versions) and Groups (enterprise versions)
    - These users and groups exist within Quicksight, not IAM !!
  - A Dashboard
@@ -2882,9 +2854,9 @@ Please see the sections below
  - To share a dashboard, you must first publish it
  - Users who see the dashboard can also see the underlying data
 
-## Glue
+## 10.6 Glue
 
-### Overview
+### 10.6.1 Overview
  - Managed Extract, Transform and Load (ETL) service
  - Useful to prepare and transform data for analytics
  - Fully serverless service
@@ -2897,13 +2869,13 @@ Please see the sections below
  - Glue Studio: new GUI to create, run and monitor ETL jobs in Glue
  - Glue streaming ETL (built on apache spark structured streaming): Compatible with Kinesis data streaming, Kafka, MSK (managed kafka)
 
-### Convert dsta into Parquet format
+### 10.6.2 Convert dsta into Parquet format
+ - TBD
+
+### 10.6.3 Glue data catalog: catalog of datasets
  - 
 
-### Glue data catalog: catalog of datasets
- - 
-
-## Lake formation
+## 10.7 Lake formation
  - Data Lake = central place to have all your data for analytics purpose
  - Fully Managed service that makes it easy to setup a data lake in days
  - Discover, Cleanse, transform and ingest data into your data lake
@@ -2914,9 +2886,9 @@ Please see the sections below
  - Built on top of AWS Glue
  - Use case: Centralized permissions example
 
-## Kinesis Data analytics
+## 10.8 Kinesis Data analytics
 
-### Kinesis Data analytics For SQL Applications
+### 10.8.1 Kinesis Data analytics For SQL Applications
  - Real time analytics for Kinesis data streams and firehose using SQL
  - Add reference data from Amazon S3 to enrich data streaming data
  - Fully managed, no servers to provision
@@ -2930,7 +2902,7 @@ Please see the sections below
    - Real time dashboards
    - Real time metrics
  
-### Kinesis Data analytics For Apache Flink
+### 10.8.2 Kinesis Data analytics For Apache Flink
  - Use Flink (Java, Scala or SQL) to process and analyze streaming data
  - Run any Apache Flink application on a managed cluster on AWS
    - provisioning compute resources, parallel computation, automatic scaling
@@ -2938,9 +2910,9 @@ Please see the sections below
    - Use any apache flink programming features
    - Flink does not read from Firehose (Use Kinesis Analytics for SQL instead)   
 
-## MSK - Managed Streaming for Apache Kafka
+## 10.9 MSK - Managed Streaming for Apache Kafka
 
-### Overview
+### 10.9.1 Overview
  - Alternate to Amazon kinesis
  - Fully managed Apache Kafka on AWS
    - Allow you to create/update/delete clusters
@@ -2952,7 +2924,7 @@ Please see the sections below
    - Run Apache kafka on MSK without Managing the capacity
    - MSK automatically provisions resources and scales compute and storage
 
-### Kinesis data streams vs MSK
+### 10.9.2 Kinesis data streams vs MSK
  - Kinesis data streams
    - 1 MB message size limit
    - Data streams with shards
@@ -2962,19 +2934,19 @@ Please see the sections below
  - MSK
    - 1 MB default, configure for higher (Ex: 10 MB)
    - kafka topics with partitions
-   - can only add prtitions to a topic
+   - can only add partitions to a topic
    - PLAINTEXT or TLS in-flight encryption
    - KMS at-rest encryption
 
-### MSK cosumers
+### 10.9.3 MSK cosumers
  - Kinesis data analytics for Apache Flink
  - AWS Glue, Streaming ETL Jobs, Powered by Apache spark streaming
  - Lambda
  - Custom (Applications running on EC2, ECS, EKS)
 
-## Big Data ingestion pipelines
+## 10.10 Big Data ingestion pipelines
 
-### Requirements
+### 10.10.1 Requirements
  - We want the ingestion pipeline to be fully serverless
  - We want to collect data in real time
  - We want to transform the data
@@ -2982,7 +2954,7 @@ Please see the sections below
  - The reports created using the queries should be in S3
  - We want to load the data into a warehouse and create dashboards
 
-### Solution
+### 10.10.2 Solution
  - IOT core allows you to harvest data data from IoT devices
  - Kinesis is great for real-time data collection
  - Firehose helps with data delivery to S3 in near real-time (1 minute)
@@ -2992,13 +2964,120 @@ Please see the sections below
  - Athena is a serverless SQL service and results are stored in S3
  - The reporting bucket contains analyzed data and can be used by reporting tool such as AWS quicksight, redshift etc
 
+# 11. Messaging and Integration 
 
+## 11.1 Kinesis
 
+### 11.1.1 Overview
+ - Makes it easy to collect, process and analyze streaming data in real time
+ - Injest real time data such as: Application logs, Metrics, Website cickstreams, IOT telemetry data
+ - **Kinesis data streams:** Capture, process and store data streams
+ - **Kinesis data firehose:** load data streams into AWS data stores
+ - **Kinesis data Analytics:** analyze data streams with SQL of Apache Flink
+ - **Kinesis video streams:** Capture, Process and sore data streams
+
+## 11.2 Kinesis data streams
+
+### 11.2.1 Overview
+ - Stream bigdata into the systems
+ - Made up of multiple shards
+ - Producers, Records, partition keys, Data Blob, consumers 
+ - Retention between 1 to 365 days
+ - Ability to express (replay) data
+ - Once data is inserted in Kinesis, It can't be deleted (immutability)
+ - Data that shares the same partition goes to the same shard (ordering)
+ - Producers: 
+    - AWS SDK, Kinesis Producer Library (KPL), Kinesis Agent
+ - Consumers: 
+    - Write your own: Kinesis Client Library
+    - Managed: Lambda, Kinesis Data Firehose, Kinesis Data Analytics
+
+### 11.2.2 Capacity Modes
+ - **Provisioned modes:**
+   - You chose the number of shards provisioned, scale manually or using API
+   - Each shard gets 1MB/s in (or 1000 records per second)
+   - Each shard gets 2 MB/s out (classing or enhances fan-out consumer)
+   - You pay per shard provisioned per hour
+
+ - **On-demand mode:**
+   - No need to manage or provision the capacity
+   - Default capacity provisioned (4 MB/s in or 4000 records per second)
+   - Scales automaticall based on the observed throughput peak during the last 30 days
+   - Pay per stream per hour & data in/out per GB
+
+### 11.2.3 Security
+ - Control Access/authorization using IAM policies
+ - Encryption in flight using HTTPS endpoints
+ - Encryption at rest using KMS
+ - You can implement encryption/decryption of data on client side (harder)
+ - VPC endpoints available for kinesis to access within VPC
+ - Monitor API calls using CloudTrail
+
+### 11.2.4 Use Cases
+ - Routing related records to the same record processor (as in streaming MapReduce). For example, counting and aggregation are simpler when all records for a given key are routed to the same record processor.
+ - Ordering of records. For example, you want to transfer log data from the application host to the processing/archival host while maintaining the order of log statements.
+ - Ability for multiple applications to consume the same stream concurrently. For example, you have one application that updates a real-time dashboard and another that archives data to Amazon Redshift. You want both applications to consume data from the same stream concurrently and independently.
+ - Ability to consume records in the same order a few hours later. For example, you have a billing application and an audit application that runs a few hours behind the billing application. Because Amazon Kinesis Data Streams stores data for up to 365 days, you can run the audit application up to 365 days behind the billing application.
+
+## 11.3 Kinesis data Firehose
+
+### 11.3.1 Overview
+ - Fully managed service, no administration, automatic scaling, serverless
+ - Pay for data going through Firehose
+ - Near RealTime
+   - 60 seconds latency minimum for non full batches
+   - or minimum 1 MB of data at a time
+ - Supports many data formats, conversions, transformations, compression
+ - Supports custom data transformations using AWS Lambda
+ - Can send failed or all data to a S3 bucket
+ 
+### 11.3.2 Different participants
+ - Producers: 
+    - Applications, Client, AWS SDK, Kinesis Producer Library (KPL), Kinesis Agent, Kinesis Data streams, Amazon Cloudwatch (Logs and Events), AWS IOT 
+ - Transferred data is called **record** and it can be upto 1MB
+ - Data Transfomations: Firehose can optionally use Lambda to transform the data
+ - Consumers:
+  - AWS COnsumers:
+    - S3
+    - Redshift (Warehouse DB) - it copies through S3
+    - Elastic Search
+  - Third Party:
+    - Datadog
+    - Splunk
+    - New Relic
+    - MongoDB
+  - Custom Destinations:
+    - HTTP Endpoint
+ - Data backup:
+    - All 
+    - failed records
+
+### 11.4 Kinesis Data Streams vs Firehose
+**Data Streams:**
+ - Streaming service for ingestion at scale
+ - Write custom code (producer/consumer)
+ - Real time (~200ms)
+ - Manage Scaling (shard splitting/merging)
+ - Data storage for 1 to 365 days
+ - Supports replay capability
+ 
+**Firehose:**
+ - Load streaming data into S3,Redshift, Elastic search, 3rd party, Custom HTTP
+ - Fully managed
+ - Near real time (buffer time minimum 60 seconds)
+ - Automatic scaling
+ - No data storage
+ - does not support replay capability
+ 
+## 11.5 Exam Guide
+ - Kinesis Agent cannot write to a Kinesis Firehose for which the delivery stream source is already set as Kinesis Data Streams
+   - Amazon Kinesis Data Firehose is the easiest way to reliably load streaming data into data lakes, data stores, and analytics tools. It is a fully managed service that automatically scales to match the throughput of your data and requires no ongoing administration. It can also batch, compress, transform, and encrypt the data before loading it, minimizing the amount of storage used at the destination and increasing security.
+   - When a Kinesis data stream is configured as the source of a Firehose delivery stream, Firehose’s `PutRecord` and `PutRecordBatch` operations are disabled and Kinesis Agent cannot write to Firehose delivery stream directly. Data needs to be added to the Kinesis data stream through the Kinesis Data Streams PutRecord and PutRecords operations instead.
 
 # AWS Encryption
 
 ## What is Encryption?
-
+ - TBD
 
 ## Types
  - In Flight
@@ -3114,6 +3193,120 @@ Please see the sections below
    - The default waiting period is 30 days. During the waiting period, the CMK status and key state is Pending deletion. 
    - To recover the CMK, you can cancel key deletion before the waiting period ends. After the waiting period ends you cannot cancel key deletion, and AWS KMS deletes the CMK.
 
+# CloudFront
+
+## Overview
+ - Content Delivery Network (CDN)
+ - Improves read performance, content is cached at the edge
+ - 216 Points of Presence globally (edge locations)
+ - DDoS protection, Integration with Shield, AWS Web application Firewall (WAF)
+ - Can expose external HTTPS and can talk to internal HTTPS backends
+
+## Origins
+ - S3 Bucket
+   - For distributed files and caching them at the edge
+   - Enhanced Security with CloudFront Origin Access Identity
+   - CloudFront can be used as an ingress (to upload files to S3)
+ - Custom Origin (HTTP)
+   - Application Load Balancer
+   - EC2 Instance
+   - S3 Website (must first enable the bucket as a static S3 website)
+   - Any HTTP backend you want
+
+## Security (how to access)
+  - S3
+  - EC2
+  - ELB
+
+## Geo Location
+
+## Price Classes
+
+## Cache Invalidations
+
+## AWS Global Accelerator
+
+## Exam Guide - CloudFront
+ - Global Accelerator
+   - AWS Global Accelerator is a network layer service that directs traffic to optimal endpoints over the AWS global network, this improves the availability and performance of your internet applications.
+
+
+# Route 53
+
+### Overview
+ - A highly available, scalable, fully managed and Authoritative DNS
+   - Authoritative = customer can update the DNS records
+ - Route 53 is also a Domain Registrar
+ - Ability to check the health of your resources
+ - Only service that provide 100% availability
+ - Why Route 53?
+   - 53 is a reference to the traditional DNS port
+
+### Records
+ - How you want to route traffic for a domain
+ - Each Record contains
+   - Domain/Sub-domain Nam: Eg: example.com
+   - Record Type: eg: A or AAAA
+   - Value: eg 12.34.56.78
+   - Routing policy: How route 53 responds to queries
+   - TTL: amount of time the record is cached at DNS resolvers
+ - Route 53 supports the following DNS record types:
+   - Must know: A/AAAA/CNAME/NS
+   - Advanced : CAA/DS/MX/NAPTR/PTR/SOA/TXT/SPF/SRV
+
+### Record Types
+ - A: maps a hostname to IPV4
+ - AAAA: maps a hostname to IPV6
+ - CNAME: Maps a hostname to another hostname
+   - The target is a domain name which must have an A or AAAA record
+   - Can't create a CNAME record for the top node of a DNS namespace (Zone APEX)
+   - Example: You cant create for example.com, but you can create for www.example.com
+ - NS: Name Servers for the hosted zone
+   - Controls how traffic is routed to a domain
+
+### Hosted Zones
+ - A container for records that define how to route traffic to a domain and its subdomains
+ - Public Hosted Zones: contains records that specify how to route traffic on the internet (Public domain names), eg: application1.mypublicdomain.com  
+ - Private Hosted Zones: contains record that specify how you route traffic within one of more VPCs (Private Domain names), eg: application1.company.internal
+ - you pay $ 0.50 per month per hosted zone
+
+### TTL
+
+
+### CNAME vs Alisas
+
+
+### Route 53  health checks
+
+
+### Routing Policies
+ - Defines how Route 53 responds to DNS queries
+ - Note:
+    - Its not same as the load balancer routing which routes the traffic
+    - DNS does not route any traffic, it only responds to DNS queries.
+ - Route 53 supports following policies:
+   - Simple
+   - Weighted
+   - Latency based
+   - Failover (Active-Passive)
+   - Geolocation
+   - Geoproximity (Using Route53 traffic floe feature)
+   - Multi-value Answer
+ - https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html
+
+#### Routing Policies - Simple
+
+
+
+### Domain Registrar vs DNS Service
+
+## Exam Guide - Route 53
+ - Negative points
+   - While relying on the DNS service is a great option for blue/green deployments, it may not fit use-cases that require a fast and controlled transition of the traffic. Some client devices and internet resolvers cache DNS answers for long periods
+
+
+
+
 # AWS Security
  
 ## AWS Systems Manager (SSM) parameter store
@@ -3158,7 +3351,7 @@ Please see the sections below
  - Automate generation of secrets on rotation (Uses Lambda)
  - Integration with Amazon RDS (MySQL, PostgreSQL, Aurora)
  - Secrets are encrypted using KMS
- - Mostly meant for RDS integartion
+ - Mostly meant for RDS integration
 
 ### Multi-Region Secrets
  - Replicate secrets across multiple AWS Regions
@@ -3244,6 +3437,7 @@ Please see the sections below
  - WAF - Fixed IP while using WAF with a load balancer
    - WAF does not support the Network Load Balancer (Layer 4)
    - We can use Global Accelerator for Fixed IP and WAF on the ALB
+ - https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
 
 ## AWS Shield
  - DDoS: Distributed Denial of Service - many requests at the same time
@@ -3304,7 +3498,11 @@ Please see the sections below
  - https://docs.aws.amazon.com/whitepapers/latest/aws-best-practices-ddos-resiliency/welcome.html
 
 ## Amazon Guard Duty
- - Intelligent Threat discovery to protect AWS account
+ - Amazon GuardDuty is a threat detection service that continuously monitors for malicious activity and unauthorized behavior to protect your AWS accounts, workloads, and data stored in Amazon S3.
+ - With the cloud, the collection and aggregation of account and network activities is simplified, but it can be time-consuming for security teams to continuously analyze event log data for potential threats. 
+ - With GuardDuty, you now have an intelligent and cost-effective option for continuous threat detection in AWS. The service uses machine learning, anomaly detection, and integrated threat intelligence to identify and prioritize potential threats.
+ - GuardDuty analyzes tens of billions of events across multiple AWS data sources, such as AWS CloudTrail events, Amazon VPC Flow Logs, and DNS logs.
+ - With a few clicks in the AWS Management Console, GuardDuty can be enabled with no software or hardware to deploy or maintain. By integrating with Amazon EventBridge Events, GuardDuty alerts are actionable, easy to aggregate across multiple accounts, and straightforward to push into existing event management and workflow systems.
  - Uses machine learning algorithms, anomaly detection, 3rd party data
  - One click to enable (30 days trial), no software installation required
  - Input data includes:
@@ -3326,7 +3524,7 @@ Please see the sections below
    - Analyze the running OS against known vulnerabilities
  - For Containers Push to Amazon ECR   
    - Assessment of containers as they are pushed
- - Reporting and integartion with AWS security hub
+ - Reporting and integration with AWS security hub
  - Send findings to Amazon Event Bridge
  - What does AWS inspector evaluate?
    - Rememeber: Only for EC2 instaces and container infrastructure
@@ -3346,7 +3544,9 @@ Please see the sections below
  - **AWS Config**: auditing and recording compliance of your AWS resources. Record configuration changes
  - **AWS Certificates Manager**: 
  - **AWS Shield**: DDoS
- - **Web Application Firewall (WAF)**: protects from common attack - SQL injection and Cross-site Scripting (XSS)
+ - **Web Application Firewall (WAF)**: 
+   - protects from common attack - SQL injection and Cross-site Scripting (XSS)
+   - block access from some countries and allow access only from the home country of the company via 
  - **Firewall Manager**: Used in conjunction with WAF for ease of management across acocounts
  - **Amazon Guard Duty**: Intelligent Threat discovery to protect AWS account using ML (can be nabled via one click and is free for 30 days)
  - **Amazon Inspector**: It is for EC2 instances and containers, helps in analysing the vulnerabilities and unknown accesibility
@@ -3354,114 +3554,10 @@ Please see the sections below
 
 ## Exam Guide
  - Macie vs Guard Duty
-
-# 10. Messaging and Integration 
-
-# Kinesis
-
-## Overview
- - Makes it easy to collect, process and analyze streaming data in real time
- - Injest real time data such as: Application logs, Metrics, Website cickstreams, IOT telemetry data
- - **Kinesis data streams:** Capture, process and store data streams
- - **Kinesis data firehose:** load data streams into AWS data stores
- - **Kinesis data Analytics:** analyze data streams with SQL of Apache Flink
- - **Kinesis video streams:** Capture, Process and sore data streams
-
-## Kinesis data streams
-
-### Overview
- - Stream bigdata into the systems
- - Made up of multiple shards
- - Producers, Records, partition keys, Data Blob, consumers 
- - Retention between 1 to 365 days
- - Ability to express (replay) data
- - Once data is inserted in Kinesis, It can't be deleted (immutability)
- - Data that shares the same partition goes to the same shard (ordering)
- - Producers: 
-    - AWS SDK, Kinesis Producer Library (KPL), Kinesis Agent
- - Consumers: 
-    - Write your own: Kinesis Client Library
-    - Managed: Lambda, Kinesis Data Firehose, Kinesis Data Analytics
-
-### Capacity Modes
- - Provisioned modes:
-   - You chose the number of shards provisioned, scale manually or using API
-   - Each shard gets 1MB/s in (or 1000 records per second)
-   - Each shard gets 2 MB/s out (classing or enhances fan-out consumer)
-   - You pay per shard provisioned per hour
-
- - On-demand mode:
-   - No need to manage or provision the capacity
-   - Default capacity provisioned (4 MB/s in or 4000 records per second)
-   - Scales automaticall based on the observed throughput peak during the last 30 days
-   - Pay per stream per hour & data in/out per GB
-
-### Security
- - Control Access/authorization using IAM policies
- - Encryption in flight using HTTPS endpoints
- - Encryption at rest using KMS
- - You can implement encryption/decryption of data on client side (harder)
- - VPC endpoints available for kinesis to access within VPC
- - Monitor API calls using CloudTrail
-
-### Use Cases
- - Routing related records to the same record processor (as in streaming MapReduce). For example, counting and aggregation are simpler when all records for a given key are routed to the same record processor.
- - Ordering of records. For example, you want to transfer log data from the application host to the processing/archival host while maintaining the order of log statements.
- - Ability for multiple applications to consume the same stream concurrently. For example, you have one application that updates a real-time dashboard and another that archives data to Amazon Redshift. You want both applications to consume data from the same stream concurrently and independently.
- - Ability to consume records in the same order a few hours later. For example, you have a billing application and an audit application that runs a few hours behind the billing application. Because Amazon Kinesis Data Streams stores data for up to 365 days, you can run the audit application up to 365 days behind the billing application.
-
-## Kinesis data Firehose
-
-### Different participants
- - Producers: 
-    - Applications, Client, AWS SDK, Kinesis Producer Library (KPL), Kinesis Agent, Kinesis Data streams, Amazon Cloudwatch (Logs and Events), AWS IOT 
- - Transferred data is called **record** and it can be upto 1MB
- - Data Transfomations: Firehose can optionally use Lambda to transform the data
- - Consumers:
-  - AWS COnsumers:
-    - S3
-    - Redshift (Warehouse DB) - it copies through S3
-    - Elastic Search
-  - Third Party:
-    - Datadog
-    - Splunk
-    - New Relic
-    - MongoDB
-  - Custom Destinations:
-    - HTTP Endpoint
- - Data backup:
-    - All 
-    - failed records
-
-### Overview
- - Fully managed service, no administration, automatic scaling, serverless
- - Pay for data going through Firehose
- - Near RealTime
-   - 60 seconds latency minimum for non full batches
-   - or minimum 1 MB of data at a time
- - Supports many data formats, conversions, transformations, compression
- - Supports custom data transformations using AWS Lambda
- - Can send failed or all data to a S3 bucket
-
-### Kinesis Data Streams vs Firehose
-
-Data Streams:
- - Streaming service for ingestion at scale
- - Write custom code (producer/consumer)
- - Real time (~200ms)
- - Manage Scaling (shard splitting/merging)
- - Data storage for 1 to 365 days
- - Supports replay capability
- 
-Firehose:
- - Load streaming data into S3,Redshift, Elastic search, 3rd party, Custom HTTP
- - Fully managed
- - Near real time (buffer time minimum 60 seconds)
- - Automatic scaling
- - No data storage
- - does not support replay capability
- 
-
+ - Disabling the Guard Duty service will delete all remaining data, including your findings and configurations before relinquishing the service permissions and resetting the service
+**WAF**  
+ - When you use AWS WAF with CloudFront, you can protect your applications running on any HTTP webserver, whether it's a webserver that's running in Amazon Elastic Compute Cloud (Amazon EC2) or a web server that you manage privately. You can also configure CloudFront to require HTTPS between CloudFront and your own webserver, as well as between viewers and CloudFront.
+ - AWS WAF is tightly integrated with Amazon CloudFront and the Application Load Balancer (ALB), services that AWS customers commonly use to deliver content for their websites and applications (have integration with other services as well, see above). When you use AWS WAF on Amazon CloudFront, your rules run in all AWS Edge Locations, located around the world close to your end-users. This means security doesn’t come at the expense of performance. Blocked requests are stopped before they reach your web servers. When you use AWS WAF on Application Load Balancer, your rules run in the region and can be used to protect internet-facing as well as internal load balancers
 
 
 # MQ
@@ -3832,6 +3928,7 @@ SQS Access policies:
  - https://aws.amazon.com/efs/pricing/
  
 ## FAQ References
+ - All: https://aws.amazon.com/faqs/
  - https://aws.amazon.com/rds/faqs/
  - https://aws.amazon.com/global-accelerator/faqs/
  - https://aws.amazon.com/storagegateway/faqs/
@@ -3839,6 +3936,7 @@ SQS Access policies:
  - https://aws.amazon.com/elasticache/faqs/
  - https://aws.amazon.com/sns/faqs/
  - https://aws.amazon.com/global-accelerator/faqs/
+ - https://aws.amazon.com/guardduty/faqs/
 
 ## Best Practices
  - Shared responsibility:
@@ -3849,7 +3947,8 @@ SQS Access policies:
  - IAM
    - https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
    - https://aws.amazon.com/blogs/security/techniques-for-writing-least-privilege-iam-policies/
-
+ - VPC
+   - https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-direct-connect-vpn.html
 # Across Service use case exam guides
  - You can use Aurora replicas and CloudFront distribution to make the application more resilient to spikes in request rates.
 
@@ -3861,6 +3960,28 @@ SQS Access policies:
  - If you have workloads that cater to a global client base, AWS recommends that you use AWS Global Accelerator.
  - If you have workloads hosted in a single AWS Region and used by clients in and around the same Region, you can use an Application Load Balancer or Network Load Balancer to manage your resources.
 
+## WAF and ALB
+ - You can use AWS WAF with your Application Load Balancer to allow or block requests based on the rules in a web access control list (web ACL). 
+ - Geographic (Geo) Match Conditions in AWS WAF allows you to use AWS WAF to restrict application access based on the geographic location of your viewers. 
+ - With geo match conditions you can choose the countries from which AWS WAF should allow access.
+ - Geo match conditions are important for many customers. For example, legal and licensing requirements restrict some customers from delivering their applications outside certain countries. These customers can configure a whitelist that allows only viewers in those countries. Other customers need to prevent the downloading of their encrypted software by users in certain countries. These customers can configure a blacklist so that end-users from those countries are blocked from downloading their software.
+
+## Host a website in S3
+ - To host a static website on Amazon S3, you configure an Amazon S3 bucket for website hosting and then upload your website content to the bucket. When you configure a bucket as a static website, you must enable website hosting, set permissions, and create and add an index document. Depending on your website requirements, you can also configure redirects, web traffic logging, and a custom error document.
+ - After you configure your bucket as a static website, you can access the bucket through the AWS Region-specific Amazon S3 website endpoints for your bucket.
+ - Website endpoints are different from the endpoints where you send REST API requests. Amazon S3 doesn't support HTTPS access for website endpoints. 
+ - If you want to use HTTPS, you can use CloudFront to serve a static website hosted on Amazon S3.
+ - You can use Amazon CloudFront to improve the performance of your website. CloudFront makes your website files (such as HTML, images, and video) available from data centers around the world (called edge locations). When a visitor requests a file from your website, CloudFront automatically redirects the request to a copy of the file at the nearest edge location. This results in faster download times than if the visitor had requested the content from a data center that is located farther away.
+ - CloudFront caches content at edge locations for a period of time that you specify. If a visitor requests content that has been cached for longer than the expiration date, CloudFront checks the origin server to see if a newer version of the content is available. If a newer version is available, CloudFront copies the new version to the edge location. Changes that you make to the original content are replicated to edge locations as visitors request the content.
+ - https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+ - Endpoints for the above created site:
+   - When you configure your bucket as a static website, the website is available at the AWS Region-specific website endpoint of the bucket.
+   - Depending on your Region, your Amazon S3 website endpoints follow one of these two formats.
+   - s3-website dash (-) Region: http://bucket-name.s3-website.Region.amazonaws.com
+   - s3-website dot (.) Region: http://bucket-name.s3-website-Region.amazonaws.com
+ - These URLs return the default index document that you configure for the website.
+
+
 ###################################################################
 
 # VPC
@@ -3869,3 +3990,14 @@ SQS Access policies:
  - AWS Site-to-Site VPN enables you to securely connect your on-premises network or branch office site to your Amazon Virtual Private Cloud (Amazon VPC). 
  - You can securely extend your data center or branch office network to the cloud with an AWS Site-to-Site VPN (Site-to-Site VPN) connection. 
  - It uses internet protocol security (IPSec) communications to create encrypted VPN tunnels between two locations
+
+## Encrypted Conenction
+ - https://docs.aws.amazon.com/vpn/latest/s2svpn/internetwork-traffic-privacy.html
+ - https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html
+
+## NACL
+
+**EXAM Guide:**
+ - NACL Rules
+   - asterisk (\*) rule cannot be changed or deleted, it is default deny for all 
+   - https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
