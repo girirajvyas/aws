@@ -130,3 +130,4 @@ Pearson Vue Exam Center guide:
 
 
 
+https://medium.com/javarevisited/6-best-aws-solution-architect-associate-certification-practice-test-mock-exams-and-dumps-240c269dab4f

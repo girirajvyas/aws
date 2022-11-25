@@ -719,6 +719,8 @@ not accesible/Timeout: Security group issues
  - Not suitable for critical jobs and databases
  - https://aws.amazon.com/blogs/aws/new-ec2-spot-blocks-for-defined-duration-workloads/
  - https://aws.amazon.com/ec2/spot/
+ - Spot Instance Advisor: https://aws.amazon.com/ec2/spot/instance-advisor/
+ - Spot instances best practices for cost optimization: https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-leveraging-ec2-spot-instances/spot-best-practices.html
  
 ### 2.4.5 Dedicated Hosts
  - An Amazon EC2 Dedicated host is a physical server with EC2 instance capacity fully dedicated to your use
@@ -1328,11 +1330,11 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  - Buckets can be in different accounts
  - Copying is asynchronous
  - Must give proper IAM permissions to S3
- - CRR use cases
+ - **CRR use cases**
    - Compliance
    - lower latency access
    - Replication across accounts
- - SRR use cases
+ - **SRR use cases**
    - log aggregation
    - live replication between production and test accounts
 
@@ -1353,7 +1355,7 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
 
 ### 5.7.1 Durability and Availability
 **Durability:**  
- - High durability (99.99999999999, 11 time 9) of objects across multiple Azure
+ - High durability (99.99999999999, 11 time 9) of objects across multiple AZ
  - If you store 10,000,000 objects with Amazon S3, you can on average expect to incur a loss of a single object once every 10,000 years
  - `Same for all storage classess`
 
@@ -1364,13 +1366,11 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
  
 ### 5.7.2 Types
  - Amazon S3 Standard - General purpose
- - Amazon S3 Standard-Infrequent Access (not accessed ver often)
+ - Amazon S3 Standard-Infrequent Access (not accessed very often)
  - Amazon S3 one Zone-Infrequent Access (you can recreate and fine with losing it)
  - Amazon S3 Intelligent tiering (Not sure which one to choose between frquent and infrequent access)
  - Amazon Glacier (Backups and archives)
  - Amazon Glacier Deep Archive (Backups and archives)
-
-
 
 #### 5.7.2.1 Amazon S3 Standard - General purpose 
  - 99.99% availability
@@ -1421,6 +1421,16 @@ You can connect to Amazon EFS file systems from EC2 instances in other AWS regio
    - Bulk (48 hours)
 
 #### 5.7.2.6 Storage classes Summary  
+ - S3 standard: 
+   - Big data analytics, Mobile and Gaming applications, content distribution, ect
+   - 99.99 % available (53 minutes not available in a year)
+ - S3 Standard Infrequent Access:  
+   - Disaster recovery
+   - 99.9% available
+ - S3 One zone Access:  
+   - High Durability (99.999999999) in Single AZ, data is lost when AZ is destroyed
+   - 99.5% availability
+   - Store secondary copies of on-premise data, or data you can recreate
  - https://aws.amazon.com/s3/storage-classes/
 
 #### 5.7.2.7 Moving between storage classes  
@@ -1627,7 +1637,7 @@ Their are 4 methods of encrypting objects in s3:
    - After a successful write of a new object or an overwrite of an existing object, any subsequent read request immediately receives the latest version of the object. S3 also provides strong consistency for list operations, so after a write, you can immediately perform a listing of the objects in a bucket with any changes reflected.
    - Strong read-after-write consistency helps when you need to immediately read an object after a write. For example, strong read-after-write consistency when you often read and list immediately after writing objects.
    - **To summarize, all S3 GET, PUT, and LIST operations, as well as operations that change object tags, ACLs, or metadata, are strongly consistent.** What you write is what you will read, and the results of a LIST will be an accurate reflection of what’s in the bucket.
-
+ - S3 Lifecycle rules
  
 # 6. Containers 
 
@@ -3921,9 +3931,11 @@ SQS Access policies:
  - And if we provision more volume, we have to pay more and hence above costs will change
 
 ## Pricing references:
+ - All: https://aws.amazon.com/pricing/
  - https://aws.amazon.com/s3/pricing/
  - https://aws.amazon.com/ec2/pricing/
    - https://aws.amazon.com/ec2/spot/pricing/
+ - https://aws.amazon.com/lambda/pricing/
  - https://aws.amazon.com/ebs/pricing/
  - https://aws.amazon.com/efs/pricing/
  
@@ -3983,6 +3995,18 @@ SQS Access policies:
 
 
 ###################################################################
+
+## DataSync
+
+ - AWS DataSync is an online data transfer service that simplifies, automates, and accelerates copying large amounts of data to and from AWS storage services over the internet or AWS Direct Connect.
+ - AWS DataSync fully automates and accelerates moving large active datasets to AWS, up to 10 times faster than command-line tools. It is natively integrated with Amazon S3, Amazon EFS, Amazon FSx for Windows File Server, Amazon CloudWatch, and AWS CloudTrail, which provides seamless and secure access to your storage services, as well as detailed monitoring of the transfer.
+ - DataSync uses a purpose-built network protocol and scale-out architecture to transfer data. A single DataSync agent is capable of saturating a 10 Gbps network link.
+ - DataSync fully automates the data transfer. It comes with retry and network resiliency mechanisms, network optimizations, built-in task scheduling, monitoring via the DataSync API and Console, and CloudWatch metrics, events, and logs that provide granular visibility into the transfer process. DataSync performs data integrity verification both during the transfer and at the end of the transfer.
+ - Usecase: company wants to move most of the on-premises data into Amazon S3, Amazon EFS, and Amazon FSx for Windows File Server easily, quickly, and cost-effectively.
+
+
+
+
 
 # VPC
 
