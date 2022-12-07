@@ -479,6 +479,7 @@ Access Advisor
    - To coordinate Availability Zones across accounts, you must use the AZ ID, which is a unique and consistent identifier for an Availability Zone. For example, usw2-az2 is an AZ ID for the us-west-2 region and it has the same location in every AWS account.
    - Viewing AZ IDs enables you to determine the location of resources in one account relative to the resources in another account. For example, if you share a subnet in the Availability Zone with the AZ ID usw2-az2 with another account, this subnet is available to that account in the Availability Zone whose AZ ID is also usw2-az2.
    - You can view the AZ IDs by going to the service health section of the EC2 Dashboard via your AWS Management Console.
+ - To apply the restrictions across multiple member accounts you must use a Service Control Policy (SCP) in the AWS Organization. The way you would do this is to create a deny rule that applies to anything that does not equal the specific instance type you want to allow.
 
 ## 1.22 Reference:
  - [Identity Management](https://www.aws.training/Details/eLearning?id=55148)
@@ -2396,6 +2397,7 @@ Please see the sections below
    - Use cross-Region Read Replicas
    - Enable the automated backup feature of Amazon RDS in a multi-AZ deployment that creates backups across multiple Regions
  - Failover is automatically handled by Amazon RDS so that you can resume database operations as quickly as possible without administrative intervention. When failing over, Amazon RDS simply flips the canonical name record (CNAME) for your DB instance to point at the standby, which is in turn promoted to become the new primary. Multi-AZ means the URL is the same, the failover is automated, and the CNAME will automatically be updated to point to the standby database.
+ - Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance. These certificates are signed by a certificate authority. The SSL certificate includes the DB instance endpoint as the Common Name (CN) for the SSL certificate to guard against spoofing attacks. You can download a root certificate from AWS that works for all Regions or you can download Region-specific intermediate certificates.
  
 **Aurora**  
  - For Amazon Aurora, each Read Replica is associated with a priority tier (0-15). 
@@ -3230,7 +3232,9 @@ Please see the sections below
 
 ## Geo Location
 
+
 ## Price Classes
+ - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html
 
 ## Cache Invalidations
 
@@ -3743,8 +3747,11 @@ SQS Access policies:
  - SQS as buffer to database writes
  - SQS to decouple between application tiers
 
-
-
+## Exam Guide
+ - AWS recommend using separate queues when you need to provide prioritization of work.
+ - FIFO queues preserve the order of messages but they do not prioritize messages within the queue
+ - Short polling and long polling are used to control the amount of time the consumer process waits before closing the API call and trying again. Polling should be configured for efficiency of API calls and processing of messages but does not help with message prioritization.
+ - https://digitalcloud.training/aws-application-integration-services/
 
 # Machine Learning
 
@@ -3931,7 +3938,7 @@ SQS Access policies:
  - And if we provision more volume, we have to pay more and hence above costs will change
 
 ## Pricing references:
- - All: https://aws.amazon.com/pricing/
+ - Pricing: https://aws.amazon.com/pricing/
  - https://aws.amazon.com/s3/pricing/
  - https://aws.amazon.com/ec2/pricing/
    - https://aws.amazon.com/ec2/spot/pricing/
@@ -3940,15 +3947,8 @@ SQS Access policies:
  - https://aws.amazon.com/efs/pricing/
  
 ## FAQ References
- - All: https://aws.amazon.com/faqs/
- - https://aws.amazon.com/rds/faqs/
- - https://aws.amazon.com/global-accelerator/faqs/
- - https://aws.amazon.com/storagegateway/faqs/
- - https://aws.amazon.com/cloudtrail/faqs/
- - https://aws.amazon.com/elasticache/faqs/
- - https://aws.amazon.com/sns/faqs/
- - https://aws.amazon.com/global-accelerator/faqs/
- - https://aws.amazon.com/guardduty/faqs/
+ - FAQs: https://aws.amazon.com/faqs/
+
 
 ## Best Practices
  - Shared responsibility:
@@ -3961,6 +3961,7 @@ SQS Access policies:
    - https://aws.amazon.com/blogs/security/techniques-for-writing-least-privilege-iam-policies/
  - VPC
    - https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-direct-connect-vpn.html
+
 # Across Service use case exam guides
  - You can use Aurora replicas and CloudFront distribution to make the application more resilient to spikes in request rates.
 
@@ -4004,9 +4005,8 @@ SQS Access policies:
  - DataSync fully automates the data transfer. It comes with retry and network resiliency mechanisms, network optimizations, built-in task scheduling, monitoring via the DataSync API and Console, and CloudWatch metrics, events, and logs that provide granular visibility into the transfer process. DataSync performs data integrity verification both during the transfer and at the end of the transfer.
  - Usecase: company wants to move most of the on-premises data into Amazon S3, Amazon EFS, and Amazon FSx for Windows File Server easily, quickly, and cost-effectively.
 
-
-
-
+## Elastic Fabric Adapter
+An Elastic Fabric Adapter is an AWS Elastic Network Adapter (ENA) with added capabilities. The EFA lets you apply the scale, flexibility, and elasticity of the AWS Cloud to tightly-coupled HPC apps. It is ideal for tightly coupled app as it uses the Message Passing Interface (MPI).
 
 # VPC
 
@@ -4025,3 +4025,9 @@ SQS Access policies:
  - NACL Rules
    - asterisk (\*) rule cannot be changed or deleted, it is default deny for all 
    - https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
+   
+## DigitalCloud Cheatesheets
+ - https://digitalcloud.training/category/aws-cheat-sheets/aws-solutions-architect-associate/
+ - https://digitalcloud.training/aws-storage-gateway/
+ - https://digitalcloud.training/aws-datasync/
+ - https://digitalcloud.training/aws-application-integration-services/

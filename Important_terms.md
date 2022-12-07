@@ -3,6 +3,7 @@
 ## Normal ports:
 FTP: 21
 SSH: 22
+RDP: 3389
 SFTP: 22 (same as SSH)
 HTTP: 80
 HTTPS: 443
@@ -102,3 +103,44 @@ Unicast vs Anycast IPs
  - Wealth management
  - SF -> Stripe
 
+NAS: Network Attach Storage (File System)
+SMB:  Server Message Block (SMB) protocol
+iSCI: 
+NFS file server
+ACL
+
+
+OAI Origin access Identity
+Different gateways volume, 
+Direct COnnect (DX)
+
+Capex vs Opex
+ - 
+
+reconnaisance for pen testing
+recon.cloud
+whois
+
+
+RTO Recovery Time Objective: Maximum acceptable downtime
+RPO Recovery Point Objective: MAximum acceptable period of data loss
+
+RCU: Read Capacity units
+WCU: Write Capacity units
+
+Caching strategies:
+Lazy loading (Cache Aside):
+ - Cache Hit: Data found, Value from cache is used
+ - Cache Miss: Data is not found, data is retrieved from db and added to cache
+Write through:
+ - Cache is in sync with backend (Cache and database updated at same time)
+
+Sporadic access
+
+Throughput
+Throttling
+
+Availability
+Resilience
+
+Reliability
